@@ -4,15 +4,17 @@
         <meta charset="utf-8">
         <title>Esports Coach</title>
         <meta name="description" content=""esports coach>
+
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-                  dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
         <link href="css/bootstrap_datepicker.css" rel="stylesheet">
         <link href="css/datepicker.css" rel="stylesheet">
     </head>
-    <body>
-        
+
+    <body>  
         <!-- NavBar -->
         <nav class ="navbar navbar-inverse navbar-fixed-top" id="my-navbar">
             <div class="container">
@@ -40,38 +42,50 @@
         <!-- jumbotron -->    
         <div class="jumbotron">
             <div class="container text-center">
-                <h1>Connect with Coach</h1>
+                <br>
+                <h1>Connect with Coach</h1><br>
                 <p>A step closer to play like a PRO</p>     
             </div>
         </div>
 
         <div class="panel panel-default" style="margin-right:15%; margin-left:15%;" align="center">
             <div class="panel-body">
-                <!-- datepicker --> 
+
                 <div style="margin-right:24%; margin-left:24%;">
+                    <!-- Datepicker --> 
                     <div class="input-append date" id="dp3" data-date="10-29-2015" data-date-format="mm-dd-yyyy">
-                        <input class="span2" size="16" type="text" placeholder="10-29-2015" readonly="" style="background-color:white; height:28px;">
-                        <span class="add-on" style="height: 28px; margin-right:25px"><i class="icon-calendar"></i></span>
+                        <input class="span2" size="16" type="text" placeholder="Select a Date" readonly="" style="background-color:white; height:28px;">
+                        <span class="add-on" style="height: 28px; margin-right:25px"><i class="glyphicon glyphicon-calendar"></i></span>
                     </div>
 
+                    <!-- Hourpicker --> 
                     <select class="dropdown" style="width:80px">
-                        <option>Hour</option>
-                        <option>1</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>13</option>
-                        <option>14</option>
+                        <option value="hour">Hour</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
                     </select> hr
+
+                    <!-- MinutePicker --> 
                     <select class="dropdown" style="width:80px">
-                        <option>Minute</option>
-                        <option>00</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>13</option>
-                        <option>14</option>
+                        <option value="minute">Minute</option>
+                        <option value="00">00</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
                     </select> min
                 </div>
-    
+                
+                <!-- Textinput for Skype and TwitchTV accounts --> 
                 <div style="margin-right:24%; margin-left:24%;">
                     <div class="input-group">
                       <span class="input-group-addon">
@@ -79,7 +93,6 @@
                       </span>
                       <input type="text" class="form-control" aria-label="..." placeholder="Skype account" style="height:28px;">
                     </div>
-                    <br>
                     <div class="input-group">
                       <span class="input-group-addon">
                         <input type="checkbox" aria-label="...">
@@ -88,8 +101,10 @@
                     </div>
                 </div>
                 <br>
-                <div align="center">
-                    <textarea id="dataquery" name="data" placeholder="Additional requests.."></textarea>
+
+                <!-- Textarea for addition comments or questions --> 
+                <div style="margin-right:24%; margin-left:24%;">
+                    <textarea id="dataquery" name="data" class="form-control" maxlength="100" placeholder="Comments or addiction requests (max: 100 chars)..."></textarea>
                 </div>
             </div>
         </div>
