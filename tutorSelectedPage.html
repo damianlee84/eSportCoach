@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Payment Summary</title>
+        <title>Esports Coach</title>
         <meta name="description" content=""esports coach>
 
         <!-- Latest compiled and minified CSS -->
@@ -29,7 +29,7 @@
                 </div>
                 <div class ="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="startPage.html">Home</a>
+                        <li><a href="#home">Home</a>
                         <li><a href="#features">Features</a>
                         <li><a href="#apply">Apply Now</a>
                         <li><a href="#rank">Player Ranking</a>
@@ -48,13 +48,14 @@
             </div>
         </div>
 
+        <!-- Info Panel --> 
         <div class="panel panel-default" style="margin-right:15%; margin-left:15%;" align="center">
             <div class="panel-body">
-
+                <!-- Date and hour pickers Div --> 
                 <div style="margin-right:24%; margin-left:24%;">
                     <!-- Datepicker --> 
                     <div class="input-append date" id="dp3" data-date="10-29-2015" data-date-format="mm-dd-yyyy">
-                        <input class="span2" size="16" type="text" placeholder="Select a Date" readonly="" style="background-color:white; height:28px;">
+                        <input class="span2" size="16" type="text" placeholder="Select a Date" readonly="" style="background-color:white; width:100px; height:28px;">
                         <span class="add-on" style="height: 28px; margin-right:25px"><i class="glyphicon glyphicon-calendar"></i></span>
                     </div>
 
@@ -73,7 +74,7 @@
                         <option value="10">10</option>
                         <option value="11">11</option>
                         <option value="12">12</option>
-                    </select> hr
+                    </select> :
 
                     <!-- MinutePicker --> 
                     <select class="dropdown" style="width:80px">
@@ -82,7 +83,13 @@
                         <option value="15">15</option>
                         <option value="30">30</option>
                         <option value="45">45</option>
-                    </select> min
+                    </select>
+
+                    <!-- AM/PM --> 
+                    <select class="dropdown" style="width:60px">
+                        <option value="am">AM</option>
+                        <option value="pm">PM</option>
+                    </select>
                 </div>
                 
                 <!-- Textinput for Skype and TwitchTV accounts --> 
@@ -104,15 +111,12 @@
 
                 <!-- Textarea for addition comments or questions --> 
                 <div style="margin-right:24%; margin-left:24%;">
-                    <textarea id="dataquery" name="data" class="form-control" maxlength="100" placeholder="Comments or addiction requests (max: 100 chars)..."></textarea>
+                    <textarea id="dataquery" name="data" class="form-control" maxlength="100" placeholder="Comments or addition requests (max: 100 chars)..."></textarea>
                 </div>
             </div>
         </div>
 
-        
-
-
-
+        <!-- Payment Method Panel --> 
         <div class="panel panel-default" style="margin-right:15%; margin-left:15%;" align="center">
             <div class="panel-body">
                 <span style="color:solid grey">Payment Method options</span>
