@@ -5,10 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Results</title>
 
     <!-- Bootstrap -->
-    <link href = "css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,86 +20,208 @@
     <![endif]-->
   </head>
   <body>
-    <h1>List of Coaches Found</h1>
-	<table class ="table table-striped">
-	<thead>
-	<tr class ="stuff">
-<!--	<th class ="leader-name">Rank</th> -->
-	<th class ="leader-name">Coach</th>
-	<th>MMR</th>
-	<th>Price/hr></th>
-	<th>Server</th>
-	<th class="col-md-1">Heroes</th>
-	<th>Reputation</th>
-	<th>User Rating</th>
-	<th>Students</th>
-	</tr>
-	</thead>
+    <!-- NavBar -->
+    <nav class ="navbar navbar-inverse navbar-fixed-top" id="my-navbar"  style="clear: both">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+                <a href="" class="navbar-brand">Esports Coach</a>
+            </div>
+            <div class ="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="startPage.html">Home</a>
+                    <li><a href="#features">Features</a>
+                    <li><a href="#apply">Apply Now</a>
+                    <li><a href="#rank">Player Ranking</a>
+                    <li><a href="#contact_us">Contact Us</a>
+                </ul>
+            </div>                                            
+        </div>
+    </nav>
+	
 
-	<tbody style = "font-size:20px">
-	<tr>
-	<td style = "color:blue">someguy</td>
-	<td>6123</td>
-	<td>$9</td>
-	<td>US</td>
-	<td><img src = "pictures/heroes1.jpg"/></td>
-	<td>332</td>
-	<td>9/10</td>
-	<td>50</td>
-	
-	</tr>
-	<tr>
-	<td style = "color:blue">someguy2</td>
-	<td>5543</td>
-	<td>$4</td>
-	<td>US</td>
-	<td><img src = "pictures/heroes2.jpg"/></td>
-	<td>443</td>
-	<td>8/10</td>
-	<td>70</td>
-	
-	</tr>
-	<tr>
-	<td style = "color:blue">someguy3</td>
-	<td>5321</td>
-	<td>$2</td>
-	<td>Europe</td>
-	<td><img src = "pictures/heroes3.jpg"/></td>
-	<td>332</td>
-	<td>5/10</td>
-	<td>20</td>
-	
-	</tr>
+	    <div id="wrapper">
+	        <!-- Sidebar -->     
+	        <div id="sidebar-wrapper"  style="clear: both; float:left; top:50px">
+	            <ul class="sidebar-nav">
+	                <li class="sidebar-brand">
+	                    <a href="#">Tutor Search</a>
+	                </li>
+			        <li class="dropdown">
+			          <select style="background-color:Black; color:White; border:none">
+						  <option>Server</option>
+						  <option>------</option>
+						  <option>North America</option>
+						  <option>Latin America</option>
+						  <option>Asia</option>
+						  <option>Europe</option>
+					  </select>
+			        </li>
+			        <li class="dropdown">
+			          <select style="background-color:Black; color:White; border:none">
+						  <option>Role</option>
+						  <option>------</option>
+						  <option>ADC</option>
+						  <option>Support</option>
+						  <option>Mid</option>
+						  <option>Top</option>
+						  <option>Jungle</option>
+					  </select>
+			        </li>
+			        <li class="dropdown">
+			          <select style="background-color:Black; color:White; border:none">
+						  <option>Champion</option>
+						  <option>------</option>
+						  <option>Long List</option>
+						  <option>Long List</option>
+						  <option>Long List</option>
+						  <option>Long List</option>
+						  <option>Long List</option>
+					  </select>
+			        </li>
+			        <li class="dropdown">
+			          <select style="background-color:Black; color:White; border:none">
+						  <option>Rank</option>
+						  <option>------</option>
+						  <option>Challenger 1-5</option>
+						  <option>Master 1-5</option>
+						  <option>Diamond 1-5</option>
+						  <option>Gold 1-5</option>
+						  <option>Silver 1-5</option>
+						  <option>Bronze 1-5</option>
+					  </select>
+			        </li>
+	        
+			        <!--<li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Rank<span class="caret"></span></a>
+			          <ul class="dropdown-menu">
+			            <li role="separator" class="divider"></li>
+			            <li><a href="#">Separated link</a></li>
+			            <li role="separator" class="divider"></li>
+			            <li><a href="#">Separated link</a></li>
+			            <li role="separator" class="divider"></li>
+			            <li><a href="#">One more separated link</a></li>
+			          </ul>
+			        </li>-->
+					
+					<li style="position:relative"><a href="listOfCoachesPage.html">Search!</a></li>
+	            </ul>
+	        </div>
+	        <!-- /#sidebar-wrapper -->
 
-	<tr>
-	<td style = "color:blue">somegirl</td>
-	<td>5600</td>
-	<td>$6</td>
-	<td>Europe</td>
-	<td><img src = "pictures/heroes4.jpg"/></td>
-	<td>300</td>
-	<td>8/10</td>
-	<td>30</td>
-	
-	</tr>
-	<tr>
-	<td style = "color:blue">freeguy</td>
-	<td>4500</td>
-	<td>$0</td>
-	<td>Asia</td>
-	<td></td>
-	<td>500</td>
-	<td>7/10</td>
-	<td>80</td>
-	
-	</tr>
+	        <!-- Page Content -->
+	        <div id="page-content-wrapper">
+	            <div class="container-fluid">
+	                <div class="row">
+	                    <div class="col-lg-12" style="top:20px">
+	                        <h1>Results</h1>
+                            <a href="searchCoachPage.html" class="btn btn-default navbar-right" id="menu-toggle">Start new search</a>
+                            
+	                        <table class ="table table-striped">
+	                           <thead>
+	                               <tr class ="stuff">
+                                        <!--	<th class ="leader-name">Rank</th> -->
+	                                    <th class ="leader-name">Coach</th>
+	                                        <th>MMR</th>
+	                                        <th>Price/hr></th>
+	                                        <th>Server</th>
+                                            <th class="col-md-1">Heroes</th>
+                                            <th>Reputation</th>
+                                            <th>User Rating</th>
+                                            <th>Students</th>
+	                               </tr>
+	                           </thead>
 
-	</tbody>
-	</table>
+	                           <tbody style = "font-size:20px">
+	                               <tr>
+                                        <td style = "color:blue">someguy</td>
+                                        <td>6123</td>
+                                        <td>$9</td>
+                                        <td>US</td>
+                                        <td><img src = "pictures/heroes1.jpg"/></td>
+                                        <td>332</td>
+                                        <td>9/10</td>
+                                        <td>50</td>
+	                               </tr>
 	
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+                                    <tr>
+	                                   <td style = "color:blue">someguy2</td>
+	                                   <td>5543</td>
+	                                   <td>$4</td>
+                                        <td>US</td>
+                                        <td><img src = "pictures/heroes2.jpg"/></td>
+                                        <td>443</td>
+                                        <td>8/10</td>
+                                        <td>70</td>
+	                               </tr>
+
+                                   <tr>
+                                        <td style = "color:blue">someguy3</td>
+                                        <td>5321</td>
+                                        <td>$2</td>
+                                        <td>Europe</td>
+                                        <td><img src = "pictures/heroes3.jpg"/></td>
+                                        <td>332</td>
+                                        <td>5/10</td>
+                                        <td>20</td>
+	                               </tr>
+
+                                   <tr>
+                                        <td style = "color:blue">somegirl</td>
+                                        <td>5600</td>
+                                        <td>$6</td>
+                                        <td>Europe</td>
+                                        <td><img src = "pictures/heroes4.jpg"/></td>
+                                        <td>300</td>
+                                        <td>8/10</td>
+                                        <td>30</td>
+	
+	                               </tr>
+	
+                                   <tr>
+                                        <td style = "color:blue">freeguy</td>
+                                        <td>4500</td>
+                                        <td>$0</td>
+                                        <td>Asia</td>
+                                        <td></td>
+                                        <td>500</td>
+                                        <td>7/10</td>
+                                        <td>80</td>
+	
+	                               </tr>
+                                </tbody>
+                            </table>
+                        </div>
+	               </div>
+	           </div>
+                
+                <div>
+                    <br>
+                    <a href="tutorSelectedPage.html" class="btn btn-success navbar-right" id="menu-toggle">Continue</a>
+                </div>
+                
+                
+                
+	        <!-- /#page-content-wrapper -->
+	    </div>
+	    <!-- /#wrapper -->
+
+	    <!-- jQuery -->
+	    <script src="js/jquery.js"></script>
+
+	    <!-- Bootstrap Core JavaScript -->
+	    <script src="js/bootstrap.min.js"></script>
+
+	    <!-- Menu Toggle Script -->
+	    <script>
+	    $("#menu-toggle").click(function() {
+	        $("#wrapper").toggleClass("toggled");
+	    });
+	    </script>
   </body>
 </html>
