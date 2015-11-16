@@ -46,3 +46,20 @@ def signup(request):
         "title": "Signup Succesful",
     }
     return render(request, "forms.html", context)
+
+def findcoach(request):
+    title = 'Testing'
+    form = SignupForm(request.POST or None)
+    context = {
+        "title": title,
+        "form" : form,
+    }
+    
+    if form.is_valid():
+        instance = form.save(commit = False)
+        instance.save()
+        context = {
+        "title": "Signup Succesful",
+    }
+    return render(request, "find_coach.html", context)
+
