@@ -6,12 +6,15 @@
         <meta name="description" content=""esports coach>
 
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-                  dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/bootstrap.min.css" >
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 
         <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
-        <link href="css/bootstrap_datepicker.css" rel="stylesheet">
-        <link href="css/datepicker.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/bootstrap_datepicker.css" >
+        <link rel="stylesheet" href="css/datepicker.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap-rating.css">
+        
     </head>
 
     <body>  
@@ -91,7 +94,8 @@
                     <br>
                     <div><img src="pictures/email_icon.jpg" height="50" width="50"></div>
                     <div>Email Coach</div>
-                    <div><img src="pictures/rating_icon.jpg" height="50" width="50"></div>
+                    <div><i class='glyphicon glyphicon-star' style="font-size:50px;"></i></div>
+
                     <div>Rate Coach</div>
                 </div>
             </div>
@@ -130,8 +134,7 @@
                            If you wish to talk to me privately, are interested, or have any questions contact me! Message me using this website. Adding me in game is not the best way to contact me as I get flooded with friend requests but feel free to after we have spoken.</p>
                     </div>
                     <div class="tab-pane" id="reviews">
-                        <h1>Yellow</h1>
-                        <p>yellow yellow yellow yellow yellow</p>
+                        <input type="hidden" class="rating"/>
                     </div>
                     <div class="tab-pane" id="reputation">
                         <h1>Green</h1>
@@ -144,6 +147,8 @@
                 </div>
             </div>
         </div>
+
+        
 
         <!-- Info Panel --> 
         <div class="panel panel-default" style="margin-right:15%; margin-left:15%;" align="center">
@@ -225,6 +230,17 @@
 
 
         <!-- BELOW ARE ALL THE SCRIPTS -->
+
+
+        <!-- Script for the rating stars -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap-rating.js"></script>
+        <script>
+        $('document').ready(function(){
+            $('input').rating();    
+        });
+        </script>
 
         <!-- Script for the tutor description tabs -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
