@@ -46,3 +46,26 @@ def signup(request):
         "title": "Signup Succesful",
     }
     return render(request, "forms.html", context)
+
+def findcoach(request):
+    title = 'Testing'
+    context = {
+        "title": title}
+    
+    return render(request, "find_coach.html", context)
+
+def list_of_coaches(request):
+    coach = 'someguy'
+    mmr = 6123
+    price = 9
+    server = "US"
+    hero = "somehero"
+    reputation = 332
+    rating = "9/10"
+    students = 50
+    usercoach = [coach, mmr, price, server, hero, reputation, rating, students]
+
+    context = {"usercoach": usercoach}
+
+    return render(request, "listOfCoachesPage.html", context)
+

@@ -23,6 +23,8 @@ urlpatterns = [
     url(r'^$', 'sideapp.views.home', name='home'),
     url(r'^contact/', 'sideapp.views.contact', name='contact'),
     url(r'^signup/', 'sideapp.views.signup', name='signup'),
+    url(r'^findcoach/', 'sideapp.views.findcoach', name='findcoach'),
+    url(r'^list_of_coaches/', 'sideapp.views.list_of_coaches', name='list_of_coaches'),
     
     url(r'^admin/', include(admin.site.urls)),
 ] 

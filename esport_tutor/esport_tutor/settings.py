@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'esport_tutor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mydatabase',
-        'USER': '',
-        'PASSWORD': '',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'Pablocpe2',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
