@@ -53,9 +53,11 @@
             <h2 align="center">Coach Damian</h2>
             <div class="row promo-top" style="margin-right:5%; margin:0% 5% 3% 5%;">
                 
-                <div class="col-xs-0 col-sm-3 text-right"><img src="pictures/coach_icon1.jpg"></div>    
-                
+                <div class="col-xs-0 col-sm-3 text-right">
+                    <img src="pictures/coach_icon1.jpg" style="border-radius:100px;">
+                </div>                
                 <div class="col-xs-12 col-sm-2 text-center">
+                    <br>
                     <div><a onclick="">Reputation:</a>
                         <div>22,400</div>
                         <div>top 1% of coaches</div>
@@ -66,9 +68,9 @@
                             <!-- <input class="rating form-control hide" value="4.91176470588235" data-readonly="true" data-show-clear="false" data-show-caption="false" data-size="xs"> -->
                         </div>
                     </div>
-                </div>
-                
+                </div>             
                 <div class="col-xs-12 col-sm-2 text-right" style="width:140px; font-weight:bold;"> 
+                    <br>
                     <div>MMR</div>
                     <div>Server</div>
                     <div>Cost</div>
@@ -77,14 +79,16 @@
                     <div>Skype Name</div>
                 </div>
                 <div class="col-xs-12 col-sm-2 text-left" style="padding:0; width:135px;">  
+                    <br>
                     <div>5700</div>
                     <div>Europe</div>
                     <div>$20.00 USD/hr</div>
-                    <div>117</div>
-                    <div>Luna</div>
-                    <div>privind_in_sus</div>
+                    <div>147</div>
+                    <div>Lunar</div>
+                    <div>privind_out_sim</div>
                 </div>
                 <div class="col-xs-12 col-sm-2 text-center" style="padding:0; width:135px;">  
+                    <br>
                     <div><img src="pictures/email_icon.jpg" height="50" width="50"></div>
                     <div>Email Coach</div>
                     <div><img src="pictures/rating_icon.jpg" height="50" width="50"></div>
@@ -93,9 +97,43 @@
             </div>
         </div>
 
+        <!-- Tutor Description Panel --> 
+        <div class="panel panel-default" style="margin-right:15%; margin-left:15%;" align="center">
+            <div class="panel-body">
+                    <div id="content">
+                        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active"><a href="#red" data-toggle="tab">Red</a></li>
+                            <li><a href="#Overview" data-toggle="tab">Orange</a></li>
+                            <li><a href="#yellow" data-toggle="tab">Yellow</a></li>
+                            <li><a href="#green" data-toggle="tab">Green</a></li>
+                            <li><a href="#blue" data-toggle="tab">Blue</a></li>
+                        </ul>
+                        <div id="my-tab-content" class="tab-content">
+                            <div class="tab-pane active" id="red">
+                                <h1>Red</h1>
+                                <p>red red red red red red</p>
+                            </div>
+                            <div class="tab-pane" id="orange">
+                                <h1>Orange</h1>
+                                <p>orange orange orange orange orange</p>
+                            </div>
+                            <div class="tab-pane" id="yellow">
+                                <h1>Yellow</h1>
+                                <p>yellow yellow yellow yellow yellow</p>
+                            </div>
+                            <div class="tab-pane" id="green">
+                                <h1>Green</h1>
+                                <p>green green green green green</p>
+                            </div>
+                            <div class="tab-pane" id="blue">
+                                <h1>Blue</h1>
+                                <p>blue blue blue blue blues</p>
+                            </div>
+                        </div>
+                    </div>
 
-
-
+            </div>
+        </div>
 
         <!-- Info Panel --> 
         <div class="panel panel-default" style="margin-right:15%; margin-left:15%;" align="center">
@@ -171,12 +209,31 @@
                 <span style="color:solid grey">Payment Method options</span>
                 <br><br>
                 <a href="summaryReceiptPage.html"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" /></a>
-                
             </div>
         </div>
 
 
+
+        <!-- BELOW ARE ALL THE SCRIPTS -->
+
+        <!-- Script for the tutor description tabs -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                    $('#myTab a').click(function (e) {
+                        e.preventDefault()
+                        $(this).tab('show')
+                    })
+
+                    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                        e.relatedTarget // previous tab
+                    });
+                });
+        </script>
         
+        <!-- Scripts for the calendar -->
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
         <script>
