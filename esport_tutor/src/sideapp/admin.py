@@ -5,7 +5,7 @@ from .forms import SignupForm
 
 
 class adminSignup(admin.ModelAdmin):
-    list_display = ("__unicode__", "timestamp", "updated")
+    list_display = ("__unicode__", "timestamp", "updated", "mmr", "pricerate", "server", "hero", "reputation", "rating", "students")
     form = SignupForm
 
 

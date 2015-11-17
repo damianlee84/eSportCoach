@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import SignupForm, ContactForm
+from .models import Signup
 
 
 def home(request):
@@ -55,7 +56,14 @@ def findcoach(request):
     return render(request, "find_coach.html", context)
 
 def list_of_coaches(request):
-    coach = 'someguy'
+    coachtest=[]
+    #listofcoaches = Signup.objects.all()
+    user = Signup.objects.all()
+    for i in range(len(user)):
+        coachtest.append([user[i].full_name, user[i].mmr, user[i].pricerate, user[i].server, user[i].hero, user[i].reputation, user[i].rating, user[i].students])
+#    coach = [user.full_name, user.mmr, user.pricerate, user.server, user.hero, user.reputation, user.rating, user.students]
+    context2 = {'coaches': coachtest}
+    coach1 = 'someguy'
     mmr = 6123
     price = 9
     server = "US"
@@ -63,9 +71,9 @@ def list_of_coaches(request):
     reputation = 332
     rating = "9/10"
     students = 50
-    usercoach = [coach, mmr, price, server, hero, reputation, rating, students]
+    usercoach = [coach1, mmr, price, server, hero, reputation, rating, students]
 
     context = {"usercoach": usercoach}
 
-    return render(request, "listOfCoachesPage.html", context)
+    return render(request, "listOfCoachesPage.html", context2)
 

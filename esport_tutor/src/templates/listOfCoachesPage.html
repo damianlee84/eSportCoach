@@ -59,12 +59,20 @@
                                         <td>50</td>
 	                               </tr>
                                    
+                                   {% for coach in coaches %}
                                    <tr>
-                                   {% for item in usercoach %}
-                                       <td>{{item}}</td>
-                                   {% endfor %}
+                                       {% for attribute in coach %}
+                                       <td>{{attribute}}</td>
+                                       {% endfor %}
                                    </tr>
+                                   {% endfor %}
                                    
+<!--                                   <tr>-->
+<!--                                   {% for attribute in coach %}-->
+<!--                                       <td>{{attribute}}</td>-->
+<!--                                   {% endfor %}-->
+<!--                                   </tr>-->
+
                                    <tr>
 	                                   <td style = "color:blue">someguy2</td>
 	                                   <td>5543</td>
