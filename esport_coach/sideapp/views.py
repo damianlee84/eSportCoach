@@ -37,32 +37,31 @@ def signup(request):
     context = {
         "title": title,
         "form" : form,
-    }
-     
+        }
     if form.is_valid():
         instance = form.save(commit = False)
         instance.save()
         context = {
-        "title": "Signup Succesful",
-    }
+            "title": "Signup Succesful",
+            }
     return render(request, "forms.html", context)
 
 def findcoach(request):
     title = 'Testing'
     context = {
-        "title": title}
+        "title": title
+        }
     
     return render(request, "find_coach.html", context)
 
 def list_of_coaches(request):
     coaches_list=[]
-    #listofcoaches = Signup.objects.all()
     user = Signup.objects.all()
     for i in range(len(user)):
         coaches_list.append([user[i].full_name, user[i].mmr, user[i].pricerate, user[i].server, user[i].hero, user[i].reputation, user[i].rating, user[i].students, user[i].id])
-    # coach = [user.full_name, user.mmr, user.pricerate, user.server, user.hero, user.reputation, user.rating, user.students]
-    context = {'coaches': coaches_list}
-
+    context = {
+        'coaches': coaches_list
+        }
     return render(request, "listOfCoachesPage.html", context)
 
 def tutorselected(request, tutor_id):

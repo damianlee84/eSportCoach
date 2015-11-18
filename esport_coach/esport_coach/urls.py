@@ -26,7 +26,6 @@ urlpatterns = [
     url(r'^findcoach/', 'sideapp.views.findcoach', name='findcoach'),
     url(r'^list_of_coaches/', 'sideapp.views.list_of_coaches', name='list_of_coaches'),
     url(r'^tutorselected/(?P<tutor_id>[0-9]+)', 'sideapp.views.tutorselected', name='tutorselected'),
-    
     url(r'^admin/', include(admin.site.urls)),
 ] 
 

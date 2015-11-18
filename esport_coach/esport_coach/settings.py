@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.static',
             ],
         },
     },
@@ -83,7 +84,7 @@ DATABASES = {
         'PASSWORD': 'Pablocpe2',
         'HOST': '127.0.0.1',
         'PORT': '5432',
-}
+    }
 }
 
 
