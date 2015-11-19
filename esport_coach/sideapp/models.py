@@ -40,3 +40,5 @@ class Coach(models.Model):
 class Tutee(models.Model):
     username = models.ForeignKey(User)
 
+class Admin(models.Model):
+    username = models.ForeignKey(User)
