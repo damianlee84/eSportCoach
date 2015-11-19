@@ -86,10 +86,10 @@ EMAIL_USE_TLS = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'etutor',
-        'USER': 'postgres',
-        'PASSWORD': 'Pablocpe2',
-        'HOST': '127.0.0.1',
+        'NAME': 'esportdb',
+        'USER': 'zawbmqgrzewebr',
+        'PASSWORD': 'w0ens6pGX3k52WVxl6NsyXn5Ea',
+        'HOST': 'ec2-54-83-199-54.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }

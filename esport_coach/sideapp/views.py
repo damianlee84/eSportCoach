@@ -21,20 +21,18 @@ def home(request):
     return render(request, "home.html", context)
 
 def contact(request):
-    form = ContactForm(request.POST or None)
+    form = ContactForm(request.POST)
     
-    if form.is_valid();
+    if form.is_valid():
         email = form.cleaned_data.get('email')
         message = form.cleaned_data.get('messsage')
         full_name = form.cleaned_data.get('full_name')
-        subject = 'Site contact form'
+        subject = 'Customers Enquiries'
         from_email = settings.EMAIL_HOST_USER
-        to_email = [from_email, 'esportcoach@gmail.com']
+        to_email = [from_email, settings.EMAIL_HOST_USER]
         contact_message = "%s: %s via %s"%(full_name, message, email)
         send_mail(subject, contact_message, from_email, to_email, fail_silently = True)
-        
-        
-        
+           
     context = {
         "form" : form,
     }
