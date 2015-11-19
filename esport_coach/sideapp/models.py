@@ -18,3 +18,8 @@ class Signup(models.Model):
         return self.full_name
 
 
+class User(models.Model):
+    username = models.CharField(primary_key=True, max_length = 100)
+    password = models.CharField(max_length = 100)
+    em = models.CharField(max_length = 100)
+    name = models.CharField(max_length = 100)
