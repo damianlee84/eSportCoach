@@ -4,7 +4,7 @@ from .models import Signup
 class SignupForm(forms.ModelForm):
     class Meta:
         model = Signup
-        fields = ['full_name', 'profile_image', 'email', 'mmr', 'pricerate', 'server', 'hero', 'reputation', 'rating', 'students']
+        fields = ['full_name', 'email', 'mmr', 'pricerate', 'server', 'hero', 'reputation', 'rating', 'students']
         
     
     def valid_email(self):

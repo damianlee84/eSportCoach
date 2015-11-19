@@ -9,10 +9,10 @@ class Signup(models.Model):
     mmr = models.CharField(max_length=50, blank = False, null = False)
     server = models.CharField(max_length=50, blank = False, null = False)
     hero = models.CharField(max_length=50, blank = False, null = False)
-    rating = models.PositiveIntegerField(max_length=50, blank = False, null = False)
-    reputation = models.PositiveIntegerField(max_length=50, blank = False, null = False)
+    rating = models.PositiveIntegerField(blank = False, null = False)
+    reputation = models.PositiveIntegerField(blank = False, null = False)
     students = models.CharField(max_length=50, blank = False, null = False)
-    pricerate = models.PositiveIntegerField(max_length=50, blank = False, null = False)
+    pricerate = models.PositiveIntegerField(blank = False, null = False)
 
     def __unicode__(self):
         return self.full_name
