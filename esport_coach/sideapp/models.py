@@ -28,7 +28,7 @@ class User(models.Model):
 
 class Coach(models.Model):
    username = models.ForeignKey(User)
-   MMR = models.CharField(max_length = 100, blank = False, null = False)
+   MMR = models.IntegerField(default=0,  blank = False, null = False)
    hero = models.CharField(max_length = 500, blank = False, null = False)
    rank = models.IntegerField(default = 0)
    server = models.CharField(max_length = 50, blank = False, null = False)
@@ -36,4 +36,7 @@ class Coach(models.Model):
    hour_rate = models.FloatField(default = 0.00)
    def __str__(self):
         return self.username + " " + self.hero + " " + self.rank + " " + self.server + " " + self.server + " " + self.hour_rate
+
+class Tutee(models.Model):
+    username = models.ForeignKey(User)
 
