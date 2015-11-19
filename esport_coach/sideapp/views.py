@@ -22,7 +22,7 @@ def home(request):
 
 def contact(request):
     form = ContactForm(request.POST)
-    
+
     if form.is_valid():
         email = form.cleaned_data.get('email')
         message = form.cleaned_data.get('messsage')
@@ -32,13 +32,13 @@ def contact(request):
         to_email = [from_email, settings.EMAIL_HOST_USER]
         contact_message = "%s: %s via %s"%(full_name, message, email)
         send_mail(subject, contact_message, from_email, to_email, fail_silently = True)
-           
+
     context = {
         "form" : form,
     }
-    
 
-    
+
+
     return render(request, "forms.html", context)
 
 def signup(request):
@@ -79,3 +79,13 @@ def tutorselected(request, tutor_id):
     tutor = Signup.objects.get(pk=tutor_id)
     context = {'coach': tutor}
     return render(request, "tutorSelectedPage.html", context)
+
+def paymentpage(request):
+    tutor = Signup.objects.get(pk=1)
+    context = {'coach': tutor.full_name}
+    return render(request, "summaryReceiptPage.html", context)
+
+def streampage(request):
+    tutor = Signup.objects.get(pk=1)
+    context = {'coach': tutor.full_name}
+    return render(request, "streamPage.html", context)

@@ -12,9 +12,7 @@ class Signup(models.Model):
     rating = models.PositiveIntegerField(blank = False, null = False)
     reputation = models.PositiveIntegerField(blank = False, null = False)
     students = models.CharField(max_length=50, blank = False, null = False)
-    pricerate = models.PositiveIntegerField(blank = False, null = False)
+    pricerate = models.PositiveIntegerField(default=0)
 
     def __unicode__(self):
         return self.full_name
-
-
