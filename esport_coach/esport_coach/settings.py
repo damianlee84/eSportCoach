@@ -72,6 +72,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'esport_coach.wsgi.application'
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'esportcoach@gmail.com'
+EMAIL_HOST_PASSWORD = 'Esportcoach1234!'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -86,6 +93,18 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd6ev70m5pvg0gd',
+        'USER': 'zawbmqgrzewebr',
+        'PASSWORD': 'w0ens6pGX3k52WVxl6NsyXn5Ea',
+        'HOST': 'ec2-54-83-199-54.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
+}'''
 
 
 # Internationalization
@@ -115,5 +134,3 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "static", 'media_root')
-
-
