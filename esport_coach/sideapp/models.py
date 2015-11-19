@@ -21,5 +21,7 @@ class Signup(models.Model):
 class User(models.Model):
     username = models.CharField(primary_key=True, max_length = 100)
     password = models.CharField(max_length = 100)
-    em = models.CharField(max_length = 100)
+    email = models.CharField(max_length = 100)
     name = models.CharField(max_length = 100)
+    def __str__(self):
+        return self.username + " " + self.email + " " + self.name
