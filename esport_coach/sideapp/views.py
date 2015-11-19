@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .forms import SignupForm, ContactForm
 from .models import Signup
+from django.core.mail import send_mail
+from django.conf import settings
 
 def home(request):
     title = 'Welcome'
@@ -9,7 +11,7 @@ def home(request):
         "title": title,
         "form" : form,
     }
-     
+
     if form.is_valid():
         instance = form.save(commit = False)
         instance.save()
@@ -20,15 +22,25 @@ def home(request):
 
 def contact(request):
     form = ContactForm(request.POST or None)
-    context = {
-        "form" : form,
-        }
-    '''
+    
     if form.is_valid();
         email = form.cleaned_data.get('email')
         message = form.cleaned_data.get('messsage')
-        full_name = form.cleaned_data.get('full_name') 
-        '''
+        full_name = form.cleaned_data.get('full_name')
+        subject = 'Site contact form'
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [from_email, 'esportcoach@gmail.com']
+        contact_message = "%s: %s via %s"%(full_name, message, email)
+        send_mail(subject, contact_message, from_email, to_email, fail_silently = True)
+        
+        
+        
+    context = {
+        "form" : form,
+    }
+    
+
+    
     return render(request, "forms.html", context)
 
 def signup(request):
@@ -51,7 +63,7 @@ def findcoach(request):
     context = {
         "title": title
         }
-    
+
     return render(request, "find_coach.html", context)
 
 def list_of_coaches(request):
@@ -69,5 +81,3 @@ def tutorselected(request, tutor_id):
     tutor = Signup.objects.get(pk=tutor_id)
     context = {'coach': tutor}
     return render(request, "tutorSelectedPage.html", context)
-
-

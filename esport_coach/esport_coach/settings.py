@@ -72,6 +72,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'esport_coach.wsgi.application'
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'esportcoach@gmail.com'
+EMAIL_HOST_PASSWORD = 'Esportcoach1234!'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -115,5 +122,3 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "static", 'media_root')
-
-
