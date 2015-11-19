@@ -42,3 +42,7 @@ class Tutee(models.Model):
 
 class Admin(models.Model):
     username = models.ForeignKey(User)
+
+class register(models.Model):
+    username = models.ForeignKey(User)
+    rdate = models.DateTimeField(auto_now_add = False, auto_now = "True")
