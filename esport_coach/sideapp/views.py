@@ -82,7 +82,7 @@ def tutorselected(request, tutor_id):
 
 def paymentpage(request):
     tutor = Signup.objects.get(pk=1)
-    context = {'coach': tutor.full_name}
+    context = {'coachname': tutor.full_name, 'coachprice': tutor.pricerate}
     return render(request, "summaryReceiptPage.html", context)
 
 def streampage(request):
