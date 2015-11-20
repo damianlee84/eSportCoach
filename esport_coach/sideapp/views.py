@@ -1,8 +1,12 @@
 from django.shortcuts import render
-from .forms import SignupForm, ContactForm
+from .forms import SignupForm, ContactForm, SalePaymentForm
 from .models import Signup
 from django.core.mail import send_mail
 from django.conf import settings
+from django.shortcuts import render_to_response
+from django.http import HttpResponse
+from django.template import RequestContext
+
 
 def home(request):
     title = 'Welcome'
@@ -89,3 +93,18 @@ def streampage(request):
     tutor = Signup.objects.get(pk=1)
     context = {'coach': tutor.full_name}
     return render(request, "streamPage.html", context)
+
+def charge(request):
+        form = SalePaymentForm(request.POST or None)
+        if form.is_valid(): # charges the card
+            return render(request, "summaryReceiptPage.html")
+        context = {"form" : form,}
+        return render(request, "checkout.html", context)
+    
+
+
+
+
+
+
+

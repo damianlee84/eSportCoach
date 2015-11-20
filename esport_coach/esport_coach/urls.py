@@ -17,6 +17,8 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
+from sideapp import views
+
 
 urlpatterns = [
 
@@ -28,6 +30,9 @@ urlpatterns = [
     url(r'^tutorselected/(?P<tutor_id>[0-9]+)', 'sideapp.views.tutorselected', name='tutorselected'),
     url(r'^paymentpage/', 'sideapp.views.paymentpage', name='paymentpage'),
     url(r'^streampage/', 'sideapp.views.streampage', name='streampage'),
+    
+    url(r'^charge/$', 'sideapp.views.charge', name="charge"),
+    
     url(r'^admin/', include(admin.site.urls)),
 ]
 

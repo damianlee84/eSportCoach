@@ -22,6 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'wd+rx85m%8x%dpp9r-e-@swp6$b6kg0pe(=c@coy#6r7qa5(oc'
 
+STRIPE_API_KEY = 'sk_test_kPe7E4aqiWEbEllxALXFoMTG'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -82,13 +83,13 @@ EMAIL_USE_TLS = True
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'etutor',
-        'USER': 'postgres',
-        'PASSWORD': 'Pablocpe2',
+        'NAME': 'postgres',
+        'USER': '',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -104,7 +105,7 @@ DATABASES = {
         'HOST': 'ec2-54-83-199-54.compute-1.amazonaws.com',
         'PORT': '5432',
     }
-}'''
+}
 
 
 # Internationalization
@@ -134,3 +135,9 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "static", 'media_root')
+
+
+
+STRIPE_API_KEY = 'sk_test_kPe7E4aqiWEbEllxALXFoMTG'
+
+
