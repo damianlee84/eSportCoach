@@ -17,20 +17,9 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
+#from sideapp import views
 
 urlpatterns = [
-
-    url(r'^$', 'sideapp.views.home', name='home'),
-    url(r'^contact/', 'sideapp.views.contact', name='contact'),
-    url(r'^signup/', 'sideapp.views.signup', name='signup'),
-    url(r'^findcoach/', 'sideapp.views.findcoach', name='findcoach'),
-    url(r'^list_of_coaches/', 'sideapp.views.list_of_coaches', name='list_of_coaches'),
-    url(r'^tutorselected/(?P<tutor_id>[0-9]+)', 'sideapp.views.tutorselected', name='tutorselected'),
-    url(r'^paymentpage/', 'sideapp.views.paymentpage', name='paymentpage'),
-    url(r'^streampage/', 'sideapp.views.streampage', name='streampage'),
+    url(r'^sideapp/', include('sideapp.urls', namespace="sideapp")),
     url(r'^admin/', include(admin.site.urls)),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

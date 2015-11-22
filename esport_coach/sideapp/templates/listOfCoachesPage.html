@@ -44,17 +44,21 @@
                                 </thead>
 
                                 <tbody style = "font-size:20px">
-                                    {% for coach in coaches %}
-                                        <tr onclick="window.location.href='/tutorselected/{{coach.8}}'" style="cursor: pointer;">
-                                            {% for attribute in coach %}
-                                                <!-- {% if attribute %} -->
-                                                <td>{{attribute}}</td>
-                                                <!-- {% else %}
-                                                <p>not working</p> -->
-                                                <!-- {% endif %} -->
-                                            {% endfor %}
-                                        </tr>
-                                    {% endfor %}
+                                    {% if coaches %}
+                                      {% for coach in coaches %}
+                                          <tr onclick="window.location.href='/tutorselected/{{coach.8}}'" style="cursor: pointer;">
+                                              {% for attribute in coach %}
+                                                  <!-- {% if attribute %} -->
+                                                  <td>{{attribute}}</td>
+                                                  <!-- {% else %}
+                                                  <p>not working</p> -->
+                                                  <!-- {% endif %} -->
+                                              {% endfor %}
+                                          </tr>
+                                      {% endfor %}
+                                    {% else %}
+                                      <p>No coaches available.</p>
+                                    {% endif %}
                                 </tbody>
                             </table>
                         </div>
