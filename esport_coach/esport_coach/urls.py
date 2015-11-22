@@ -17,9 +17,10 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
-#from sideapp import views
+from django.views.generic import RedirectView
 
 urlpatterns = [
+    url(r'^$',RedirectView.as_view(url='/sideapp/'), name='home'),
     url(r'^sideapp/', include('sideapp.urls', namespace="sideapp")),
     url(r'^admin/', include(admin.site.urls)),
 ]
