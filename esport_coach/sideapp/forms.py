@@ -89,3 +89,37 @@ class expDateInput(forms.MultiValueField):
             return date(year, month, day)
         return None
     
+class SalePaymentForm(forms.Form):
+    CCnumber = CreditCardField(required=True, label="Card Number")
+    expiration = CCExpField(required=True, label="Expiration")
+    cvc = forms.IntegerField(required=True, label="CCV Number",
+        max_value=9999, widget=forms.TextInput(attrs={'size': '4'}))
+ 
+    def clean(self):
+        """
+        The clean method will effectively charge the card and create a new
+        Sale instance. If it fails, it simply raises the error given from
+        Stripe's library as a standard ValidationError for proper feedback.
+        """
+        cleaned = super(SalePaymentForm, self).clean()
+ 
+        if not self.errors:
+            number = self.cleaned_data["number"]
+            exp_month = self.cleaned_data["expiration"].month
+            exp_year = self.cleaned_data["expiration"].year
+            cvc = self.cleaned_data["cvc"]
+ 
+            sale = Sale()
+ 
+            # charge 10 bucks for testing, change the value 
+            success, instance = sale.charge(1000, CCnumber, exp_month,
+                                                exp_year, cvc)
+ 
+            if not success:
+                raise forms.ValidationError("Error: %s" % instance.message)
+            else:
+                instance.save()
+                """Payment succesful"""
+                pass
+ 
+        return cleaned
