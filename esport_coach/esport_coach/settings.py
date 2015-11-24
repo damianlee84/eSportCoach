@@ -95,7 +95,7 @@ EMAIL_USE_TLS = True
 #         }
 #     }
 
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -106,10 +106,9 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+"""
 
 
-
-'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -119,7 +118,7 @@ DATABASES = {
         'HOST': 'ec2-54-83-199-54.compute-1.amazonaws.com',
         'PORT': '5432',
     }
-}'''
+}
 
 
 # Internationalization

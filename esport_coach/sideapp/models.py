@@ -61,7 +61,7 @@ class transaction(models.Model):
         
     #transaction number    
     transaction_id = models.CharField(max_length = 32)
-    transaction_date = models.models.DateTimeField(auto_now_add = True, auto_now=False)
+    transaction_date = models.DateTimeField(auto_now_add = True, auto_now=False)
     
     def charge(self, price_in_cents, number, exp_month, exp_year, cvc):
         if self.transaction_id:
