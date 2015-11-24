@@ -1,4 +1,7 @@
 from django.db import models
+from django.conf import settings
+from datetime import date, datetime
+from calendar import monthrange
 
 class Signup(models.Model):
     email = models.EmailField()
@@ -47,3 +50,26 @@ class Admin(models.Model):
 class register(models.Model):
     username = models.ForeignKey(User)
     rdate = models.DateTimeField(auto_now_add = False, auto_now = "True")
+
+class transaction(models.Model):
+    def __init__(self, *args, **kwargs):
+        super(transaction, self).__init__(*args, **kwargs)
+        
+        import stripe
+        stripe.api.key = settings.STRIPE_API_KEY
+        self.stripe = stripe
+        
+    #transaction number    
+    transaction_id = models.CharField(max_length = 32)
+    transaction_date = models.models.DateTimeField(auto_now_add = True, auto_now=False)
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+    
