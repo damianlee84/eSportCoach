@@ -2,7 +2,7 @@ from django import forms
 from .models import Signup 
 from datetime import date, datetime
 from calendar import monthrange
-from .models import Sale
+from .models import transaction
 
 class SignupForm(forms.ModelForm):
     class Meta:
@@ -63,12 +63,12 @@ class expDateInput(forms.MultiValueField):
             forms.ChoiceField(choices=self.EXP_YEAR,
                 error_messages={'invalid': errors['invalid_year']}),
         )
-        super(CCExpField, self).__init__(fields, *args, **kwargs)
-        self.widget = CCExpWidget(widgets =
+        super(expDateInput, self).__init__(fields, *args, **kwargs)
+        self.widget = expDate(widgets =
             [fields[0].widget, fields[1].widget])
  
     def clean(self, value):
-        exp = super(CCExpField, self).clean(value)
+        exp = super(expDateInput, self).clean(value)
         if date.today() > exp:
             raise forms.ValidationError(
             "The expiration date you entered is in the past.")
@@ -91,7 +91,7 @@ class expDateInput(forms.MultiValueField):
     
 class SalePaymentForm(forms.Form):
     CCnumber = CreditCardField(required=True, label="Card Number")
-    expiration = CCExpField(required=True, label="Expiration")
+    expiration = expDateInput(required=True, label="Expiration")
     cvc = forms.IntegerField(required=True, label="CCV Number",
         max_value=9999, widget=forms.TextInput(attrs={'size': '4'}))
  
