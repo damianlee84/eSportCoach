@@ -21,7 +21,10 @@ from django.views.generic import RedirectView
 from sideapp import views
 
 urlpatterns = [
+    url(r'', include('social.apps.django_app.urls', namespace='social')),
     url(r'^$',RedirectView.as_view(url='/sideapp/'), name='home'),
+    url(r'^$', 'sideapp.views.login'), #login
+    url(r'^logout/$', 'sideapp.views.logout'), #logout
     url(r'^sideapp/', include('sideapp.urls', namespace="sideapp")),
     url(r'^admin/', include(admin.site.urls)),
 ]
