@@ -77,13 +77,12 @@ def list_of_coaches(request):
     return render(request, "listOfCoachesPage.html", context)
 
 def tutorselected(request, tutor_id):
-    print tutor_id
     tutor = Signup.objects.get(pk=tutor_id)
     context = {'coach': tutor}
     return render(request, "tutorSelectedPage.html", context)
 
-def paymentpage(request):
-    tutor = Signup.objects.get(pk=1)
+def paymentpage(request, tutor_id):
+    tutor = Signup.objects.get(pk=tutor_id)
     context = {'coachname': tutor.full_name, 'coachprice': tutor.pricerate}
     return render(request, "summaryReceiptPage.html", context)
 
@@ -94,19 +93,7 @@ def streampage(request):
 
 def charge(request):
         form = SalePaymentForm(request.POST or None)
-        if form.is_valid(): 
+        if form.is_valid():
             return render(request, "summaryReceiptPage.html", context)
         context = {"form" : form,}
         return render(request, "checkout.html", context)
-
-
-
-
-
-
-
-
-
-
-
-
