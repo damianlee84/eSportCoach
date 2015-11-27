@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+from config import * #importing login and redirect info about steam api
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -43,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',  #python social auth
     'sideapp',
 )
 
@@ -71,10 +74,26 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.static',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
+                
             ],
         },
     },
 ]
+
+
+#SOCIAL_AUTH_STEAM_API_KEY = '02B0116DD931F48828C8BB2E2B5B3C15'
+
+#SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
+
+#SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home/'
+#SOCIAL_AUTH_LOGIN_URL = '/'
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.steam.SteamOpenId',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'esport_coach.wsgi.application'
 
@@ -105,11 +124,11 @@ EMAIL_USE_TLS = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'etutor',
-        'USER': 'postgres',
-        'PASSWORD': 'Pablocpe2',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': 'myproject',
+        'USER': 'wantong',
+        'PASSWORD': 'hello',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 """
