@@ -26,11 +26,6 @@ def home(request):
     }
     return render(request, "home.html", context)
 
-def login(request):
-    # context = RequestContext(request, {
-    #     'request': request, 'user': request.user})
-    # return render_to_response('login.html', context_instance=context)
-    return render(request, 'signup.html')
 
 def logout(request):
     auth_logout(request)

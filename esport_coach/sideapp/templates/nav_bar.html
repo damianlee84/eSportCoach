@@ -11,8 +11,12 @@
                     <a href="/sideapp/" class="navbar-brand">Esports Coach</a>
                 </div>
                 <div class ="collapse navbar-collapse" id="navbar-collapse">
-
-                    <a href="/signup" class="btn btn-info navbar-btn navbar-right">Login</a>
+                  {% if user and not user.is_anonymous %}
+		     <a class = "btn btn-info navbar-btn navbar-right"> Hello, {{ user.social_auth.get.extra_data.player.personaname }}!</a> 
+                     <a href = "/logout">Logout</a>
+                  {% else %}  
+                    <a href="{% url 'social:begin' 'steam' %}?next={{request.path}}" class="btn btn-info navbar-btn navbar-right">Login</a>
+                  {% endif %}
                  <!--   <a href="" class="btn btn-info navbar-btn navbar-right">Log in</a> -->
                     <ul class="nav navbar-nav">
                         <li><a href="/sideapp/">Home</a>
