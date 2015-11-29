@@ -48,11 +48,9 @@
                                       {% for coach in coaches %}
                                           <tr onclick="window.location.href='/sideapp/tutorselected/{{coach.8}}'" style="cursor: pointer;">
                                               {% for attribute in coach %}
-                                                  <!-- {% if attribute %} -->
+                                                  {% if attribute != coach.8 %}
                                                   <td>{{attribute}}</td>
-                                                  <!-- {% else %}
-                                                  <p>not working</p> -->
-                                                  <!-- {% endif %} -->
+                                                  {% endif %}
                                               {% endfor %}
                                           </tr>
                                       {% endfor %}

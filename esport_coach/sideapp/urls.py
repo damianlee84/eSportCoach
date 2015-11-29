@@ -1,3 +1,4 @@
+"""this file connects all urls to application when being called."""
 from django.conf.urls import url
 
 from . import views
