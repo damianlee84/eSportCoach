@@ -65,9 +65,9 @@ def list_of_coaches(request):
     coaches_list = []
     user = Signup.objects.all()
     for i in range(len(user)):
-        coaches_list.append([user[i].full_name, user[i].mmr, user[i].pricerate,
-                            user[i].server, user[i].hero, user[i].reputation,
-                            user[i].rating, user[i].students, user[i].id])
+        coaches_list.append([user[i].full_name, user[i].mmr, user[i].server,
+                            user[i].hero, user[i].rating, user[i].reputation,
+                            user[i].students, user[i].pricerate, user[i].id])
     context = {'coaches': coaches_list}
     return render(request, "listOfCoachesPage.html", context)
 
