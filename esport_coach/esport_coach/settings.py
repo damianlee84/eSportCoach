@@ -120,6 +120,16 @@ EMAIL_USE_TLS = True
 #         }
 #     }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'etutor',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Pablocpe2',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
