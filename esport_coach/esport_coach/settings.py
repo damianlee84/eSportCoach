@@ -45,7 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social.apps.django_app.default',  #python social auth
+    #'social.apps.django_app.default',  #python social auth
     'sideapp',
 )
 
@@ -111,7 +111,7 @@ EMAIL_USE_TLS = True
 # DATABASES = {
 #         'default': {
 #             'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-#             'NAME': 'coachbase',                      # Or path to database file if using sqlite3.
+#             'NAME': 'testin',                      # Or path to database file if using sqlite3.
 #             # The following settings are not used with sqlite3:
 #             'USER': 'feiyu',
 #             'PASSWORD': 'abc1234',
@@ -131,19 +131,6 @@ EMAIL_USE_TLS = True
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'etutor',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Pablocpe2',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -154,6 +141,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
 
 
 # Internationalization
