@@ -45,7 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'social.apps.django_app.default',  #python social auth
+    'social.apps.django_app.default',  #python social auth
     'sideapp',
 )
 
@@ -83,12 +83,12 @@ TEMPLATES = [
 ]
 
 
-#SOCIAL_AUTH_STEAM_API_KEY = '02B0116DD931F48828C8BB2E2B5B3C15'
+SOCIAL_AUTH_STEAM_API_KEY = '02B0116DD931F48828C8BB2E2B5B3C15'
 
-#SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
+SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
 
-#SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home/'
-#SOCIAL_AUTH_LOGIN_URL = '/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home/'
+SOCIAL_AUTH_LOGIN_URL = '/'
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.steam.SteamOpenId',
