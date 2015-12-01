@@ -82,7 +82,7 @@ def paymentpage(request, tutor_id):
     return render(request, "summaryReceiptPage.html", context)
 
 def streampage(request):
-    tutor = Signup.objects.get(pk=1)
+    tutor = Signup.objects.get(pk=2)
     context = {'coach': tutor.full_name}
     return render(request, "streamPage.html", context)
 
