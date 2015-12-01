@@ -83,12 +83,10 @@ TEMPLATES = [
 ]
 
 
-#SOCIAL_AUTH_STEAM_API_KEY = '02B0116DD931F48828C8BB2E2B5B3C15'
-
-#SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
-
-#SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home/'
-#SOCIAL_AUTH_LOGIN_URL = '/'
+SOCIAL_AUTH_STEAM_API_KEY = '02B0116DD931F48828C8BB2E2B5B3C15'
+SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home/'
+SOCIAL_AUTH_LOGIN_URL = '/'
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.steam.SteamOpenId',
@@ -120,39 +118,29 @@ EMAIL_USE_TLS = True
 #         }
 #     }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'etutor',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Pablocpe2',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'etutor',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Pablocpe2',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
-
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd6ev70m5pvg0gd',
-        'USER': 'zawbmqgrzewebr',
-        'PASSWORD': 'w0ens6pGX3k52WVxl6NsyXn5Ea',
-        'HOST': 'ec2-54-83-199-54.compute-1.amazonaws.com',
+        'NAME': 'etutor',
+        'USER': 'postgres',
+        'PASSWORD': 'Pablocpe2',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
+}
+"""
+
+
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+         'NAME': 'd6ev70m5pvg0gd',
+         'USER': 'zawbmqgrzewebr',
+         'PASSWORD': 'w0ens6pGX3k52WVxl6NsyXn5Ea',
+         'HOST': 'ec2-54-83-199-54.compute-1.amazonaws.com',
+         'PORT': '5432',
+     }
 }
 
 
