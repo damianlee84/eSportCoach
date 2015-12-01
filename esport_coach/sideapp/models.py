@@ -21,6 +21,12 @@ class Signup(models.Model):
         return self.full_name
 
 
+class Ratings(models.Model):
+    coach = models.ForeignKey(Signup)
+    num_stars = models.PositiveIntegerField(blank=False, null=True)
+    comment = models.CharField(max_length=300, blank=False, null=True)
+
+
 class User(models.Model):
     username = models.CharField(primary_key=True, max_length=100, blank=False, null=False)
     email = models.EmailField(blank = False, null = False)
