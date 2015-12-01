@@ -27,19 +27,19 @@
 
         <!-- Tutor Info Panel -->
         <div class="panel panel-default" style="margin-right:15%; margin-left:15%;">
-            <h2 align="center">Coach John</h2>
+            <h2 align="center">Coach {{ coach.full_name }}</h2>
             <div class="row promo-top" style="margin-right:5%; margin:0% 5% 3% 5%;">
                 <div class="col-xs-0 col-sm-3 text-right">
                     <img src="{% static 'pictures/coach_icon1.jpg' %}" style="border-radius:100px;">
                 </div>
-                <div class="col-xs-12 col-sm-2 text-center">
+                <div class="col-xs-12 col-sm-2 text-center" style="padding-right:0%; padding-left:0%;">
                     <br>
                     <div><a onclick="">Reputation:</a>
-                        <div>22,400</div>
-                        <div>top 1% of coaches</div>
+                        <div>{{ coach.reputation }}</div>
+                        <div>top #% of coaches</div>
                         <div>
                             <a onclick="">Reviews:</a><br>
-                            <span>4.9</span>/5
+                            <span>{{ avg_rating }}</span>/5
                             <p id="finalRating"></p>
                             <!-- <input class="rating form-control hide" value="4.91176470588235" data-readonly="true" data-show-clear="false" data-show-caption="false" data-size="xs"> -->
                         </div>
@@ -56,17 +56,17 @@
                 </div>
                 <div class="col-xs-12 col-sm-2 text-left" style="padding:0; width:135px;">
                     <br>
-                    <div>5700</div>
-                    <div>Europe</div>
-                    <div>$20.00 USD/hr</div>
-                    <div>147</div>
-                    <div>Lunar</div>
-                    <div>privind_out_sim</div>
+                    <div>{{ coach.mmr }}</div>
+                    <div>{{ coach.server }}</div>
+                    <div>${{ coach.pricerate }} USD/hr</div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
                 <div class="col-xs-12 col-sm-2 text-center" style="padding:0; width:135px;">
                     <br>
                     <div><img src="{% static 'pictures/email_icon.jpg' %}" height="50" width="50"></div>
-                    <div>Email Coach</div>
+                    <div>Email Coach </div>
                     <div><i class='glyphicon glyphicon-star' style="font-size:50px;"></i></div>
 
                     <div>Rate Coach</div>
@@ -115,12 +115,16 @@
                     </div>
                     <div class="tab-pane" id="reviews">
                         <br>
-                        <div class="col-xs-0 col-sm-2 text-left" style="padding:0; width:100px;">
-                            Rate the tutor:
-                        </div>
-                        <div class="col-xs-0 col-sm-3 text-left" style="padding:0; width:115px">
-                            <span style="font-size:20px;"><input type="number" name="coachRatingStars" id="ratingStars" class="rating" onchange="inputStars(this.value)"/></span>
-                        </div>
+                            Rate Coach {{ coach.full_name }}:
+                            <form action="action_page.php">
+                                <div>Skill:</div>
+                                    <span style="font-size:20px;"><input type="number" name="coachRatingStars" id="ratingStars" class="rating"/></span>
+                                <!-- Textarea for addition comments or questions -->
+                                    <textarea id="dataquery" name="data" class="form-control" maxlength="100" placeholder="Comments or addition requests (max: 100 chars)..."></textarea>
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </form>
+
+                            <!-- onchange="inputStars(this.value)" -->
                     </div>
                     <div class="tab-pane" id="reputation">
                         <h1>Green</h1>
@@ -217,7 +221,8 @@
 
         <!-- BELOW ARE ALL THE SCRIPTS -->
 
-        <!-- Script for the rating stars -->
+        <!-- Script for the average rating stars -->
+        <!-- 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -232,6 +237,27 @@
                     temp += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
                 }
                 for (i = stars; i < 5; i++) {
+                    temp += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
+                }
+                return temp;
+            }
+        </script>
+        -->        
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script>
+            $(function (){
+                document.getElementById("finalRating").innerHTML = calcAvgStars({{ avg_rating }});
+            });
+
+            function calcAvgStars(avg_rating){
+                temp = "";
+                for (i = 0; i < avg_rating; i++) {
+                    temp += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
+                }
+                for (i = avg_rating; i < 5; i++) {
                     temp += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
                 }
                 return temp;
