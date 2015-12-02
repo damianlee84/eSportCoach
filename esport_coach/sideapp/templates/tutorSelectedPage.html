@@ -39,7 +39,7 @@
                         <div>top #% of coaches</div>
                         <div>
                             <a onclick="">Reviews:</a><br>
-                            <span>{{ avg_rating }}</span>/5
+                            <span>{{ final_avg_review }}</span>/5
                             <p id="finalRating"></p>
                         </div>
                     </div>
@@ -127,8 +127,8 @@
                                     <div class="form-group">Helpfulness</div> 
                                 </div>
                                 <br>
-                                    <!-- Textarea for addition comments or questions -->
-                                    <textarea id="dataquery" name="data" class="form-control" maxlength="100" placeholder="Comments or addition requests (max: 100 chars)..."></textarea>
+                                <!-- Textarea for addition comments or questions -->
+                                <textarea id="dataquery" name="data" class="form-control" maxlength="300" placeholder="Comments or addition requests (max: 300 chars)..."></textarea>
                                 <button type="submit" class="btn btn-default">Submit</button>
                             </form>
 
@@ -257,15 +257,15 @@
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
         <script>
             $(function (){
-                document.getElementById("finalRating").innerHTML = calcAvgStars({{ avg_rating }});
+                document.getElementById("finalRating").innerHTML = calcAvgStars({{ final_avg_review }});
             });
 
-            function calcAvgStars(avg_rating){
+            function calcAvgStars(final_avg_review){
                 temp = "";
-                for (i = 0; i < avg_rating; i++) {
+                for (i = 0; i < final_avg_review; i++) {
                     temp += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
                 }
-                for (i = avg_rating; i < 5; i++) {
+                for (i = final_avg_review; i < 5; i++) {
                     temp += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
                 }
                 return temp;

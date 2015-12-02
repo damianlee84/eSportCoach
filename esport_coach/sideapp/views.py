@@ -2,7 +2,7 @@
 this file calls all page functions and renders the pages with given context.
 """
 from .forms import SignupForm, ContactForm, SalePaymentForm
-from .models import Signup
+from .models import Signup, Ratings
 from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import render_to_response, redirect, render
@@ -26,6 +26,7 @@ def logout(request):
     auth_logout(request)
     return redirect('/')
 
+
 def contact(request):
     """
     Contact function which creates a contact
@@ -45,8 +46,10 @@ def contact(request):
         contact_message = "%s: %s via %s"%(full_name, message, email)
         send_mail(subject, contact_message, from_email, to_email, fail_silently=True)
 
+
     context = {"form" : form}
     return render(request, "contact.html", context)
+
 
 def signup(request):
     title = 'Welcome'
@@ -81,9 +84,12 @@ def tutorselected(request, tutor_id):
     num_ratings = 0
     avg_rating = 0
     coach_selected = Signup.objects.get(pk=tutor_id)
+    rate = Ratings(id=None, coach=coach_selected, num_stars=4, comment=4)
+    rate.save()
     ratings = coach_selected.ratings_set.all()
 
     for rating in ratings:
+        print "here"
         rating_list.append([rating.num_stars, rating.comment])
         sum_stars += rating.num_stars
         num_ratings += 1
