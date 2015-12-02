@@ -35,7 +35,9 @@ def contact(request):
 
     if form.is_valid():
         email = form.cleaned_data.get('email')
-        message = form.cleaned_data.get('messsage')
+        message = request.POST.get('message', '')
+        #message = form.cleaned_data.get('messsage')
+        #print(message)
         full_name = form.cleaned_data.get('full_name')
         subject = 'Customers Enquiries'
         from_email = settings.EMAIL_HOST_USER
@@ -44,7 +46,7 @@ def contact(request):
         send_mail(subject, contact_message, from_email, to_email, fail_silently=True)
 
     context = {"form" : form}
-    return render(request, "forms.html", context)
+    return render(request, "contact.html", context)
 
 def signup(request):
     title = 'Welcome'
