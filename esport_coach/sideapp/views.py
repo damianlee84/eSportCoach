@@ -2,7 +2,7 @@
 this file calls all page functions and renders the pages with given context.
 """
 from .forms import SignupForm, ContactForm, SalePaymentForm
-from .models import Signup, Ratings
+from .models import Signup, Reviews
 from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import render_to_response, redirect, render
@@ -79,36 +79,43 @@ def list_of_coaches(request):
 
 
 def tutorselected(request, tutor_id):
-    rating_list = []
-    sum_stars = 0
-    num_ratings = 0
-    avg_rating = 0
+    sum_all_avg_reviews = 0
+    num_reviews = 0
+    final_avg_review = 0
+    list_reviews = []
     coach_selected = Signup.objects.get(pk=tutor_id)
-    rate = Ratings(id=None, coach=coach_selected, num_stars=4, comment=4)
-    rate.save()
-    ratings = coach_selected.ratings_set.all()
+    all_users_reviews = coach_selected.reviews_set.all()
 
-    for rating in ratings:
-        print "here"
-        rating_list.append([rating.num_stars, rating.comment])
-        sum_stars += rating.num_stars
-        num_ratings += 1
+    # for user_review in all_users_reviews:
+    #     print user_review.skill_stars
+    #     print user_review.communication_stars
+    #     print user_review.helpfulness_stars
+    #     print user_review.comment
 
-    if num_ratings > 0:
-        avg_rating = sum_stars/num_ratings
+    for user_review in all_users_reviews:
+        avg_review = (user_review.skill_stars + user_review.communication_stars + user_review.helpfulness_stars)/3
+        list_reviews.append([user_review.skill_stars, user_review.communication_stars, user_review.helpfulness_stars, avg_review])
+        sum_all_avg_reviews += avg_review
+        num_reviews += 1
 
-    context = {'coach': coach_selected, 'ratings': rating_list, 'avg_rating': avg_rating}
+    if num_reviews > 0:
+        final_avg_review = sum_all_avg_reviews/num_reviews
+
+    context = {
+        'coach': coach_selected,
+        'list_reviews': list_reviews,
+        'final_avg_review': final_avg_review
+        }
 
     return render(request, "tutorSelectedPage.html", context)
 
 
-def rateuser(request, tutor_id, stars, tutee_comment):
+def reviewuser(request, tutor_id, skill, communication, helpfulness, tutee_comment):
     coach_selected = Signup.objects.get(pk=tutor_id)
-    rate = Ratings(id=None, coach=coach_selected, num_stars=stars, comment=tutee_comment)
+    rate = Reviews(id=None, coach=coach_selected, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=tutee_comment)
     rate.save()
 
-    # return render(request, "listOfCoachesPage.html", context)
-
+    
 
 # def retrieverating(request, tutor_id):
 #     rating_list = []
