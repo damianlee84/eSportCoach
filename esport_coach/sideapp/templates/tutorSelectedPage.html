@@ -107,7 +107,7 @@
                     </div>
                     <div class="tab-pane" id="reviews">
                             <h4>Rate Coach {{ coach.full_name }}</h4>
-                            <form action="">
+                            <form id="form_review" method="get" action="/sideapp/reviewcoach/">
                                 <div class="form-inline">
                                     <div class="form-group">
                                         <span style="font-size:20px;"><input type="number" name="coachRatingStars" id="ratingSkill" class="rating"/></span>
@@ -127,13 +127,11 @@
                                     <div class="form-group">Helpfulness</div> 
                                 </div>
                                 <br>
-
-                                <!-- Textarea for addition comments or questions -->
-                                <textarea id="dataquery" name="data" class="form-control" maxlength="300" placeholder="Comments or addition requests (max: 300 chars)..."></textarea>
-                                <button type="submit" class="btn btn-default">Submit</button>
+                                 <!-- Textarea for addition comments or questions -->
+                                <textarea id="textarea_review" name="textarea_review" class="form-control" maxlength="300" placeholder="Write your honest review (max: 300 chars)..."></textarea>
+                                <button id="submitButton" type="submit" class="btn btn-default">Submit</button>
                             </form>
-
-                            <!-- onchange="inputStars(this.value)" -->
+                            <div id="form_review_messages"></div>
                     </div>
                     <div class="tab-pane" id="reputation">
                         <h1>Green</h1>
@@ -212,7 +210,7 @@
 
                 <!-- Textarea for addition comments or questions -->
                 <div style="margin-right:24%; margin-left:24%;">
-                    <textarea id="dataquery" name="data" class="form-control" maxlength="100" placeholder="Comments or addition requests (max: 100 chars)..."></textarea>
+                    <textarea id="request_comment" name="data" class="form-control" maxlength="100" placeholder="Comments or addition requests (max: 100 chars)..."></textarea>
                 </div>
             </div>
         </div>
@@ -231,31 +229,13 @@
         <!-- BELOW ARE ALL THE SCRIPTS -->
 
         <!-- Script for the average rating stars -->
-        <!-- 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="{% static 'jquery-2.1.0.min.js' %}"></script>
         <script src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
-        <script>
-            function inputStars(stars){
-                document.getElementById("finalRating").innerHTML = calcAvgStars(stars);
-            }
 
-            function calcAvgStars(stars){
-                temp = "";
-                for (i = 0; i < stars; i++) {
-                    temp += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
-                }
-                for (i = stars; i < 5; i++) {
-                    temp += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
-                }
-                return temp;
-            }
-        </script>
-        -->        
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        
+               
         <script>
             $(function (){
                 document.getElementById("finalRating").innerHTML = calcAvgStars({{ final_avg_review }});
@@ -272,6 +252,7 @@
                 return temp;
             }
         </script>
+
 
         <!-- Script for the tutor description tabs -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

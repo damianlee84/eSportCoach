@@ -8,6 +8,8 @@ from django.conf import settings
 from django.shortcuts import render_to_response, redirect, render
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
+from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.template import RequestContext
 
 
 def home(request):
@@ -109,11 +111,20 @@ def tutorselected(request, tutor_id):
 
     return render(request, "tutorSelectedPage.html", context)
 
-
-def reviewuser(request, tutor_id, skill, communication, helpfulness, tutee_comment):
-    coach_selected = Signup.objects.get(pk=tutor_id)
-    rate = Reviews(id=None, coach=coach_selected, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=tutee_comment)
-    rate.save()
+ 
+def reviewcoach(request):
+    # coach_selected = Signup.objects.get(pk=tutor_id)
+    # rate = Reviews(id=None, coach=coach_selected, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=tutee_comment)
+    # rate.save()
+    if request.is_ajax:
+        try:
+            data = request.GET.get('textarea_review')
+        except KeyError:
+            return HttpResponse('Key Error')    # Incorrect Post
+        return HttpResponse(data)
+    else:
+        raise Http404
+        
 
     
 
