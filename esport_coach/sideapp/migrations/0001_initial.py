@@ -11,6 +11,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='Blacklist',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+            ],
+        ),
+        migrations.CreateModel(
             name='Coach',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -29,6 +35,7 @@ class Migration(migrations.Migration):
                 ('date', models.DateTimeField(auto_now=True)),
                 ('pricerate', models.FloatField(default=0)),
                 ('quantity', models.IntegerField(default=0)),
+                ('coach', models.ForeignKey(to='sideapp.Coach')),
             ],
         ),
         migrations.CreateModel(
@@ -68,17 +75,17 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='coaching',
-            name='coach',
-            field=models.ForeignKey(to='sideapp.User'),
-        ),
-        migrations.AddField(
-            model_name='coaching',
             name='student',
-            field=models.ForeignKey(related_name='stu', to='sideapp.User'),
+            field=models.ForeignKey(to='sideapp.User'),
         ),
         migrations.AddField(
             model_name='coach',
             name='username',
+            field=models.ForeignKey(to='sideapp.User'),
+        ),
+        migrations.AddField(
+            model_name='blacklist',
+            name='usr',
             field=models.ForeignKey(to='sideapp.User'),
         ),
     ]

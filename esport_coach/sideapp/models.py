@@ -42,15 +42,17 @@ class Coach(models.Model):
         return self.user.username + " " + self.hero + " " + str(self.rating) + " " + self.server + " " + str(self.hour_rate)
 
 class Coaching(models.Model):
-   coach = models.ForeignKey('User', on_delete=models.CASCADE)
-   student = models.ForeignKey('User', related_name='stu')
+   coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
+   student = models.ForeignKey('User', on_delete=models.CASCADE)
    date = models.DateTimeField(auto_now_add = False, auto_now = "True")
    pricerate = models.FloatField(default = 0, blank = False, null = False)
    quantity = models.IntegerField(default = 0,  blank = False, null = False)
    def __str__(self):
         return self.user.username + " " + self.student + " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
   
-
+#class Blacklist(models.Model):
+#   usr = models.ForeignKey('User')
+   #student
 '''
 class Register(models.Model):
     username = models.ForeignKey(User)
