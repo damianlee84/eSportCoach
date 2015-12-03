@@ -31,34 +31,58 @@ class Reviews(models.Model):
 
 class User(models.Model):
     username = models.CharField(primary_key=True, max_length=100, blank=False, null=False)
-    email = models.EmailField(blank = False, null = False)
-    name = models.CharField(max_length = 100, blank = False, null = False)
+    email = models.EmailField(blank=False, null=False)
+    name = models.CharField(max_length=100, blank=False, null=False)
+    MMR = models.IntegerField(default=0,  blank=False, null=False)
+    skype = models.CharField(max_length=100, blank=False, null=False)
     def __str__(self):
         return self.username + " " + self.email + " " + self.name
 
-class Coach(User):
-   MMR = models.IntegerField(default=0,  blank=False, null=False)
-   hero = models.CharField(max_length = 500, blank = False, null = False)
+class Coach(models.Model):
+   username = models.ForeignKey('User', on_delete=models.CASCADE)
    server = models.CharField(max_length = 50, blank = False, null = False)
+   champion = models.CharField(max_length = 500, blank = False, null = False)
+   role = models.CharField(max_length = 500, blank = False, null = False)
+   pricerate = models.FloatField(default = 0.00)
+   avatar = models.ImageField()
    rating = models.IntegerField(default = 0,  blank = False, null = False)
-   hour_rate = models.FloatField(default = 0.00)
    def __str__(self):
         return self.username + " " + self.hero + " " + str(self.rating) + " " + self.server + " " + str(self.hour_rate)
 
-class Tutee(User):
-   MMR = models.IntegerField(default=0,  blank = False, null = False)
+class Coaching(models.Model):
+   coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
+   student = models.ForeignKey('User', on_delete=models.CASCADE)
+   date = models.DateTimeField(auto_now_add = False, auto_now = "True")
+   pricerate = models.FloatField(default = 0, blank = False, null = False)
+   quantity = models.IntegerField(default = 0,  blank = False, null = False)
    def __str__(self):
-        return self.username + " " + self.email + " " + self.name
+        return self.coach + " " + self.student + " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
+  
+class Blacklist(models.Model):
+   usr = models.ForeignKey('User', on_delete=models.CASCADE)
+   date = models.DateTimeField(auto_now_add = False, auto_now = "True")
+   reason = models.TextField(blank = False, null=False)
+   #should we add another field of admin so taht we know who put these people into the blacklist
+   def __str__(self):
+        return self.usr + " " + str(self.date) + " " + self.reason
+
+class reviewing(models.Model):
+   student = models.ForeignKey('User', on_delete=models.CASCADE)
+   coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
+   review = models.TextField(blank=False, null=False)
+   date = models.DateTimeField(auto_now_add=False, auto_now=False)
+   rating = models.IntegerField(default=0, blank=False, null=False)
+   def __str__(self):
+        return self.student + " " + self.coach + " " + str(self.rating) + " " + str(self.date) + " " + self.review
 
 
-
-
-
-class Register(models.Model):
-    username = models.ForeignKey(User)
-    rdate = models.DateTimeField(auto_now_add = False, auto_now = "True")
-    def __str__(self):
-      return self.username + " " + rdate
+class report(models.Model):
+   student = models.ForeignKey('User', on_delete=models.CASCADE)
+   coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
+   reason = models.TextField(blank=False, null=False)
+   date = models.DateTimeField(auto_now_add=False, auto_now=False)
+   def __str__(self):
+        return self.student + " " + self.coach + " "  + str(self.date) + " " + self.reason   
 
 
 
