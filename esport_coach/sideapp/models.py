@@ -66,7 +66,7 @@ class Blacklist(models.Model):
    def __str__(self):
         return self.usr + " " + str(self.date) + " " + self.reason
 
-class reviewing(models.Model):
+class Reviewing(models.Model):
    student = models.ForeignKey('User', on_delete=models.CASCADE)
    coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
    review = models.TextField(blank=False, null=False)
@@ -76,7 +76,7 @@ class reviewing(models.Model):
         return self.student + " " + self.coach + " " + str(self.rating) + " " + str(self.date) + " " + self.review
 
 
-class report(models.Model):
+class Report(models.Model):
    student = models.ForeignKey('User', on_delete=models.CASCADE)
    coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
    reason = models.TextField(blank=False, null=False)
@@ -85,7 +85,10 @@ class report(models.Model):
         return self.student + " " + self.coach + " "  + str(self.date) + " " + self.reason   
 
 
-
+class Champions(models.Model):
+   champion = models.CharField(primary_key=True, max_length=100, blank=False, null=False)
+   def __str__(self):
+        return self.champion
 
 
 
