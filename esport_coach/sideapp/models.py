@@ -26,19 +26,30 @@ class User(models.Model):
     email = models.EmailField(blank = False, null = False)
     name = models.CharField(max_length = 100, blank = False, null = False)
     MMR = models.IntegerField(default=0,  blank = False, null = False)
+    skype = models.CharField(max_length = 100, blank = False, null = False)
     def __str__(self):
         return self.username + " " + self.email + " " + self.name
 
 class Coach(models.Model):
-   users = models.ForeignKey('User')
-   champion = models.CharField(max_length = 500, blank = False, null = False)
+   username = models.ForeignKey('User', on_delete=models.CASCADE)
    server = models.CharField(max_length = 50, blank = False, null = False)
-   rating = models.IntegerField(default = 0,  blank = False, null = False)
-   hour_rate = models.FloatField(default = 0.00)
+   champion = models.CharField(max_length = 500, blank = False, null = False)
    role = models.CharField(max_length = 500, blank = False, null = False)
+   pricerate = models.FloatField(default = 0.00)
    avatar = models.ImageField()
+   rating = models.IntegerField(default = 0,  blank = False, null = False)
    def __str__(self):
         return self.user.username + " " + self.hero + " " + str(self.rating) + " " + self.server + " " + str(self.hour_rate)
+
+class Coaching(models.Model):
+   coach = models.ForeignKey('User', on_delete=models.CASCADE)
+   student = models.ForeignKey('User', related_name='stu')
+   date = models.DateTimeField(auto_now_add = False, auto_now = "True")
+   pricerate = models.FloatField(default = 0, blank = False, null = False)
+   quantity = models.IntegerField(default = 0,  blank = False, null = False)
+   def __str__(self):
+        return self.user.username + " " + self.student + " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
+
 
 '''
 class Register(models.Model):

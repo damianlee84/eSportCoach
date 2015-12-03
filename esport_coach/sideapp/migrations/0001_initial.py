@@ -14,12 +14,21 @@ class Migration(migrations.Migration):
             name='Coach',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('champion', models.CharField(max_length=500)),
                 ('server', models.CharField(max_length=50)),
-                ('rating', models.IntegerField(default=0)),
-                ('hour_rate', models.FloatField(default=0.0)),
+                ('champion', models.CharField(max_length=500)),
                 ('role', models.CharField(max_length=500)),
+                ('pricerate', models.FloatField(default=0.0)),
                 ('avatar', models.ImageField(upload_to=b'')),
+                ('rating', models.IntegerField(default=0)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Coaching',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('date', models.DateTimeField(auto_now=True)),
+                ('pricerate', models.FloatField(default=0)),
+                ('quantity', models.IntegerField(default=0)),
             ],
         ),
         migrations.CreateModel(
@@ -48,17 +57,28 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Tutee',
+            name='User',
             fields=[
                 ('username', models.CharField(max_length=100, serialize=False, primary_key=True)),
                 ('email', models.EmailField(max_length=254)),
                 ('name', models.CharField(max_length=100)),
                 ('MMR', models.IntegerField(default=0)),
+                ('skype', models.CharField(max_length=100)),
             ],
         ),
         migrations.AddField(
+            model_name='coaching',
+            name='coach',
+            field=models.ForeignKey(to='sideapp.User'),
+        ),
+        migrations.AddField(
+            model_name='coaching',
+            name='student',
+            field=models.ForeignKey(related_name='stu', to='sideapp.User'),
+        ),
+        migrations.AddField(
             model_name='coach',
-            name='users',
-            field=models.ForeignKey(to='sideapp.Tutee'),
+            name='username',
+            field=models.ForeignKey(to='sideapp.User'),
         ),
     ]
