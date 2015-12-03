@@ -41,6 +41,25 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='report',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('reason', models.TextField()),
+                ('date', models.DateTimeField()),
+                ('coach', models.ForeignKey(to='sideapp.Coach')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='reviewing',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('review', models.TextField()),
+                ('date', models.DateTimeField()),
+                ('rating', models.IntegerField(default=0)),
+                ('coach', models.ForeignKey(to='sideapp.Coach')),
+            ],
+        ),
+        migrations.CreateModel(
             name='Signup',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -74,6 +93,16 @@ class Migration(migrations.Migration):
                 ('MMR', models.IntegerField(default=0)),
                 ('skype', models.CharField(max_length=100)),
             ],
+        ),
+        migrations.AddField(
+            model_name='reviewing',
+            name='student',
+            field=models.ForeignKey(to='sideapp.User'),
+        ),
+        migrations.AddField(
+            model_name='report',
+            name='student',
+            field=models.ForeignKey(to='sideapp.User'),
         ),
         migrations.AddField(
             model_name='coaching',
