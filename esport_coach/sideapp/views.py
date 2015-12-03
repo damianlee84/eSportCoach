@@ -121,6 +121,7 @@ def reviewcoach(request):
             data = request.GET.get('textarea_review')
         except KeyError:
             return HttpResponse('Key Error')    # Incorrect Post
+        print 
         return HttpResponse(data)
     else:
         raise Http404
