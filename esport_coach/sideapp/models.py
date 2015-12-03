@@ -49,7 +49,7 @@ class Coaching(models.Model):
    quantity = models.IntegerField(default = 0,  blank = False, null = False)
    def __str__(self):
         return self.user.username + " " + self.student + " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
-
+  
 
 '''
 class Register(models.Model):
