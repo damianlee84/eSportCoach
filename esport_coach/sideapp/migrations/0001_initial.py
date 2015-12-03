@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
@@ -60,6 +60,16 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='Reviews',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('skill_stars', models.PositiveIntegerField(null=True)),
+                ('communication_stars', models.PositiveIntegerField(null=True)),
+                ('helpfulness_stars', models.PositiveIntegerField(null=True)),
+                ('comment', models.CharField(max_length=300, null=True)),
+            ],
+        ),
+        migrations.CreateModel(
             name='Signup',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -93,6 +103,11 @@ class Migration(migrations.Migration):
                 ('MMR', models.IntegerField(default=0)),
                 ('skype', models.CharField(max_length=100)),
             ],
+        ),
+        migrations.AddField(
+            model_name='reviews',
+            name='coach',
+            field=models.ForeignKey(to='sideapp.Signup'),
         ),
         migrations.AddField(
             model_name='reviewing',
