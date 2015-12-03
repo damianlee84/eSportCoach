@@ -9,7 +9,6 @@ class SignupForm(forms.ModelForm):
         model = Signup
         fields = ['full_name', 'email', 'pricerate', 'server', 'hero', 'reputation', 'rating', 'students']
 
-
     def valid_email(self):
         email = self.validated_data.get('email')
         return email
@@ -23,6 +22,7 @@ class ContactForm(forms.Form):
     full_name = forms.CharField()
     email = forms.EmailField()
     message = forms.CharField()
+
 
 class CreditCardField(forms.IntegerField):
     def clean(self, value):
