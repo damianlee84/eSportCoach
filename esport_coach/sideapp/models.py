@@ -50,9 +50,15 @@ class Coaching(models.Model):
    def __str__(self):
         return self.user.username + " " + self.student + " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
   
-#class Blacklist(models.Model):
-#   usr = models.ForeignKey('User')
-   #student
+class Blacklist(models.Model):
+   usr = models.ForeignKey('User')
+   date = models.DateTimeField(auto_now_add = False, auto_now = "True")
+   reason = models.TextField(blank = False, null=False)
+   #should we add another field of admin so taht we know who put these people into the blacklist
+   def __str__(self):
+        return self.usr + " " + str(self.date) + " " + self.reason
+
+        
 '''
 class Register(models.Model):
     username = models.ForeignKey(User)
