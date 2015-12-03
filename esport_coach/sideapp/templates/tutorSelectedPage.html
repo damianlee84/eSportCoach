@@ -234,7 +234,35 @@
         <script src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
-        
+        <script>
+            $(function() {
+                var form = $('#form_review');                   // Get the form.
+                var formMessages = $('#form_review_messages');  // Get the messages div.
+
+                $(form).submit(function(event) {                // Set up an event listener for the contact form.
+                    event.preventDefault();                     // Stop the browser from submitting the form.
+                    var formData = $(form).serialize();         // Serialize the form data.
+                    $.ajax({                                    // Submit the form using AJAX.
+                        type: 'GET',
+                        url: $(form).attr('action'),
+                        data: formData,
+                        dataType:'text',
+                    })
+                    .done(function(response) {
+                        if (response == "Key Error"){
+                            alert("Key Error when sending review");
+                        }
+                        else{
+                            alert("Thanks for your honest review!");
+                            $('#textarea_review').val('');        // Clear the form.     
+                        }                   
+                    })
+                    .fail(function(response) {
+                        alert("Oops! An error occured sending your review.");
+                    });
+                });
+            });
+        </script>
                
         <script>
             $(function (){
