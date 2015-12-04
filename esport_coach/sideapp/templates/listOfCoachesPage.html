@@ -48,7 +48,7 @@
                                         {% for coach in coaches %}
                                             <tr onclick="window.location.href='/sideapp/tutorselected/{{coach.8}}'" style="cursor: pointer;">
                                                 {% for attribute in coach %}
-                                                    {% if attribute != coach.8 %}
+                                                    {% if forloop.counter != 8 %}
                                                         <td>{{attribute}}</td>
                                                     {% endif %}
                                                 {% endfor %}
