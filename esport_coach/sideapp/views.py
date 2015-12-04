@@ -41,11 +41,11 @@ def contact(request):
         message = request.POST.get('message', '')
         #message = form.cleaned_data.get('messsage')
         #print(message)
-        full_name = form.cleaned_data.get('full_name')
+        username = form.cleaned_data.get('username')
         subject = 'Customers Enquiries'
         from_email = settings.EMAIL_HOST_USER
         to_email = [from_email, settings.EMAIL_HOST_USER]
-        contact_message = "%s: %s via %s"%(full_name, message, email)
+        contact_message = "%s: %s via %s"%(username, message, email)
         send_mail(subject, contact_message, from_email, to_email, fail_silently=True)
 
 
@@ -80,12 +80,12 @@ def list_of_coaches(request):
     return render(request, "listOfCoachesPage.html", context)
 
 
-def tutorselected(request, tutor_id):
+def tutorselected(request, tutor_username):
     sum_all_avg_reviews = 0
     num_reviews = 0
     final_avg_review = 0
     list_reviews = []
-    coach_selected = Signup.objects.get(pk=tutor_id)
+    coach_selected = Signup.objects.get(username=tutor_username)
     all_users_reviews = coach_selected.reviews_set.all()
 
     for user_review in all_users_reviews:
@@ -105,23 +105,21 @@ def tutorselected(request, tutor_id):
     return render(request, "tutorSelectedPage.html", context)
 
  
-def reviewcoach(request, tutor_id):
+def reviewcoach(request, tutor_username):
     if request.is_ajax:
         try:
             # For now the reviewer is manually inputed below until we have that global username passed around correctly.
-            # reviewer = Signup.objects.get(pk=user_id)
+            # reviewer = Signup.objects.get(username=tutor_username)
             reviewer = "SomeTutee"
             skill = int(request.GET.get('ratingSkill'))
             communication = int(request.GET.get('ratingCommunication'))
             helpfulness = int(request.GET.get('ratingHelpfulness'))
             comment = request.GET.get('textarea_review')
-
-            coach_selected = Signup.objects.get(pk=tutor_id)
-            rate = Reviews(id=None, coach=coach_selected, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=tutee_comment)
-            rate.save()
+            # coach_selected = Signup.objects.get(username=tutor_username)
+            # rate = Reviews(id=None, coach=coach_selected, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=tutee_comment)
+            # rate.save()
         except KeyError:
             return HttpResponse('keyError')    # Incorrect Post
-        print data, type(skill)
         return HttpResponse("success")
     else:
         raise Http404     
@@ -132,14 +130,14 @@ def reviewcoach(request, tutor_id):
     #     print user_review.comment
 
 
-def paymentpage(request, tutor_id):
-    tutor = Signup.objects.get(pk=tutor_id)
-    context = {'coachname': tutor.full_name, 'coachprice': tutor.pricerate}
+def paymentpage(request, tutor_username):
+    tutor = Signup.objects.get(username=tutor_username)
+    context = {'coachname': tutor.username, 'coachprice': tutor.pricerate}
     return render(request, "summaryReceiptPage.html", context)
 
 def streampage(request):
-    tutor = Signup.objects.get(pk=2)
-    context = {'coach': tutor.full_name}
+    tutor = Signup.objects.get(username=tutor_username)
+    context = {'coach': tutor.username}
     return render(request, "streamPage.html", context)
 
 def charge(request):

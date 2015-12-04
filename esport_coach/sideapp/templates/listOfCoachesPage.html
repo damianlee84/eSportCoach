@@ -46,7 +46,7 @@
                                 <tbody style = "font-size:16px">
                                     {% if coaches %}
                                         {% for coach in coaches %}
-                                            <tr onclick="window.location.href='/sideapp/tutorselected/{{coach.8}}'" style="cursor: pointer;">
+                                            <tr onclick="window.location.href='/sideapp/tutorselected/{{coach.0}}'" style="cursor: pointer;">
                                                 {% for attribute in coach %}
                                                     {% if forloop.counter != 8 %}
                                                         <td>{{attribute}}</td>

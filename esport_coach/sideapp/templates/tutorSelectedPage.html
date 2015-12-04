@@ -107,7 +107,7 @@
                     </div>
                     <div class="tab-pane" id="reviews">
                             <h4>Rate Coach {{ coach.username }}</h4>
-                            <form id="form_review" method="get" action="/sideapp/reviewcoach/">
+                            <form id="form_review" method="get" action="/sideapp/reviewcoach/{{coach.username}}'">
                                 <div class="form-inline">
                                     <div class="form-group">
                                         <span style="font-size:20px;"><input type="number" name="ratingSkill" id="ratingSkill" class="rating"/></span>
@@ -220,7 +220,7 @@
             <div class="panel-body">
                 <span style="color:solid grey">Payment Method options</span>
                 <br><br>
-                <a href="/sideapp/paymentpage/{{coach.id}}" ><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" /></a>
+                <a href="/sideapp/paymentpage/{{coach.username}}" ><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" /></a>
             </div>
         </div>
 
@@ -249,7 +249,7 @@
                         dataType:'text',
                     })
                     .done(function(response) {
-                        if (response == "sucess"){
+                        if (response == "success"){
                             alert("Thanks for your honest review!");
                             $('#textarea_review').val('');        // Clear the form.
                         }
