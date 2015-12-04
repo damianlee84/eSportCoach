@@ -73,7 +73,7 @@ def list_of_coaches(request):
     coaches_list = []
     user = Signup.objects.all()
     for i in range(len(user)):
-        coaches_list.append([user[i].full_name, user[i].mmr, user[i].server,
+        coaches_list.append([user[i].username, user[i].mmr, user[i].server,
                             user[i].hero, user[i].rating, user[i].reputation,
                             user[i].students, user[i].pricerate, user[i].id])
     context = {'coaches': coaches_list}
@@ -87,12 +87,6 @@ def tutorselected(request, tutor_id):
     list_reviews = []
     coach_selected = Signup.objects.get(pk=tutor_id)
     all_users_reviews = coach_selected.reviews_set.all()
-
-    # for user_review in all_users_reviews:
-    #     print user_review.skill_stars
-    #     print user_review.communication_stars
-    #     print user_review.helpfulness_stars
-    #     print user_review.comment
 
     for user_review in all_users_reviews:
         avg_review = (user_review.skill_stars + user_review.communication_stars + user_review.helpfulness_stars)/3
@@ -108,35 +102,34 @@ def tutorselected(request, tutor_id):
         'list_reviews': list_reviews,
         'final_avg_review': final_avg_review
         }
-
     return render(request, "tutorSelectedPage.html", context)
 
  
-def reviewcoach(request):
-    # coach_selected = Signup.objects.get(pk=tutor_id)
-    # rate = Reviews(id=None, coach=coach_selected, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=tutee_comment)
-    # rate.save()
+def reviewcoach(request, tutor_id):
     if request.is_ajax:
         try:
-            data = request.GET.get('textarea_review')
+            # For now the reviewer is manually inputed below until we have that global username passed around correctly.
+            # reviewer = Signup.objects.get(pk=user_id)
+            reviewer = "SomeTutee"
+            skill = int(request.GET.get('ratingSkill'))
+            communication = int(request.GET.get('ratingCommunication'))
+            helpfulness = int(request.GET.get('ratingHelpfulness'))
+            comment = request.GET.get('textarea_review')
+
+            coach_selected = Signup.objects.get(pk=tutor_id)
+            rate = Reviews(id=None, coach=coach_selected, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=tutee_comment)
+            rate.save()
         except KeyError:
-            return HttpResponse('Key Error')    # Incorrect Post
-        print 
-        return HttpResponse(data)
+            return HttpResponse('keyError')    # Incorrect Post
+        print data, type(skill)
+        return HttpResponse("success")
     else:
-        raise Http404
-        
-
-    
-
-# def retrieverating(request, tutor_id):
-#     rating_list = []
-#     coach_selected = Signup.objects.filter(id=tutor_id)
-#     ratings = coach_selected.Ratings.all()
-#     for i in range(len(ratings))
-#         rating_list.append([rating[i].num_stars, rating[i].comment])
-#     context = {'ratings': rating_list}
-#     return render(request, "listOfCoachesPage.html", context)
+        raise Http404     
+    # for user_review in all_users_reviews:
+    #     print user_review.skill_stars
+    #     print user_review.communication_stars
+    #     print user_review.helpfulness_stars
+    #     print user_review.comment
 
 
 def paymentpage(request, tutor_id):

@@ -11,16 +11,59 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Register',
+            name='Blacklist',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('rdate', models.DateTimeField(auto_now=True)),
+                ('date', models.DateTimeField(auto_now=True)),
+                ('reason', models.TextField()),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Coach',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('server', models.CharField(max_length=50)),
+                ('champion', models.CharField(max_length=500)),
+                ('role', models.CharField(max_length=500)),
+                ('pricerate', models.FloatField(default=0.0)),
+                ('avatar', models.ImageField(upload_to=b'')),
+                ('rating', models.IntegerField(default=0)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Coaching',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('date', models.DateTimeField(auto_now=True)),
+                ('pricerate', models.FloatField(default=0)),
+                ('quantity', models.IntegerField(default=0)),
+                ('coach', models.ForeignKey(to='sideapp.Coach')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='report',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('reason', models.TextField()),
+                ('date', models.DateTimeField()),
+                ('coach', models.ForeignKey(to='sideapp.Coach')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='reviewing',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('review', models.TextField()),
+                ('date', models.DateTimeField()),
+                ('rating', models.IntegerField(default=0)),
+                ('coach', models.ForeignKey(to='sideapp.Coach')),
             ],
         ),
         migrations.CreateModel(
             name='Reviews',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('reviewer', models.CharField(max_length=100, null=True)),
                 ('skill_stars', models.PositiveIntegerField(null=True)),
                 ('communication_stars', models.PositiveIntegerField(null=True)),
                 ('helpfulness_stars', models.PositiveIntegerField(null=True)),
@@ -31,17 +74,17 @@ class Migration(migrations.Migration):
             name='Signup',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('email', models.EmailField(max_length=254)),
-                ('full_name', models.CharField(max_length=50)),
-                ('timestamp', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
-                ('mmr', models.CharField(max_length=50)),
+                ('username', models.CharField(max_length=50)),
+                ('name', models.CharField(max_length=50)),
+                ('email', models.EmailField(max_length=50)),
+                ('skype', models.CharField(max_length=50)),
+                ('mmr', models.PositiveIntegerField(default=0)),
                 ('server', models.CharField(max_length=50)),
                 ('hero', models.CharField(max_length=50)),
-                ('rating', models.PositiveIntegerField()),
-                ('reputation', models.PositiveIntegerField()),
-                ('students', models.CharField(max_length=50)),
-                ('pricerate', models.PositiveIntegerField(default=0)),
+                ('rating', models.PositiveIntegerField(default=0)),
+                ('reputation', models.PositiveIntegerField(default=0)),
+                ('students', models.PositiveIntegerField(default=0)),
+                ('pricerate', models.FloatField(default=0.0)),
             ],
         ),
         migrations.CreateModel(
@@ -58,27 +101,9 @@ class Migration(migrations.Migration):
                 ('username', models.CharField(max_length=100, serialize=False, primary_key=True)),
                 ('email', models.EmailField(max_length=254)),
                 ('name', models.CharField(max_length=100)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Coach',
-            fields=[
-                ('user_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='sideapp.User')),
                 ('MMR', models.IntegerField(default=0)),
-                ('hero', models.CharField(max_length=500)),
-                ('server', models.CharField(max_length=50)),
-                ('rating', models.IntegerField(default=0)),
-                ('hour_rate', models.FloatField(default=0.0)),
+                ('skype', models.CharField(max_length=100)),
             ],
-            bases=('sideapp.user',),
-        ),
-        migrations.CreateModel(
-            name='Tutee',
-            fields=[
-                ('user_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='sideapp.User')),
-                ('MMR', models.IntegerField(default=0)),
-            ],
-            bases=('sideapp.user',),
         ),
         migrations.AddField(
             model_name='reviews',
@@ -86,8 +111,28 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(to='sideapp.Signup'),
         ),
         migrations.AddField(
-            model_name='register',
+            model_name='reviewing',
+            name='student',
+            field=models.ForeignKey(to='sideapp.User'),
+        ),
+        migrations.AddField(
+            model_name='report',
+            name='student',
+            field=models.ForeignKey(to='sideapp.User'),
+        ),
+        migrations.AddField(
+            model_name='coaching',
+            name='student',
+            field=models.ForeignKey(to='sideapp.User'),
+        ),
+        migrations.AddField(
+            model_name='coach',
             name='username',
+            field=models.ForeignKey(to='sideapp.User'),
+        ),
+        migrations.AddField(
+            model_name='blacklist',
+            name='usr',
             field=models.ForeignKey(to='sideapp.User'),
         ),
     ]
