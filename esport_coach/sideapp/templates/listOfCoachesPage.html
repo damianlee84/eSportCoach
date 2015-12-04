@@ -34,28 +34,28 @@
                                         <!--  <th class ="leader-name">Rank</th> -->
                                         <th class ="leader-name">Coach</th>
                                             <th>MMR</th>
-                                            <th>Price/hr></th>
                                             <th>Server</th>
-                                            <th class="col-md-1">Heroes</th>
+                                            <th>Heroes</th>
+                                            <th class="col-md-1">Rating</th>
                                             <th>Reputation</th>
-                                            <th>User Rating</th>
                                             <th>Students</th>
+                                            <th>Price/hr($)</th>
                                     </tr>
                                 </thead>
 
-                                <tbody style = "font-size:20px">
+                                <tbody style = "font-size:16px">
                                     {% if coaches %}
-                                      {% for coach in coaches %}
-                                          <tr onclick="window.location.href='/sideapp/tutorselected/{{coach.8}}'" style="cursor: pointer;">
-                                              {% for attribute in coach %}
-                                                  {% if attribute != coach.8 %}
-                                                  <td>{{attribute}}</td>
-                                                  {% endif %}
-                                              {% endfor %}
-                                          </tr>
-                                      {% endfor %}
+                                        {% for coach in coaches %}
+                                            <tr onclick="window.location.href='/sideapp/tutorselected/{{coach.0}}'" style="cursor: pointer;">
+                                                {% for attribute in coach %}
+                                                    {% if forloop.counter != 8 %}
+                                                        <td>{{attribute}}</td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tr>
+                                        {% endfor %}
                                     {% else %}
-                                      <p>No coaches available.</p>
+                                        <p>No coaches available.</p>
                                     {% endif %}
                                 </tbody>
                             </table>

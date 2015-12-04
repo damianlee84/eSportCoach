@@ -1,21 +1,16 @@
 from django import forms
-from .models import Signup
+from .models import Signup, transaction
 from datetime import date, datetime
 from calendar import monthrange
-from .models import transaction
 
 class SignupForm(forms.ModelForm):
     class Meta:
         model = Signup
-        fields = ['full_name', 'email', 'pricerate', 'server', 'hero', 'reputation', 'rating', 'students']
+        fields = ['username', 'name', 'email', 'skype', 'mmr', 'server', 'hero', 'rating', 'reputation', 'students', 'pricerate']
 
     def valid_email(self):
         email = self.validated_data.get('email')
         return email
-
-    def valid_name(self):
-        full_name = self.validated_data.get('full_name')
-        return full_name
 
 
 class ContactForm(forms.Form):
@@ -32,6 +27,7 @@ class CreditCardField(forms.IntegerField):
             raise forms.ValidationError("Please enter in a valid "+\
                 "credit card number.")
         return super(CreditCardField, self).clean(value)
+
 
 class expDate(forms.MultiWidget):
     def decompress(self, value):
@@ -89,6 +85,7 @@ class expDateInput(forms.MultiValueField):
             return date(year, month, day)
         return None
 
+
 class SalePaymentForm(forms.Form):
     CCnumber = CreditCardField(required=True, label="Card Number")
     expiration = expDateInput(required=True, label="Expiration")
@@ -108,12 +105,10 @@ class SalePaymentForm(forms.Form):
             exp_month = self.cleaned_data["expiration"].month
             exp_year = self.cleaned_data["expiration"].year
             cvc = self.cleaned_data["cvc"]
-
             sale = Sale()
 
             # charge 10 bucks for testing, change the value
-            success, instance = sale.charge(1000, CCnumber, exp_month,
-                                                exp_year, cvc)
+            success, instance = sale.charge(1000, CCnumber, exp_month, exp_year, cvc)
 
             if not success:
                 raise forms.ValidationError("Error: %s" % instance.message)
@@ -121,5 +116,4 @@ class SalePaymentForm(forms.Form):
                 instance.save()
                 """Payment succesful"""
                 pass
-
         return cleaned
