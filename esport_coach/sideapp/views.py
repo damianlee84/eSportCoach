@@ -107,27 +107,51 @@ def tutorselected(request, tutor_username):
  
 def reviewcoach(request, tutor_username):
     if request.is_ajax:
+        # Response messages:
+        response_sucess = "Thanks for your honest review!"
+        response_error1 = "Error: Must input a comment."
+        response_error2 = "Error: Error when sending your review."
+
         try:
             # For now the reviewer is manually inputed below until we have that global username passed around correctly.
             # reviewer = Signup.objects.get(username=tutor_username)
-            reviewer = "SomeTutee"
-            skill = int(request.GET.get('ratingSkill'))
-            communication = int(request.GET.get('ratingCommunication'))
-            helpfulness = int(request.GET.get('ratingHelpfulness'))
-            comment = request.GET.get('textarea_review')
-            # coach_selected = Signup.objects.get(username=tutor_username)
-            # rate = Reviews(id=None, coach=coach_selected, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=tutee_comment)
-            # rate.save()
+            user_reviewer = "SomeTutee"
+            skill = request.GET.get('ratingSkill')
+            communication = request.GET.get('ratingCommunication')
+            helpfulness = request.GET.get('ratingHelpfulness')
+            review_comment = request.GET.get('textarea_review')
+            
+            if skill == "":
+                skill == 0
+            else:
+                skill = int(skill)
+            if communication == "":
+                communication == 0
+            else:
+                communication = int(communication)
+            if helpfulness == "":
+                helpfulness == 0
+            else:
+                helpfulness = int(helpfulness)      
+            if review_comment == "":
+                return HttpResponse(response_error1)
+
         except KeyError:
-            return HttpResponse('keyError')    # Incorrect Post
-        return HttpResponse("success")
+            return HttpResponse(response_error2)
+
+        coach_selected = Signup.objects.get(username=tutor_username)
+        rating = Reviews(id=None, coach=coach_selected, reviewer=user_reviewer, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=review_comment)
+        rating.save()
+        # all_users_reviews = coach_selected.reviews_set.all()
+        # for user_review in all_users_reviews:
+        #     print user_review.skill_stars
+        #     print user_review.communication_stars
+        #     print user_review.helpfulness_stars
+        #     print user_review.comment
+        return HttpResponse(response_sucess)
     else:
         raise Http404     
-    # for user_review in all_users_reviews:
-    #     print user_review.skill_stars
-    #     print user_review.communication_stars
-    #     print user_review.helpfulness_stars
-    #     print user_review.comment
+    
 
 
 def paymentpage(request, tutor_username):

@@ -249,13 +249,10 @@
                         dataType:'text',
                     })
                     .done(function(response) {
-                        if (response == "success"){
-                            alert("Thanks for your honest review!");
-                            $('#textarea_review').val('');        // Clear the form.
-                        }
-                        else{
-                             alert("Key Error when sending review");    
-                        }                   
+                            alert(response);
+                            if (!("Error" in response)){
+                                $('#textarea_review').val('');        // Clear the form.     
+                            }            
                     })
                     .fail(function(response) {
                         alert("Oops! An error occured sending your review.");
