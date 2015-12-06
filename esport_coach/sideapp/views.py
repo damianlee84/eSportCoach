@@ -79,6 +79,21 @@ def list_of_coaches(request):
     context = {'coaches': coaches_list}
     return render(request, "listOfCoachesPage.html", context)
 
+def searchCoach(request):
+    if request.is_ajax():
+        try:
+            reviewer = "SomeTutee"
+            skill = int(request.GET.get('ratingSkill'))
+            communication = int(request.GET.get('ratingCommunication'))
+            helpfulness = int(request.GET.get('ratingHelpfulness'))
+            comment = request.GET.get('textarea_review')
+        except KeyError:
+            return HttpResponse('Error') # incorrect post
+        # do stuff, e.g. calculate a score
+        return HttpResponse("Search Succesful")
+    else:
+        raise Http404
+
 
 def tutorselected(request, tutor_username):
     sum_all_avg_reviews = 0
@@ -104,7 +119,7 @@ def tutorselected(request, tutor_username):
         }
     return render(request, "tutorSelectedPage.html", context)
 
- 
+
 def reviewcoach(request, tutor_username):
     if request.is_ajax:
         try:
@@ -122,7 +137,7 @@ def reviewcoach(request, tutor_username):
             return HttpResponse('keyError')    # Incorrect Post
         return HttpResponse("success")
     else:
-        raise Http404     
+        raise Http404
     # for user_review in all_users_reviews:
     #     print user_review.skill_stars
     #     print user_review.communication_stars

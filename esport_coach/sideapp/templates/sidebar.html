@@ -1,4 +1,5 @@
 <!-- Sidebar -->
+{% load static from staticfiles %}
 <div id="sidebar-wrapper"  style="clear: both; float:left; top:50px">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
@@ -49,19 +50,42 @@
             </select>
         </li>
 
-        <!--<li class="dropdown">
-         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Rank<span class="caret"></span></a>
-         <ul class="dropdown-menu">
-         <li role="separator" class="divider"></li>
-         <li><a href="#">Separated link</a></li>
-         <li role="separator" class="divider"></li>
-         <li><a href="#">Separated link</a></li>
-         <li role="separator" class="divider"></li>
-         <li><a href="#">One more separated link</a></li>
-         </ul>
-         </li>-->
 
         <li style="position:relative"><a href="/sideapp/list_of_coaches">Search!</a></li>
+        <input id="search" value="Search!" type="button"/>
+        <form></form>
     </ul>
 </div>
 <!-- /#sidebar-wrapper -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="{% static 'jquery-2.1.0.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<script>
+    $(function() {
+        var searchBtn= $('#search');                   // Get the form.
+
+        $(searchBtn).click(function(event) {                // Set up an event listener for the contact form.
+            // event.preventDefault();                     // Stop the browser from submitting the form.
+            //var searchData = $(searchBtn).serialize();         // Serialize the form data.
+            $.ajax({                                    // Submit the form using AJAX.
+                type: 'GET',
+                url: "/sideapp/searchCoach", //$(searchBtn).attr('onclick')
+                data: 'text',
+            })
+            .done(function(response) {
+                if (response == "Search Succesful"){
+                    alert("Thanks for your honest review!");
+                }
+                else{
+                     alert("Key Error when sending review");
+                }
+            })
+            .fail(function(response) {
+                alert("Oops! An error occured.");
+            });
+        });
+    });
+</script>
