@@ -3,8 +3,16 @@ this file tests all functionality of the app.
 """
 from django.test import TestCase
 from django.utils import timezone
-from .models import Signup
+from .models import Signup, Reviews
 from django.core.urlresolvers import reverse
+import urlparse
+from mock import Mock, ANY
+from django.conf import settings
+
+
+
+
+
 # Create your tests here.
 
 def create_signup(email, full_name, mmr, server, hero, rating, reputation,
@@ -38,9 +46,42 @@ class SignupMethodTests(TestCase):
         self.assertQuerysetEqual(response.context['coaches'][0],
                                  ["u'testbot'", "u'123'", "u'LA'", "u'myHero'",
                                   '10', '50', "u'20'", '30', '2'])
+        
+class testViews(TestCase):
+    def testHome(self):
+        response = self.client.get(reverse('sideapp:home'))
+        self.assertEqual(response.status_code, 200)
 
-class testPages():
+    def testLogout(self):
+        response = self.client.get(reverse('sideapp:logout'))
+        self.assertEqual(response.status_code, 200)
+
+    def testContact(self):
+        response = self.client.get(reverse('sideapp:contact'))
+        self.assertEqual(response.status_code, 200)
+
+    def testSignup(self):
+        response = self.client.get(reverse('sideapp:signup
+        self.assertEqual(response.status_code, 200)
+
+    def testFindCoach(self):
+        response = self.client.get(reverse('sideapp:findcoach'))
+        self.assertEqual(response.status_code, 200)
+                                           
+    def testListCoach(self):
+        response = self.client.get(reverse('sideapp:list_of_coaches'))
+        self.assertEqual(response.status_code, 200)
+                                           
+    def testTutorSelect(self):
+        response = self.client.get(reverse('sideapp:tutorselected'))
+        self.assertEqual(response.status_code, 200)
+                                        
+
+                
+                                    
     
-    def testHome(self, client):
-        response = client.get('/home/')
-        assert response.status.code == 200
+
+
+
+    
+    
