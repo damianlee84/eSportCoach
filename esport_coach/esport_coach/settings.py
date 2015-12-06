@@ -46,6 +46,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social.apps.django_app.default',  #python social auth
+    'dajaxice',
+    'dajax',
     'sideapp',
 )
 
@@ -58,7 +60,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    
+
 )
 
 ROOT_URLCONF = 'esport_coach.urls'

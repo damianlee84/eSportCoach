@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-{% load static from staticfiles %}
+
 <div id="sidebar-wrapper"  style="clear: both; float:left; top:50px">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
@@ -50,18 +50,24 @@
             </select>
         </li>
 
+        <input type="text" value="5" id="a"> x
+        <input type="text" value="6" id="b"> =
+        <input type="text" value="" id="result">
+        <input type="button" value="Multiply!" onclick="calculate();">
 
         <li style="position:relative"><a href="/sideapp/list_of_coaches">Search!</a></li>
-        <input id="search" value="Search!" type="button"/>
+        <input id="search" value="Search!" onclick="Dajaxice.example.myexample(Dajax.process);" type="button"/>
         <form></form>
     </ul>
 </div>
 <!-- /#sidebar-wrapper -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="{% static 'jquery-2.1.0.min.js' %}"></script>
-<script src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+function calculate(){
+  alert("testing!")
+  Dajaxice.examples.multiply(Dajax.process,{'a':$('#a').val(),'b':$('#b').val()})
+}
+</script>
 
 <script>
     $(function() {
