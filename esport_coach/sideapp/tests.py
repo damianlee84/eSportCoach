@@ -76,7 +76,39 @@ class testViews(TestCase):
         response = self.client.get(reverse('sideapp:tutorselected'))
         self.assertEqual(response.status_code, 200)
                                         
+class testStripe(TestCase):
+    def test_making_a_donation_and_getting_the_callback(self):
+        """These two tests must live together because they need to be done sequentially.
 
+        First, we place a donation using the client. Then we send a mock callback to our
+        webhook, to make sure it accepts it properly.
+        """
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        # Create a stripe token (this would normally be done via javascript in the front
+        # end when the submit button was pressed)
+        token = stripe.Token.create(
+            card={
+                'number': '4242424242424242',
+                'exp_month': '6',
+                'exp_year': str(datetime.today().year + 1),
+                'cvc': '123',
+            }
+        )
+
+        # Place a donation as an anonymous (not logged in) person using the
+        # token we just got
+        r = self.client.post('/checkout/', data={
+            'first_name': 'Justin',
+            'last_name': 'Timberlake',
+            'address1': '1600 Pennsylvania Ave.',
+            'address2': 'The Whitehouse',
+            'city': 'DC',
+            'state': 'DC',
+            'zip_code': '20500',
+            'email': 'justin@timnberlake.org',
+            'referrer': 'footer',
+            'stripeToken': token.id,
+        })
                 
                                     
     
