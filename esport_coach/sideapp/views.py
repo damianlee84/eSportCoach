@@ -80,17 +80,14 @@ def list_of_coaches(request):
     return render(request, "listOfCoachesPage.html", context)
 
 def searchCoach(request):
-    if request.is_ajax():
+    if request.is_ajax:
         try:
-            reviewer = "SomeTutee"
-            skill = int(request.GET.get('ratingSkill'))
-            communication = int(request.GET.get('ratingCommunication'))
-            helpfulness = int(request.GET.get('ratingHelpfulness'))
-            comment = request.GET.get('textarea_review')
+            server = request.GET.get('Server')
         except KeyError:
             return HttpResponse('Error') # incorrect post
         # do stuff, e.g. calculate a score
-        return HttpResponse("Search Succesful")
+        print server
+        return HttpResponse(server)
     else:
         raise Http404
 
