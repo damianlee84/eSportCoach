@@ -37,7 +37,6 @@ section{
 
 #container1 .intro-text .intro-heading {
     margin-bottom: 25px;
-    text-transform: lowercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 50px;
     font-weight: 300;
@@ -60,8 +59,7 @@ section{
 
     #container1 .intro-text .intro-heading {
         margin-bottom: 50px;
-        text-transform: uppercase;
-        font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-family: Montserrat,"Bodoni 72",Helvetica,Arial,sans-serif;
         font-size: 50px;
         font-weight: 300;
         line-height: 75px;
