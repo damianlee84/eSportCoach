@@ -38,3 +38,9 @@ class SignupMethodTests(TestCase):
         self.assertQuerysetEqual(response.context['coaches'][0],
                                  ["u'testbot'", "u'123'", "u'LA'", "u'myHero'",
                                   '10', '50', "u'20'", '30', '2'])
+
+class testPages():
+    
+    def testHome(self, client):
+        response = client.get('/home/')
+        assert response.status.code == 200
