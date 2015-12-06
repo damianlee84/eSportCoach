@@ -139,9 +139,9 @@ def reviewcoach(request, tutor_username):
         except KeyError:
             return HttpResponse(response_error2)
 
-        coach_selected = Signup.objects.get(username=tutor_username)
-        rating = Reviews(id=None, coach=coach_selected, reviewer=user_reviewer, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=review_comment)
-        rating.save()
+        # coach_selected = Signup.objects.get(username=tutor_username)
+        # rating = Reviews(id=None, coach=coach_selected, reviewer=user_reviewer, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=review_comment)
+        # rating.save()
         # all_users_reviews = coach_selected.reviews_set.all()
         # for user_review in all_users_reviews:
         #     print user_review.skill_stars
