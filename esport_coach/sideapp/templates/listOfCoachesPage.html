@@ -81,7 +81,6 @@
                     <div class="row">
                         <div class="col-lg-12" style="top:20px">
                             <h1>Results</h1>
-                            <a href="searchCoachPage.html" class="btn btn-default navbar-right" id="menu-toggle">Start new search</a>
 
                             <table class ="table table-striped">
                                 <thead>
@@ -98,7 +97,8 @@
                                     </tr>
                                 </thead>
 
-                                <tbody style = "font-size:16px">
+                                <div id="test2">
+                                <tbody style = "font-size:16px" id="test">
                                     {% if coaches %}
                                         {% for coach in coaches %}
                                             <tr onclick="window.location.href='/sideapp/tutorselected/{{coach.0}}'" style="cursor: pointer;">
@@ -113,6 +113,7 @@
                                         <p>No coaches available.</p>
                                     {% endif %}
                                 </tbody>
+                              </div>
                             </table>
 
                         </div>
@@ -157,7 +158,8 @@
                         dataType:'text',
                     })
                     .done(function(response) {
-                        alert(response);
+                        mmr = response
+                        $('#test').html("<p>"+mmr+"</p>")
                     })
                     .fail(function(response) {
                         alert("Oops! An error occured sending your review.");

@@ -83,11 +83,14 @@ def searchCoach(request):
     if request.is_ajax:
         try:
             server = request.GET.get('Server')
+            print server
+            user = Signup.objects.get(username="UsernameOfPablo")
+            print user
+            mmr = str(user.mmr)
         except KeyError:
             return HttpResponse('Error') # incorrect post
         # do stuff, e.g. calculate a score
-        print server
-        return HttpResponse(server)
+        return HttpResponse(mmr)
     else:
         raise Http404
 
