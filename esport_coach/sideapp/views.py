@@ -83,9 +83,7 @@ def searchCoach(request):
     if request.is_ajax:
         try:
             server = request.GET.get('Server')
-            print server
             user = Signup.objects.get(username="UsernameOfPablo")
-            print user
             mmr = str(user.mmr)
         except KeyError:
             return HttpResponse('Error') # incorrect post
@@ -150,7 +148,7 @@ def paymentpage(request, tutor_username):
     context = {'coachname': tutor.username, 'coachprice': tutor.pricerate}
     return render(request, "summaryReceiptPage.html", context)
 
-def streampage(request):
+def streampage(request, tutor_username):
     tutor = Signup.objects.get(username=tutor_username)
     context = {'coach': tutor.username}
     return render(request, "streamPage.html", context)
