@@ -54,7 +54,7 @@ class Coaching(models.Model):
 	 quantity = models.IntegerField(default = 0,  blank = False, null = False)
 	 def __str__(self):
 				return self.coach + " " + self.student + " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
-	
+
 class Blacklist(models.Model):
 	 usr = models.ForeignKey('User', on_delete=models.CASCADE)
 	 date = models.DateTimeField(auto_now_add = False, auto_now = "True")
@@ -78,7 +78,7 @@ class report(models.Model):
 	 reason = models.TextField(blank=False, null=False)
 	 date = models.DateTimeField(auto_now_add=False, auto_now=False)
 	 def __str__(self):
-			return self.student + " " + self.coach + " "  + str(self.date) + " " + self.reason   
+			return self.student + " " + self.coach + " "  + str(self.date) + " " + self.reason
 
 
 class transaction(models.Model):
@@ -87,26 +87,17 @@ class transaction(models.Model):
 			import stripe
 			stripe.api.key = settings.STRIPE_API_KEY
 			self.stripe = stripe
-				
-		#transaction number    
+
+		#transaction number
 		transaction_id = models.CharField(max_length = 32)
 		transaction_date = models.DateTimeField(auto_now_add = True, auto_now=False)
-	
+
 		def charge(self, price_in_cents, number, exp_month, exp_year, cvc):
 				if self.transaction_id:
-						return False, Exception(message = "Already charged.")      
+						return False, Exception(message = "Already charged.")
 				try:
 						response = self.stripe.Charge.create(amount = price_in_cents, currency = "usd", card = {"number": number, "exp_month": exp_month, "exp_year": exp_year, "cvc": cvc, "address_line1": self.address1, "address_line2": self.address2, "zip_code": self.zip_code, "state": self.state,}, description = "Thank You, Happy Gaming!")
 						self.transcation_id = response.id
-				except self.stripe.CardError, ce:            
+				except self.stripe.CardError, ce:
 						return False, ce
 				return True, response
-				
-				
-				
-				
-				
-				
-				
-				
-		

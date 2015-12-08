@@ -10,6 +10,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
+from django.core import serializers
 
 
 def home(request):
@@ -86,16 +87,14 @@ def searchCoach(request):
             role = request.GET.get('Role')
             hero = request.GET.get('Hero')
             mmr = request.GET.get('MMR')
-            print server
-            print role
-            print hero
-            print mmr
-            searchQueryList = Signup.objects.filter(server=server).filter(hero=hero).filter(mmr=350)
-            print searchQueryList
+
+            # searchQueryList = Signup.objects.all()
+            searchQueryList = Signup.objects.filter(server=server).filter(hero=hero).filter(mmr="350")
+            formData = serializers.serialize('json',searchQueryList)
+
         except KeyError:
-            return HttpResponse('Error') # incorrect post
-        # do stuff, e.g. calculate a score
-        return HttpResponse(searchQueryList)
+            return HttpResponse('Error')
+        return HttpResponse(formData)
     else:
         raise Http404
 
