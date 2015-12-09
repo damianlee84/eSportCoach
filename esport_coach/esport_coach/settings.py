@@ -58,7 +58,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    
+
 )
 
 ROOT_URLCONF = 'esport_coach.urls'
@@ -132,6 +132,7 @@ EMAIL_USE_TLS = True
 #         'PORT': '5432',
 #     }
 # }
+
 
 DATABASES = {
     'default': {

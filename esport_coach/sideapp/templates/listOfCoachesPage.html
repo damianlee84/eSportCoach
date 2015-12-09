@@ -15,18 +15,81 @@
 
     <body>
         {% include "nav_bar.html" %}
-
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper"  style="clear: both; float:left; top:50px">
+          <form id="form_search" method="get" action="/sideapp/searchCoach">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">Tutor Search</a>
+                </li>
+                <li class="dropdown">
+                    <select name="Server" style="background-color:#222; color:White; border:none">
+                        <option>Region Server</option>
+                        <option>------</option>
+                        <option>Africa</option>
+                        <option>Asia</option>
+                        <option>Australia</option>
+                        <option>Central America</option>
+                        <option>Europe</option>
+                        <option>North America</option>
+                        <option>Russia</option>
+                        <option>South America</option>
+                    </select>
+                </li>
+                <li class="dropdown">
+                    <select name="Role" style="background-color:#222; color:White; border:none">
+                        <option>Role</option>
+                        <option>------</option>
+                        <option>Carry</option>
+                        <option>Disabler</option>
+                        <option>Lane Support</option>
+                        <option>Initiator</option>
+                        <option>Jungler</option>
+                        <option>Support</option>
+                        <option>Durable</option>
+                        <option>Nuker</option>
+                        <option>Pusher</option>
+                        <option>Escape</option>
+                    </select>
+                </li>
+                <li class="dropdown">
+                    <select name="Hero" style="background-color:#222; color:White; border:none">
+                        <option>Hero</option>
+                        <option>------</option>
+                        <option>Earthshaker</option>
+                        <option>Axe</option>
+                        <option>Pudge</option>
+                        <option>Sven</option>
+                        <option>Sand King</option>
+                    </select>
+                </li>
+                <li class="dropdown">
+                    <select name="MMR" style="background-color:#222; color:White; border:none">
+                        <option>MMR</option>
+                        <option>------</option>
+                        <option>100-300</option>
+                        <option>300-500</option>
+                        <option>500-700</option>
+                        <option>700-900</option>
+                        <option>900-1100</option>
+                        <option>1100-1300</option>
+                    </select>
+                </li>
+                <input value="Search!" type="submit" style="background-color:#222;
+                              color:#999999; border-style:none; margin-left:20px;
+                              margin-top:10px"/>
+            </ul>
+          </form>
+        </div>
+        <!-- /#sidebar-wrapper -->
 
         <div id="wrapper">
-            {% include "sidebar.html" %}
-
             <!-- Page Content -->
             <div id="page-content-wrapper">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12" style="top:20px">
                             <h1>Results</h1>
-                            <a href="searchCoachPage.html" class="btn btn-default navbar-right" id="menu-toggle">Start new search</a>
 
                             <table class ="table table-striped">
                                 <thead>
@@ -43,7 +106,7 @@
                                     </tr>
                                 </thead>
 
-                                <tbody style = "font-size:16px">
+                                <tbody style = "font-size:16px" id="test">
                                     {% if coaches %}
                                         {% for coach in coaches %}
                                             <tr onclick="window.location.href='/sideapp/tutorselected/{{coach.0}}'" style="cursor: pointer;">
@@ -59,14 +122,20 @@
                                     {% endif %}
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <form id="form_test" method="get" action="/sideapp/tutorselected">
+        </form>
 
         <!-- jQuery -->
+        <script src="{% static 'dajax/jquery.dajax.core.js' %}" type="text/javascript"></script>
         <script src="{% static 'js/jquery.js' %}" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="{% static 'js/jquery-2.1.0.min.js' %}"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script>
 
@@ -75,5 +144,49 @@
             $("#wrapper").toggleClass("toggled");
             });
         </script>
+
+        <script> // Function to populate list of coaches with specified criteria.
+            $(function() {
+                var form = $('#form_search');                   // Get the form.
+
+                $(form).submit(function(event) {                // Set up an event listener for the contact form.
+                    event.preventDefault();                     // Stop the browser from submitting the form.
+                    var formData = $(form).serialize();         // Serialize the form data.
+                    $.ajax({                                    // Submit the form using AJAX.
+                        type: 'GET',
+                        url: $(form).attr('action'),
+                        data: formData,
+                        dataType:'json',
+                    })
+                    .done(function(response) {
+                        list = response //list of objects
+                        var listLength = list.length;
+                        var s = "";
+                        var field;
+
+                        for (var i=0; i < list.length; i++)
+                        {
+                          field = list[i]["fields"]
+                          s += "<tr onclick=\"window.location.href='/sideapp/tutorselected/"+field["username"]+"'\" style=\"cursor: pointer;\">";
+                          s += "<td>" + field["username"] + "</td>" +
+                            "<td>" + field["mmr"] + "</td>" +
+                            "<td>" + field["server"] + "</td>" +
+                            "<td>" + field["hero"] + "</td>" +
+                            "<td>" + field["rating"] + "</td>" +
+                            "<td>" + field["reputation"] + "</td>" +
+                            "<td>" + field["students"] + "</td>" +
+                            "<td>" + field["pricerate"] + "</td>";
+                          s += "</tr>";
+                        }
+                        // console.log(list);
+                        $('#test').html(s);
+                    })
+                    .fail(function(response) {
+                        alert("Oops! An error occured sending your review.");
+                    });
+                });
+            });
+        </script>
+
     </body>
 </html>

@@ -10,24 +10,20 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/simple-sidebar.css' %}">
 
-    <title>Congratulation!</title>
+    <title>Congratulations!</title>
 
   </head>
   <body>
     {% include "nav_bar.html" %}
 
-        <div id="wrapper">
-            <!-- Sidebar -->
-            {% include "sidebar.html" %}
-            <!-- /#sidebar-wrapper -->
-
+        <div style="float:left">
             <!-- Page Content -->
             <div id="page-content-wrapper">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12" style="top:20px">
                             <br>
-                            <div class="alert alert-success" role="alert"><h2>Congraz! You've successfully hired a Coach.</h2></div>
+                            <div class="alert alert-success" role="alert"><h2>Congrats! You've successfully hired a Coach.</h2></div>
 
                             <div >
                                 <div style="width:50%;" class="list-group">
@@ -35,7 +31,7 @@
                                     Coach:
                                   </a>
                                   <a href="#" class="list-group-item">Name: {{coachname}}</a>
-                                  <a href="#" class="list-group-item">Rank: TOP 10</a>
+                                  <!-- <a href="#" class="list-group-item">MMR: {{mmr}}</a> -->
                                   <a href="#" class="list-group-item">$/h: $20 </a>
                                   <a href="#" class="list-group-item">Hired for #h: 24 Hour</a>
                                 </div>
@@ -51,7 +47,7 @@
                                 <div class="input-group">
                                   <input type="text" class="form-control" placeholder="https://www.link.com/a_link_to_establish_connection_with_the_coach">
                                   <span class="input-group-btn">
-                                    <a href="/sideapp/streampage">
+                                    <a href="/sideapp/streampage/{{coachname}}">
                                         <button class="btn btn-default" type="button">Stream!</button>
                                     </a>
                                   </span>
@@ -67,7 +63,6 @@
             </div>
             <!-- /#page-content-wrapper -->
         </div>
-        <!-- /#wrapper -->
 
         <!-- jQuery -->
         <script src="{% static 'js/jquery.js' %}" type="text/javascript"></script>
