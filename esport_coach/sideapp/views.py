@@ -86,10 +86,29 @@ def searchCoach(request):
             server = request.GET.get('Server')
             role = request.GET.get('Role')
             hero = request.GET.get('Hero')
-            mmr = request.GET.get('MMR')
+            mmrRange = request.GET.get('MMR')
+            if (mmrRange == "100-300"):
+                minRange = 100
+                maxRange = 300
+            elif mmrRange == "300-500":
+                minRange = 300
+                maxRange = 500
+            elif mmrRange == "500-700":
+                minRange = 500
+                maxRange = 700
+            elif mmrRange == "700-900":
+                minRange = 700
+                maxRange = 900
+            elif mmrRange == "900-1100":
+                minRange = 900
+                maxRange = 1100
+            elif mmrRange == "1100-1300":
+                minRange = 1100
+                maxRange = 1300
 
-            # searchQueryList = Signup.objects.all()
-            searchQueryList = Signup.objects.filter(server=server).filter(hero=hero).filter(mmr="350")
+            #searchQueryList = Signup.objects.all()
+            searchQueryList = (Signup.objects.filter(server=server).filter(hero=hero)
+                                .filter(mmr__range=(minRange,maxRange)))
             formData = serializers.serialize('json',searchQueryList)
 
         except KeyError:
