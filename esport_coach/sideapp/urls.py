@@ -9,9 +9,10 @@ urlpatterns = [
     url(r'^signup/', views.signup, name='signup'),
     url(r'^findcoach/$', views.findcoach, name='findcoach'),
     url(r'^list_of_coaches/', views.list_of_coaches, name='list_of_coaches'),
+    url(r'^searchCoach/', views.searchCoach, name='searchCoach'),
     url(r'^tutorselected/(?P<tutor_username>[-\w]+)', views.tutorselected, name='tutorselected'),
     url(r'^reviewcoach/(?P<tutor_username>[-\w]+)', views.reviewcoach, name='reviewcoach'),
     url(r'^populateReviews/(?P<tutor_username>[-\w]+)', views.populateReviews, name='populateReviews'),
     url(r'^paymentpage/(?P<tutor_username>[-\w]+)', views.paymentpage, name='paymentpage'),
-    url(r'^streampage/', views.streampage, name='streampage'),
+    url(r'^streampage/(?P<tutor_username>[-\w]+)', views.streampage, name='streampage'),
 ]
