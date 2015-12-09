@@ -106,8 +106,9 @@
                            If you wish to talk to me privately, are interested, or have any questions contact me! Message me using this website. Adding me in game is not the best way to contact me as I get flooded with friend requests but feel free to after we have spoken.</p>
                     </div>
                     <div class="tab-pane" id="reviews">
+                            <!-- Coach rating form -->
                             <h4>Rate Coach {{ coach.username }}</h4>
-                            <form id="form_review" method="get" action="/sideapp/reviewcoach/{{coach.username}}'">
+                            <form id="form_review" method="get" action="/sideapp/reviewcoach/{{coach.username}}">
                                 <div class="form-inline">
                                     <div class="form-group">
                                         <span style="font-size:20px;"><input type="number" name="ratingSkill" id="ratingSkill" class="rating"/></span>
@@ -127,25 +128,36 @@
                                     <div class="form-group">Helpfulness</div> 
                                 </div>
                                 <br>
-                                 <!-- Textarea for addition comments or questions -->
                                 <textarea id="textarea_review" name="textarea_review" class="form-control" maxlength="300" placeholder="Write your honest review (max: 300 chars)..."></textarea>
                                 <button id="submitButton" type="submit" class="btn btn-default">Submit</button>
                             </form>
                             <div id="form_review_messages"></div>
+                            <br>
+
+                            <!-- Latest coach ratings -->
+                            <div id="coach_reviews">
+                                {% if list_reviews %}
+                                    {% for review in list_reviews %}
+                                        <script>
+                                            review_stars(3);
+                                        </script>
+                                        <p id="review_stars"></p>                                    
+                                    {% endfor %}
+                                {% else %}
+                                    <p>No Reviews available. Be the first one to review coach {{ coach.username }}...</p>
+                                {% endif %}
+                            </div>
+
+                            <!-- Button for pagination -->
+                            <!-- <a id="button_list" class="btn btn-info navbar-btn navbar-left">List</a> -->
                     </div>
-                    <div class="tab-pane" id="reputation">
-                        <h1>Green</h1>
-                        <p>green green green green green</p>
-                    </div>
-                    <div class="tab-pane" id="contact_coach">
-                        <h1>Blue</h1>
-                        <p>blue blue blue blue blues</p>
-                    </div>
+                    <div class="tab-pane" id="reputation"></div>
+                    <div class="tab-pane" id="contact_coach"></div>
                 </div>
             </div>
         </div>
 
-
+        
 
         <!-- Info Panel -->
         <div class="panel panel-default" style="margin-right:15%; margin-left:15%;" align="center">
@@ -234,37 +246,7 @@
         <script src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
-        <script>
-            $(function() {
-                var form = $('#form_review');                   // Get the form.
-                var formMessages = $('#form_review_messages');  // Get the messages div.
-
-                $(form).submit(function(event) {                // Set up an event listener for the contact form.
-                    event.preventDefault();                     // Stop the browser from submitting the form.
-                    var formData = $(form).serialize();         // Serialize the form data.
-                    $.ajax({                                    // Submit the form using AJAX.
-                        type: 'GET',
-                        url: $(form).attr('action'),
-                        data: formData,
-                        dataType:'text',
-                    })
-                    .done(function(response) {
-                            
-                            if (response.includes("Error")){
-                                $("#form_review_messages").html("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+response+"</div>");
-                            }
-                            else {
-                                $("#form_review_messages").html("<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+response+"</div>");
-                                $('#textarea_review').val('');        // Clear the form.  
-                            }      
-                    })
-                    .fail(function(response) {
-                        alert("Oops! An error occured sending your review.");
-                    });
-                });
-            });
-        </script>
-               
+        <!-- Script to render the correct coach average rating stars in the page when loaded.  -->
         <script>
             $(function (){
                 document.getElementById("finalRating").innerHTML = calcAvgStars({{ final_avg_review }});
@@ -282,7 +264,103 @@
             }
         </script>
 
+        <!-- Script to rate the selected coach -->
+        <script>
+            $(function() {
+                var form = $('#form_review');                   // Get the form.
+                var formMessages = $('#form_review_messages');  // Get the messages div.
 
+                $(form).submit(function(event){                // Set up an event listener for the contact form.
+                    event.preventDefault();                     // Stop the browser from submitting the form.
+                    var formData = $(form).serialize();         // Serialize the form data.
+                    $.ajax({                                    // Submit the form using AJAX.
+                        type: 'GET',
+                        url: $(form).attr('action'),
+                        data: formData,
+                        dataType:'text',
+                    })
+                    .done(function(response,coach){             
+                            if (response.includes("Error")){
+                                $("#form_review_messages").html("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+response+"</div>");
+                            }
+                            else {
+                                $("#form_review_messages").html("<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+response+"</div>");
+                                $('#textarea_review').val('');        // Clear the form.  
+                            }     
+                    })
+                    .fail(function(response){
+                        alert("Oops! An error occured sending your review.");
+                    });
+                });
+            });
+        </script>
+
+        <!-- Script to render the reviews rating stars in the page when loaded.  -->
+        <script>
+            function review_stars(stars){
+                document.getElementById("review_stars").innerHTML = calcAvgStars(stars);
+            };
+
+            function calcAvgStars(final_avg_review){
+                temp = "";
+                for (i = 0; i < final_avg_review; i++) {
+                    temp += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
+                }
+                for (i = final_avg_review; i < 5; i++) {
+                    temp += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
+                }
+                return temp;
+            }
+        </script>
+
+        <!-- Script to populate the reviews -->
+        <!--
+        <script>
+            $(function() {
+                $("#button_list").click(function(event){                
+                    event.preventDefault();                             
+                    $.ajax({                                            
+                        type: 'POST',
+                        url: "/sideapp/populateReviews/{{coach.username}}",
+                        dataType:'json',
+                    })
+                    .done(function(response){              
+                        $("#page-selection1").html("<p>Pablo Sucks!</p><p>"+response+"</p>");
+                    })
+                    .fail(function(response){
+                        alert("Oops! An error occured sending your review.");
+                    });
+                });
+            });
+        </script> -->
+
+        <!-- Script for script pagination -->
+        <!---
+        <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="//raw.github.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <script>
+            $('#coach_reviews').bootpag({
+                total: 50,
+                page: 2,
+                maxVisible: 5,
+                leaps: true,
+                firstLastUse: true,
+                first: '←',
+                last: '→',
+                wrapClass: 'pagination',
+                activeClass: 'active',
+                disabledClass: 'disabled',
+                nextClass: 'next',
+                prevClass: 'prev',
+                lastClass: 'last',
+                firstClass: 'first'
+            }).on("page", function(event, num){
+                $(".content4").html("Page " + num); // or some ajax content loading...
+            }); 
+        </script> -->
+        
         <!-- Script for the tutor description tabs -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>

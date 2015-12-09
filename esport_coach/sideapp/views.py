@@ -10,6 +10,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
+from django.core import serializers
 
 
 def home(request):
@@ -90,7 +91,7 @@ def tutorselected(request, tutor_username):
 
     for user_review in all_users_reviews:
         avg_review = (user_review.skill_stars + user_review.communication_stars + user_review.helpfulness_stars)/3
-        list_reviews.append([user_review.skill_stars, user_review.communication_stars, user_review.helpfulness_stars, avg_review])
+        list_reviews.append([user_review.skill_stars, user_review.communication_stars, user_review.helpfulness_stars, avg_review, user_review.reviewer])
         sum_all_avg_reviews += avg_review
         num_reviews += 1
 
@@ -139,10 +140,10 @@ def reviewcoach(request, tutor_username):
         except KeyError:
             return HttpResponse(response_error2)
 
-        # coach_selected = Signup.objects.get(username=tutor_username)
+        coach_selected = Signup.objects.get(username=tutor_username)
+        # all_users_reviews = coach_selected.reviews_set.all()
         # rating = Reviews(id=None, coach=coach_selected, reviewer=user_reviewer, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=review_comment)
         # rating.save()
-        # all_users_reviews = coach_selected.reviews_set.all()
         # for user_review in all_users_reviews:
         #     print user_review.skill_stars
         #     print user_review.communication_stars
@@ -151,8 +152,20 @@ def reviewcoach(request, tutor_username):
         return HttpResponse(response_sucess)
     else:
         raise Http404     
-    
 
+def populateReviews(request, tutor_username):
+    if request.is_ajax:
+        try:
+            coach_selected = Signup.objects.get(username=tutor_username)
+            response = serializers.serialze('json',coach_selected)
+            print response
+        except KeyError:
+            print "Error"
+            return HttpResponse("error")
+        return HttpResponse(response)
+    else:
+        print "else"
+        raise Http404
 
 def paymentpage(request, tutor_username):
     tutor = Signup.objects.get(username=tutor_username)
