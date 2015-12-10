@@ -224,3 +224,9 @@ def charge(request):
     context = {"form" : form}
     return render(request, "checkout.html", context)
 
+def coachApp(request):
+    """
+    coach application
+    """
+    return render(request, "coachApp.html")
+
