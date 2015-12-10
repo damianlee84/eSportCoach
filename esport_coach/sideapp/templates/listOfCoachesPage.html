@@ -29,11 +29,11 @@
                         <option>Africa</option>
                         <option>Asia</option>
                         <option>Australia</option>
-                        <option>Central America</option>
+                        <option>CA</option>
                         <option>Europe</option>
-                        <option>North America</option>
+                        <option>NA</option>
                         <option>Russia</option>
-                        <option>South America</option>
+                        <option>SA</option>
                     </select>
                 </li>
                 <li class="dropdown">
@@ -61,6 +61,7 @@
                         <option>Pudge</option>
                         <option>Sven</option>
                         <option>Sand King</option>
+                        <option>Jungler</option>
                     </select>
                 </li>
                 <li class="dropdown">
@@ -157,23 +158,21 @@
                         dataType:'json',
                     })
                     .done(function(response) {
-                        list = response //list of objects
-                        var listLength = list.length;
-                        var s = "";
-                        var field;
+                        // list = response //list of objects
+                        // var listLength = list.length;
+                        // var s = "";
+                        // var field;
 
-                        for (var i=0; i < list.length; i++)
+                        for (var i=0; i < 1; i++)
                         {
-                          field = list[i]["fields"]
-                          s += "<tr onclick=\"window.location.href='/sideapp/tutorselected/"+field["username"]+"'\" style=\"cursor: pointer;\">";
-                          s += "<td>" + field["username"] + "</td>" +
-                            "<td>" + field["mmr"] + "</td>" +
-                            "<td>" + field["server"] + "</td>" +
-                            "<td>" + field["hero"] + "</td>" +
-                            "<td>" + field["rating"] + "</td>" +
-                            "<td>" + field["reputation"] + "</td>" +
-                            "<td>" + field["students"] + "</td>" +
-                            "<td>" + field["pricerate"] + "</td>";
+                          // field = list[i]["fields"]
+                          s += "<tr onclick=\"window.location.href='/sideapp/tutorselected/"+"Samma"+"'\" style=\"cursor: pointer;\">";
+                          s += "<td>" + "Samma" + "</td>" +
+                            "<td>" + "658" + "</td>" +
+                            "<td>" + "SA" + "</td>" +
+                            "<td>" + "Earthshaker" + "</td>" +
+                            "<td>" + "4" + "</td>" +
+                            "<td>" + "30.2" + "</td>";
                           s += "</tr>";
                         }
                         // console.log(list);

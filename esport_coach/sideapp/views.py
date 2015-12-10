@@ -107,14 +107,23 @@ def searchCoach(request):
                 minRange = 1100
                 maxRange = 1300
 
-            #searchQueryList = Signup.objects.all()
-            searchQueryList = (Signup.objects.filter(server=server).filter(hero=hero)
-                                .filter(mmr__range=(minRange,maxRange)))
+            searchQueryList = User.objects.get(pname="Samma")
+            print searchQueryList
+
+            
+            # for user in users:
+            #     searchQueryList = user.objects.get(server=server)
+            #     # if searchQueryList != []:
+            #     #     break
+            #     coach = Coach.objects.get(userid=tutor_username)
+
+            # print searchQueryList
+
             formData = serializers.serialize('json',searchQueryList)
 
         except KeyError:
             return HttpResponse('Error')
-        return HttpResponse(formData)
+        return HttpResponse(searchQueryList)
     else:
         raise Http404
 
@@ -184,14 +193,14 @@ def renderReviews(request,tutor_username):
         num_reviews = 0
         list_reviews = []
         try:
-            coach_selected = Signup.objects.get(username=tutor_username)
-            all_users_reviews = coach_selected.reviews_set.all()
+            coach = Coach.objects.get(userid=tutor_username)
+            all_users_reviews = coach.reviewing_set.all()
         except KeyError:
             return HttpResponse("error")
 
-        for user_review in all_users_reviews:
-            avg_review = (user_review.skill_stars + user_review.communication_stars + user_review.helpfulness_stars)/3
-            list_reviews.append({"skill":user_review.skill_stars, "communication":user_review.communication_stars, "helpfulness":user_review.helpfulness_stars, "avg_review":avg_review, "comment":user_review.comment,"reviewer":user_review.reviewer})
+        # for user_review in all_users_reviews:
+        #     avg_review = int((user_review.skill_stars + user_review.communication_stars + user_review.helpfulness_stars)/3)
+        #     # list_reviews.append({"skill":user_review.skill_stars, "communication":user_review.communication_stars, "helpfulness":user_review.helpfulness_stars, "avg_review":avg_review, "comment":user_review.comment,"reviewer":user_review.reviewer})
 
         response = serializers.serialize('json',all_users_reviews)
         return HttpResponse(response)
@@ -199,21 +208,42 @@ def renderReviews(request,tutor_username):
         raise Http404
 
 def paymentpage(request, tutor_username):
-    coach_selected = Signup.objects.get(username=tutor_username)
-    lesson_duration = int(request.POST['lesson_duration'])
-    lesson_date_time = request.POST['lesson_date_time']
+    user = User.objects.get(userid=tutor_username)
+    coaches = user.coach_set.all()
 
+    for coach in coaches:
+        reviews = coach.reviewing_set.all()
+        for review in reviews:
+            avg_review = int((review.skill_stars+review.communication_stars+review.helpfulness_stars)/3)
+        coach_info = {"pname":user.pname, "mmr":user.MMR, "server":coach.server, "champion":coach.champion, "avg_review":avg_review, "pricerate":coach.pricerate, "skypeid":user.skypeid, "twitchid":user.twitchid, "userid":user.userid}
+
+    # if request.is_ajax:
+    #     lesson_duration = request.POST['lesson_duration']
+    #     lesson_date_time = request.POST['lesson_date_time']
+
+    #     context = lesson_duration + "," + lesson_date_time
+    #     return HttpResponse(context)
+    # else:
+    #     raise Http404
     context = {
-        "coach": coach_selected,
-        "duration": lesson_duration,
-        "lesson_date_time": lesson_date_time
+        "coach":coach_info,
     }
+
     return render(request, "summaryReceiptPage.html", context)
 
 def streampage(request, tutor_username):
-    tutor = Signup.objects.get(username=tutor_username)
-    context = {'coach': tutor.username}
+    user = User.objects.get(userid=tutor_username)
+    coaches = user.coach_set.all()
+
+    for coach in coaches:
+        reviews = coach.reviewing_set.all()
+        for review in reviews:
+            avg_review = int((review.skill_stars+review.communication_stars+review.helpfulness_stars)/3)
+        coach_info = {"pname":user.pname, "mmr":user.MMR, "server":coach.server, "champion":coach.champion, "avg_review":avg_review, "pricerate":coach.pricerate, "skypeid":user.skypeid, "twitchid":user.twitchid, "userid":user.userid}
+
+    context = {'coach': coach_info}
     return render(request, "streamPage.html", context)
+
 
 def charge(request):
     form = SalePaymentForm(request.POST or None)

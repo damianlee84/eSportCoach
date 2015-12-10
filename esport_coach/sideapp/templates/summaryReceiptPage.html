@@ -30,24 +30,24 @@
                                   <a href="#" class="list-group-item active">
                                     Coach:
                                   </a>
-                                  <a href="#" class="list-group-item">Name: {{coachname}}</a>
+                                  <a href="#" class="list-group-item">Name: {{coach.pname}}</a>
                                   <!-- <a href="#" class="list-group-item">MMR: {{mmr}}</a> -->
-                                  <a href="#" class="list-group-item">$/h: $20 </a>
-                                  <a href="#" class="list-group-item">Hired for #h: 24 Hour</a>
+                                  <a href="#" class="list-group-item">$/h: ${{coach.pricerate}} </a>
+                                  <a href="#" class="list-group-item">Hired for #h: 2 Hour</a>
                                 </div>
                             </div>
 
-                            <h3> you are scheduled today 8:00Pm </h3>
-                            <h4>At ${{coachprice}}/hr</h4>
+                            <h3> You are scheduled for: Mon and Wed at 7pm  </h3>
+                            <h4>At ${{coach.pricerate}}/hr</h4>
                             <p>Please Click on the <code>"Stream!"</code> button to establish connection with the coach.</p>
 
                             <!-- /# Input textbox -->
                             <div class="row">
                               <div class="col-lg-6">
                                 <div class="input-group">
-                                  <input type="text" class="form-control" placeholder="https://www.link.com/a_link_to_establish_connection_with_the_coach">
+                                  <input type="text" class="form-control" placeholder={{"https://www.link.com/a_link_to_establish_connection_with_the_coach"}}>
                                   <span class="input-group-btn">
-                                    <a href="/sideapp/streampage/{{coachname}}">
+                                    <a href="/sideapp/streampage/{{coach.userid}}">
                                         <button class="btn btn-default" type="button">Stream!</button>
                                     </a>
                                   </span>

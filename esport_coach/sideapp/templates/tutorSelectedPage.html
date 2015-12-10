@@ -149,8 +149,8 @@
         <!-- Lesson Schedule Info -->
         <div class="panel panel-default" style="padding-top:1%; margin-right:15%; margin-left:15%;" align="center">
             <div class="panel-body">                            
-                <form id="form_payment" method="POST" action="/sideapp/paymentpage/{{coach.username}}">
-                    {% csrf_token %}
+                <form id="form_payment" method="GET" action="/sideapp/paymentpage/{{coach.userid}}">
+                    
                     <div class="col-xs-0 col-sm-4 text-left" style="width:25%; padding:0;">
                         <a href="/sideapp/paymentpage/{{coach.username}}" ><img src="{% static 'pictures/stripe-logo.png' %}" style="width: 350px; height: 150px;" alt="Pay now with Stipe" /></a>
                     </div>
@@ -164,7 +164,7 @@
                         <div class="col-xs-0 col-sm-3 text-left" style="width:75%;padding:0%;">
                         <!-- Quantity -->
                             <select class="dropdown" name="lesson_duration" style="width:390px">
-                                <option value="lesson_duration">Lesson duration in hours</option>
+                                <option value="lesson_dura">Lesson duration in hours</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -174,7 +174,7 @@
                             </select>
                         </div>
 
-                        <!-- Textarea for addition comments or questions -->
+                        <!-- Textarea to specify the date and time -->
                         <div class="col-xs-0 col-sm-3 text-right" style="width:25%; padding-right:3%;">
                             <span style="font-size:16px; font-weight:bold;">When?</span>
                         </div>
@@ -183,7 +183,7 @@
                         </div>
                     </div>
                     <div style="width:88%;" align="right">
-                        <button id="submitPayment" type="submit" class="btn btn-default">Submit</button>
+                        <a href="/sideapp/paymentpage/{{coach.userid}}" class="btn btn-info navbar-btn navbar-right">Submit</a>
                     </div>
                 </form>
             </div>
@@ -253,7 +253,7 @@
             $(window).load(function() {
                 $.ajax({                                    
                         type: 'GET',
-                        url: "/sideapp/renderReviews/{{coach.username}}/",
+                        url: "/sideapp/renderReviews/{{coach.userid}}/",
                         dataType: "json",
                     })
                     .done(function(response){       
@@ -305,7 +305,7 @@
                             context += "</div><div class='form-group' style='padding-left:1%;'>Helpfulness</div></div>";
 
                             // For the comment
-                            context += "</div><div class='col-xs-12 col-sm-2 text-left' style='width:510px; '>"+response[review]["fields"]["comment"]+"<br>- <em>"+response[review]["fields"]["reviewer"]+"</em></div></div>";
+                            context += "</div><div class='col-xs-12 col-sm-2 text-left' style='width:510px; '>"+response[review]["fields"]["comment"]+"<br>- <em>"+response[review]["fields"]["student"]+"</em></div></div>";
                         }
 
                         console.log("{{ user.social_auth.get.extra_data.player.personaname }}")
@@ -318,21 +318,7 @@
         </script>
         
         <!-- Script for the lesson schedule and payment information  -->
-        // <script>
-        //     $(function() {
-        //         var form = $('#form_payment');                   // Get the form.
-
-        //         $(form).submit(function(event){                // Set up an event listener for the contact form.
-        //             event.preventDefault();                     // Stop the browser from submitting the form.
-        //             var formData = $(form).serialize(); 
-        //             $.ajax({                                    // Submit the form using AJAX.
-        //                 type: 'GET',
-        //                 url: $(form).attr('action'),
-        //                 data: formData,
-        //             })
-        //         });
-        //     });
-        // </script>
+        
 
         <!-- Script for script pagination -->
         <!---
