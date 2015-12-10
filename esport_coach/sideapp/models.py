@@ -72,7 +72,7 @@ class Coach(models.Model):
 """
 *Coaching Table:A database table containing the information of user been coached
 *Fields: 		coach: ForeignKey meaning it has to be a instance of coach
-				student: Student is the person who hires te coach, this has to be in the database
+				student: Student is the person who hires coach, this has to be in the database
 				date: The date that this order was submitted
 				pricerate: FloatField rate the coach is charing the student
 				quantity: The unit of hour the user is applying for
@@ -88,7 +88,16 @@ class Coaching(models.Model):
 	 def __str__(self):
 				return self.coach.userid.userid + " " + self.student.userid + " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
 
-
+"""
+*ReviewingTable:A database table containing the information of students reviewing coach
+*Fields: 		coach: ForeignKey meaning it has to be a instance of coach
+				student: Student is the person who hires coach, this has to be in the database
+				skill_stars: rating coach skill
+				communication_stars: rating coach commnunication
+				helpfulness_stars: rating eoach helpfulness
+				comment: Comment that the student had on the coach
+				date: The date that the review is submitted
+"""
 class Reviewing(models.Model):
 	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
 	 student = models.ForeignKey('User', on_delete=models.CASCADE)
