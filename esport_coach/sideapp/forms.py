@@ -1,5 +1,5 @@
 from django import forms
-from .models import Signup, transaction
+from .models import Signup, transaction, Coach, User
 from datetime import date, datetime
 from calendar import monthrange
 
@@ -11,6 +11,17 @@ class SignupForm(forms.ModelForm):
     def valid_email(self):
         email = self.validated_data.get('email')
         return email
+
+class CoachForm(forms.ModelForm):
+    class Meta:
+        model = Coach
+        fields = ['server', 'champion', 'rating', 'pricerate', 'role', 'avatar', 'overview']
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['userid', 'email', 'pname', 'MMR', 'skypeid', 'twitchid']
+
 
 
 class ContactForm(forms.Form):

@@ -2,7 +2,7 @@
 this file calls all page functions and renders the pages with given context.
 """
 from .forms import SignupForm, ContactForm, SalePaymentForm
-from .models import Signup, Reviews
+from .models import Signup, Reviews, Coach, User
 from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import render_to_response, redirect, render
@@ -67,11 +67,12 @@ def signup(request):
 
 def list_of_coaches(request):
     coaches_list = []
-    user = Signup.objects.all()
-    for i in range(len(user)):
-        coaches_list.append([user[i].username, user[i].mmr, user[i].server,
-                            user[i].hero, user[i].rating, user[i].reputation,
-                            user[i].students, user[i].pricerate, user[i].id])
+    coach = Coach.objects.all()
+    for i in range(len(coach)):
+        user = User.objects.get(userid=coach[i].userid)
+        coaches_list.append([user.pname, user.MMR, coach[i].server,
+                            coach[i].champion, coach[i].rating, coach[i].reputation,
+                            coach[i].pricerate, coach[i].userid])
     context = {'coaches': coaches_list}
     return render(request, "listOfCoachesPage.html", context)
 

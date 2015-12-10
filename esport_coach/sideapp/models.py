@@ -39,6 +39,7 @@ class User(models.Model):
 
 class Coach(models.Model):
 	 userid = models.ForeignKey('User', on_delete=models.CASCADE)
+	#  pname =  models.ForeignKey('User', on_delete=models.CASCADE)
 	 server = models.CharField(max_length = 50, blank = False, null = False)
 	 champion = models.CharField(max_length = 500, blank = False, null = False)
 	 role = models.CharField(max_length = 500, blank = False, null = False)
@@ -46,6 +47,7 @@ class Coach(models.Model):
 	 avatar = models.URLField(blank=False, null=False)
 	 rating = models.IntegerField(default = 0,  blank = False, null = False)
 	 overview = models.TextField(blank=True)
+	 user = User
 	 def __str__(self):
 				return   " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate) + " " + self.overview
 
@@ -104,7 +106,7 @@ class Report(models.Model):
    reason = models.TextField(blank=False, null=False)
    date = models.DateTimeField(auto_now_add=False, auto_now=False)
    def __str__(self):
-        return self.student + " " + self.coach + " "  + str(self.date) + " " + self.reason   
+        return self.student + " " + self.coach + " "  + str(self.date) + " " + self.reason
 
 
 class Champions(models.Model):
