@@ -8,6 +8,7 @@ class adminSignup(admin.ModelAdmin):
     form = SignupForm
 
 
+
 admin.site.register(Signup, adminSignup)
 
 

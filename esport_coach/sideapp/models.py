@@ -26,25 +26,33 @@ class Reviews(models.Model):
 		helpfulness_stars = models.PositiveIntegerField(blank=False, null=True)
 		comment = models.CharField(max_length=300, blank=False, null=True)
 
+
+
+
+
+
+
+
 class User(models.Model):
-		username = models.CharField(primary_key=True, max_length=100, blank=False, null=False)
+		userid = models.CharField(primary_key=True, max_length=100, blank=False, null=False)
 		email = models.EmailField(blank=False, null=False)
-		name = models.CharField(max_length=100, blank=False, null=False)
+		pname = models.CharField(max_length=100, blank=False, null=False)
 		MMR = models.IntegerField(default=0,  blank=False, null=False)
-		skype = models.CharField(max_length=100, blank=False, null=False)
+		skypeid = models.CharField(max_length=100, blank=False, null=False)
+		twitchid = models.CharField(max_length=100, blank=False, null=False)
 		def __str__(self):
-				return self.username + " " + self.email + " " + self.name
+				return self.userid + " " + self.email + " " + self.pname
 
 class Coach(models.Model):
-	 username = models.ForeignKey('User', on_delete=models.CASCADE)
+	 userid = models.ForeignKey('User', on_delete=models.CASCADE)
 	 server = models.CharField(max_length = 50, blank = False, null = False)
 	 champion = models.CharField(max_length = 500, blank = False, null = False)
 	 role = models.CharField(max_length = 500, blank = False, null = False)
 	 pricerate = models.FloatField(default = 0.00)
-	 avatar = models.ImageField()
+	 avatar = models.URLField(blank=False, null=False)
 	 rating = models.IntegerField(default = 0,  blank = False, null = False)
 	 def __str__(self):
-				return self.username + " " + self.hero + " " + str(self.rating) + " " + self.server + " " + str(self.hour_rate)
+				return self.userid + " " + self.hero + " " + str(self.rating) + " " + self.server + " " + str(self.hour_rate)
 
 class Coaching(models.Model):
 	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
@@ -56,7 +64,7 @@ class Coaching(models.Model):
 				return self.coach + " " + self.student + " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
 
 class Blacklist(models.Model):
-	 usr = models.ForeignKey('User', on_delete=models.CASCADE)
+	 userid = models.ForeignKey('User', on_delete=models.CASCADE)
 	 date = models.DateTimeField(auto_now_add = False, auto_now = "True")
 	 reason = models.TextField(blank = False, null=False)
 	 #should we add another field of admin so taht we know who put these people into the blacklist

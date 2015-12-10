@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('champion', models.CharField(max_length=500)),
                 ('role', models.CharField(max_length=500)),
                 ('pricerate', models.FloatField(default=0.0)),
-                ('avatar', models.ImageField(upload_to=b'')),
+                ('avatar', models.URLField()),
                 ('rating', models.IntegerField(default=0)),
             ],
         ),
@@ -98,11 +98,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='User',
             fields=[
-                ('username', models.CharField(max_length=100, serialize=False, primary_key=True)),
+                ('userid', models.CharField(max_length=100, serialize=False, primary_key=True)),
                 ('email', models.EmailField(max_length=254)),
-                ('name', models.CharField(max_length=100)),
+                ('pname', models.CharField(max_length=100)),
                 ('MMR', models.IntegerField(default=0)),
-                ('skype', models.CharField(max_length=100)),
+                ('skypeid', models.CharField(max_length=100)),
+                ('twitchid', models.CharField(max_length=100)),
             ],
         ),
         migrations.AddField(
@@ -127,12 +128,12 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='coach',
-            name='username',
+            name='userid',
             field=models.ForeignKey(to='sideapp.User'),
         ),
         migrations.AddField(
             model_name='blacklist',
-            name='usr',
+            name='userid',
             field=models.ForeignKey(to='sideapp.User'),
         ),
     ]
