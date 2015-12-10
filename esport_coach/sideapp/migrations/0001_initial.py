@@ -61,9 +61,11 @@ class Migration(migrations.Migration):
             name='Reviewing',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('review', models.TextField()),
+                ('skill_stars', models.PositiveIntegerField(null=True)),
+                ('communication_stars', models.PositiveIntegerField(null=True)),
+                ('helpfulness_stars', models.PositiveIntegerField(null=True)),
+                ('comment', models.TextField()),
                 ('date', models.DateTimeField()),
-                ('rating', models.IntegerField(default=0)),
                 ('coach', models.ForeignKey(to='sideapp.Coach')),
             ],
         ),
