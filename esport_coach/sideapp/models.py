@@ -28,16 +28,6 @@ class Reviews(models.Model):
 
 
 
-class Reviews(models.Model):
-		coach = models.ForeignKey(Signup, on_delete=models.CASCADE)
-		reviewer = models.CharField(max_length=100, blank=False, null=True)
-		skill_stars = models.PositiveIntegerField(blank=False, null=True)
-		communication_stars = models.PositiveIntegerField(blank=False, null=True)
-		helpfulness_stars = models.PositiveIntegerField(blank=False, null=True)
-		comment = models.CharField(max_length=300, blank=False, null=True)
-
-
-
 
 
 class User(models.Model):
