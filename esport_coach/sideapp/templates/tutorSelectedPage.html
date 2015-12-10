@@ -27,7 +27,7 @@
 
         <!-- Tutor Info Panel -->
         <div class="panel panel-default" style="margin-right:15%; margin-left:15%;">
-            <h2 align="center">Coach {{ coach.username }}</h2>
+            <h2 align="center">Coach {{ coach.pname }}</h2>
             <div class="row promo-top" style="margin-right:5%; margin:0% 5% 3% 5%;">
                 <div class="col-xs-0 col-sm-3 text-right">
                     <img src="{% static 'pictures/coach_icon1.jpg' %}" style="border-radius:100px;">
@@ -35,11 +35,11 @@
                 <div class="col-xs-12 col-sm-2 text-center" style="padding-right:0%; padding-left:0%;">
                     <br>
                     <div><a onclick="">Reputation:</a>
-                        <div>{{ coach.reputation }}</div>
+                        <div>125</div>
                         <div>top #% of coaches</div>
                         <div>
                             <a onclick="">Reviews:</a><br>
-                            <span>{{ final_avg_review }}</span>/5
+                            <span>{{ coach.avg_review }}</span>/5
                             <p id="finalRating"></p>
                         </div>
                     </div>
@@ -58,9 +58,9 @@
                     <div>{{ coach.mmr }}</div>
                     <div>{{ coach.server }}</div>
                     <div>${{ coach.pricerate }} USD/hr</div>
-                    <div>#</div>
-                    <div>{{ coach.name }}</div>
-                    <div>{{ coach.skype }}</div>
+                    <div>56</div>
+                    <div>{{ coach.pname }}</div>
+                    <div>{{ coach.skypeid }}</div>
                 </div>
                 <div class="col-xs-12 col-sm-2 text-center" style="padding:0; width:135px;">
                     <br>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="tab-pane" id="reviews">
                             <!-- Coach rating form -->
-                            <h4>Rate Coach {{ coach.username }}</h4>
+                            <h4>Rate Coach {{ coach.pname }}</h4>
                             <form id="form_review" method="get" action="/sideapp/reviewcoach/{{coach.username}}">
                                 <div class="form-inline">
                                     <div class="form-group">
@@ -202,7 +202,7 @@
         <!-- Script to render the reviews rating stars in the page when loaded.  -->
         <script>
             $(function (){
-                document.getElementById("finalRating").innerHTML = renderAllReviews({{ final_avg_review }});
+                document.getElementById("finalRating").innerHTML = renderAllReviews({{ coach.avg_review }});
             });
 
             function renderAllReviews(final_avg_review){

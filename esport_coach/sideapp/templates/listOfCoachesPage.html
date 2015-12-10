@@ -107,9 +107,9 @@
                                 <tbody style = "font-size:16px" id="test">
                                     {% if coaches %}
                                         {% for coach in coaches %}
-                                            <tr onclick="window.location.href='/sideapp/tutorselected/{{coach.0}}'" style="cursor: pointer;">
+                                            <tr onclick="window.location.href='/sideapp/tutorselected/{{coach.6}}'" style="cursor: pointer;">
                                                 {% for attribute in coach %}
-                                                    {% if forloop.counter != 8 %}
+                                                    {% if forloop.counter != 7 %}
                                                         <td>{{attribute}}</td>
                                                     {% endif %}
                                                 {% endfor %}

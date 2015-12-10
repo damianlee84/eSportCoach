@@ -76,7 +76,7 @@ def list_of_coaches(request):
             avg_review = 0;
             for review in reviews:
                 avg_review = int((review.skill_stars+review.communication_stars+review.helpfulness_stars)/3)
-            coaches_list.append([user.pname, user.MMR, coach.server, coach.champion, avg_review, coach.pricerate])
+            coaches_list.append([user.pname, user.MMR, coach.server, coach.champion, avg_review, coach.pricerate, user.userid])
 
     context = {'coaches': coaches_list}
     return render(request, "listOfCoachesPage.html", context)
@@ -120,23 +120,18 @@ def searchCoach(request):
 
 
 def tutorselected(request, tutor_username):
-    sum_all_avg_reviews = 0
-    num_reviews = 0
-    final_avg_review = 0
-    coach_selected = Signup.objects.get(username=tutor_username)
-    all_users_reviews = coach_selected.reviews_set.all()
-
-    for user_review in all_users_reviews:
-        avg_review = (user_review.skill_stars + user_review.communication_stars + user_review.helpfulness_stars)/3
-        sum_all_avg_reviews += avg_review
-        num_reviews += 1
-
-    if num_reviews > 0:
-        final_avg_review = sum_all_avg_reviews/num_reviews
+    coach_info = []
+    avg_review = 0;
+    user = User.objects.get(userid=tutor_username)
+    coaches = user.coach_set.all()    # It should always return a query set of one coach instance.
+    for coach in coaches:
+        reviews = coach.reviewing_set.all()
+        for review in reviews:
+            avg_review = int((review.skill_stars+review.communication_stars+review.helpfulness_stars)/3)
+        coach_info = {"pname":user.pname, "mmr":user.MMR, "server":coach.server, "champion":coach.champion, "avg_review":avg_review, "pricerate":coach.pricerate, "skypeid":user.skypeid, "twitchid":user.twitchid, "userid":user.userid}
 
     context = {
-        'coach': coach_selected,
-        'final_avg_review': final_avg_review
+        'coach': coach_info,
         }
     return render(request, "tutorSelectedPage.html", context)
 
