@@ -1,18 +1,11 @@
 from django.contrib import admin
-from .models import Signup, Coach, User
+from .models import *
 from .forms import SignupForm
 
-class adminSignup(admin.ModelAdmin):
-    list_display = ('username', 'name', 'email', 'skype', 'mmr', 'server', 'hero', 'rating', 'reputation', 'students', 'pricerate')
+
+    list_display = ('username', 'name', 'email', 'skype', 'mmr', 'server', 'hero', 'rating', 'reputation', 'students', 'pricerate')class adminSignup(admin.ModelAdmin):
     form = SignupForm
 
-class adminCoach(admin.ModelAdmin):
-    list_display = ('server', 'champion', 'rating', 'pricerate', 'role', 'avatar', 'overview')
-
-class adminUser(admin.ModelAdmin):
-    list_display = ('userid', 'email', 'pname', 'MMR', 'skypeid', 'twitchid')
 
 
 admin.site.register(Signup, adminSignup)
-admin.site.register(Coach, adminCoach)
-admin.site.register(User, adminUser)
