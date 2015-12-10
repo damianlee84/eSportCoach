@@ -27,7 +27,9 @@
                             <p>Profile Page: <a href="{{ user.social_auth.get.extra_data.player.profileurl}}">{{ user.social_auth.get.extra_data.player.profileurl}}</a></p>
                             <p>Full Name: {{ user.social_auth.get.extra_data.player.realname}}</p>
                             <p>Persona Name: {{ user.social_auth.get.extra_data.player.personaname}}</p>
-                            
+                            <p>Clan ID: {{ user.social_auth.get.extra_data.player.primaryclanid}}</p>
+                            <p>Time Created: {{ user.social_auth.get.extra_data.player.timecreated}}</p>
+                            <p>Last Logout: <time>{{ user.social_auth.get.extra_data.player.lastlogoff}}</time></p>        
                                 <div class="btn-group">
                                     <a href="/sideapp/signupCoach" class="btn-lg btn-primary">Submit</a>
                             </div>
