@@ -24,6 +24,7 @@
                         <div class="col-lg-12" style="top:20px">
                             <h1>Your Information</h1>
                             <p>SteamID: {{ user.social_auth.get.extra_data.player.steamid}}</p>
+                            <p>Profile Page: <a href="{{ user.social_auth.get.extra_data.player.profileurl}}">{{ user.social_auth.get.extra_data.player.profileurl}}</a></p>
                         
                                 <div class="btn-group">
                                     <a href="/sideapp/signupCoach" class="btn-lg btn-primary">Submit</a>
