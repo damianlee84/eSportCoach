@@ -171,21 +171,32 @@ def reviewcoach(request, tutor_username):
             return HttpResponse(response_error2)
 
         coach_selected = Signup.objects.get(username=tutor_username)
-        rating = Reviews(id=None, coach=coach_selected, reviewer=user_reviewer, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=review_comment)
-        rating.save()
+        # all_users_reviews = coach_selected.reviews_set.all()
+        # rating = Reviews(id=None, coach=coach_selected, reviewer=user_reviewer, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=review_comment)
+        # rating.save()
+        # for user_review in all_users_reviews:
+        #     print user_review.skill_stars
+        #     print user_review.communication_stars
+        #     print user_review.helpfulness_stars
+        #     print user_review.comment
         return HttpResponse(response_sucess)
     else:
         raise Http404
 
 def renderReviews(request,tutor_username):
     if request.is_ajax:
+        sum_all_avg_reviews = 0
+        num_reviews = 0
+        list_reviews = []
         try:
             coach_selected = Signup.objects.get(username=tutor_username)
             all_users_reviews = coach_selected.reviews_set.all()
-
-            response = serializers.serialize('json',all_users_reviews)
         except KeyError:
             return HttpResponse("error")
+
+        for user_review in all_users_reviews:
+            avg_review = (user_review.skill_stars + user_review.communication_stars + user_review.helpfulness_stars)/3
+            list_reviews.append({"skill":user_review.skill_stars, "communication":user_review.communication_stars, "helpfulness":user_review.helpfulness_stars, "avg_review":avg_review, "comment":user_review.comment,"reviewer":user_review.reviewer})
 
         response = serializers.serialize('json',all_users_reviews)
         return HttpResponse(response)
@@ -193,13 +204,8 @@ def renderReviews(request,tutor_username):
         raise Http404
 
 def paymentpage(request, tutor_username):
-    lesson_duration = int(request.POST['lesson_duration'])
-    lesson_date_time = request.POST['lesson_date_time']
-
-    context = {
-        "duration": lesson_duration,
-        "lesson_date_time": lesson_date_time
-    }
+    tutor = Signup.objects.get(username=tutor_username)
+    context = {'coachname': tutor.username, 'coachprice': tutor.pricerate}
     return render(request, "summaryReceiptPage.html", context)
 
 def streampage(request, tutor_username):
@@ -213,3 +219,9 @@ def charge(request):
         return render(request, "summaryReceiptPage.html", context)
     context = {"form" : form}
     return render(request, "checkout.html", context)
+
+def coachApp(request):
+    """
+    coach application
+    """
+    return render(request, "coachApp.html")
