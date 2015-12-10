@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^streampage/(?P<tutor_username>[-\w]+)', views.streampage, name='streampage'),
     url(r'^tutorselected/',RedirectView.as_view(url='/sideapp/list_of_coaches/'), name='redirecttutor'),
     #url(r'^stream/', views.url, name='stream'),
-    url(r'^coachApp/', views.coachApp, name='coachApp'),
+    # url(r'^coachApp/', views.coachApp, name='coachApp'),
     #url(r'^signupCoach/', views.signupCoach, name='signupCoach'),
     #url(r'^player_rank/', views.player_rank, name='player_rank'),
 

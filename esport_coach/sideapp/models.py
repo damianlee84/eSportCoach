@@ -27,9 +27,6 @@ class Reviews(models.Model):
 		comment = models.CharField(max_length=300, blank=False, null=True)
 
 
-
-
-
 class User(models.Model):
 		userid = models.CharField(primary_key=True, max_length=100, blank=False, null=False)
 		email = models.EmailField(blank=False, null=False)
@@ -83,7 +80,6 @@ class Blacklist(models.Model):
 	 def __str__(self):
 				return  " " + str(self.date) + " " + self.reason
 
-<<<<<<< local
 class Report(models.Model):
 	 student = models.ForeignKey('User', on_delete=models.CASCADE)
 	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
@@ -91,7 +87,7 @@ class Report(models.Model):
 	 date = models.DateTimeField(auto_now_add=False, auto_now=False)
 	 def __str__(self):
 			return self.student + " " + self.coach + " "  + str(self.date) + " " + self.reason
-=======
+
 class Reviewing(models.Model):
    student = models.ForeignKey('User', on_delete=models.CASCADE)
    coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
@@ -116,28 +112,23 @@ class Champions(models.Model):
    def __str__(self):
         return self.champion
 
-
-
-
-
-
 class transaction(models.Model):
-		def __init__(self, *args, **kwargs):
-			super(transaction, self).__init__(*args, **kwargs)
-			import stripe
-			stripe.api.key = settings.STRIPE_API_KEY
-			self.stripe = stripe
+	def __init__(self, *args, **kwargs):
+		super(transaction, self).__init__(*args, **kwargs)
+		import stripe
+		stripe.api.key = settings.STRIPE_API_KEY
+		self.stripe = stripe
 
-		#transaction number
-		transaction_id = models.CharField(max_length = 32)
-		transaction_date = models.DateTimeField(auto_now_add = True, auto_now=False)
+	#transaction number
+	transaction_id = models.CharField(max_length = 32)
+	transaction_date = models.DateTimeField(auto_now_add = True, auto_now=False)
 
-		def charge(self, price_in_cents, number, exp_month, exp_year, cvc):
-				if self.transaction_id:
-						return False, Exception(message = "Already charged.")
-				try:
-						response = self.stripe.Charge.create(amount = price_in_cents, currency = "usd", card = {"number": number, "exp_month": exp_month, "exp_year": exp_year, "cvc": cvc, "address_line1": self.address1, "address_line2": self.address2, "zip_code": self.zip_code, "state": self.state,}, description = "Thank You, Happy Gaming!")
-						self.transcation_id = response.id
-				except self.stripe.CardError, ce:
-						return False, ce
-				return True, response
+	def charge(self, price_in_cents, number, exp_month, exp_year, cvc):
+			if self.transaction_id:
+					return False, Exception(message = "Already charged.")
+			try:
+					response = self.stripe.Charge.create(amount = price_in_cents, currency = "usd", card = {"number": number, "exp_month": exp_month, "exp_year": exp_year, "cvc": cvc, "address_line1": self.address1, "address_line2": self.address2, "zip_code": self.zip_code, "state": self.state,}, description = "Thank You, Happy Gaming!")
+					self.transcation_id = response.id
+			except self.stripe.CardError, ce:
+					return False, ce
+			return True, response
