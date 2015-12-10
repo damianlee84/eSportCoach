@@ -73,7 +73,7 @@ class Coaching(models.Model):
 				return  " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
 
 
-class reviewing(models.Model):
+class Reviewing(models.Model):
 	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
 	 student = models.ForeignKey('User', on_delete=models.CASCADE)
 	 skill_stars = models.PositiveIntegerField(blank=False, null=True)
@@ -93,7 +93,7 @@ class Blacklist(models.Model):
 	 def __str__(self):
 				return  " " + str(self.date) + " " + self.reason
 
-class report(models.Model):
+class Report(models.Model):
 	 student = models.ForeignKey('User', on_delete=models.CASCADE)
 	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
 	 reason = models.TextField(blank=False, null=False)

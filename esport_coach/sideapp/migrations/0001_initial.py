@@ -28,6 +28,7 @@ class Migration(migrations.Migration):
                 ('pricerate', models.FloatField(default=0.0)),
                 ('avatar', models.URLField()),
                 ('rating', models.IntegerField(default=0)),
+                ('overview', models.TextField(blank=True)),
             ],
         ),
         migrations.CreateModel(
@@ -37,11 +38,12 @@ class Migration(migrations.Migration):
                 ('date', models.DateTimeField(auto_now=True)),
                 ('pricerate', models.FloatField(default=0)),
                 ('quantity', models.IntegerField(default=0)),
+                ('request', models.TextField(blank=True)),
                 ('coach', models.ForeignKey(to='sideapp.Coach')),
             ],
         ),
         migrations.CreateModel(
-            name='report',
+            name='Report',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('reason', models.TextField()),
@@ -50,12 +52,14 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='reviewing',
+            name='Reviewing',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('review', models.TextField()),
+                ('skill_stars', models.PositiveIntegerField(null=True)),
+                ('communication_stars', models.PositiveIntegerField(null=True)),
+                ('helpfulness_stars', models.PositiveIntegerField(null=True)),
+                ('comment', models.TextField()),
                 ('date', models.DateTimeField()),
-                ('rating', models.IntegerField(default=0)),
                 ('coach', models.ForeignKey(to='sideapp.Coach')),
             ],
         ),
@@ -98,8 +102,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='User',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('userid', models.CharField(max_length=100)),
+                ('userid', models.CharField(max_length=100, serialize=False, primary_key=True)),
                 ('email', models.EmailField(max_length=254)),
                 ('pname', models.CharField(max_length=100)),
                 ('MMR', models.IntegerField(default=0)),

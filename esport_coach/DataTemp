@@ -76,6 +76,49 @@ pab2.save()
 ton1.save()
 
 
+rfei1 = Reviewing(coach=fei, student=won, date = timezone.now(), skill_stars = 1, communication_stars = 5, helpfulness_stars=3, comment = "Huntaela is a good guy. I wasn't really too sure what to expect, but he explained everything to me and was very patient and understanding. From all my interactions with the guy, it seems like his intentions are good. I would recommend him to others and trust him again.")
 
+rfei2 = Reviewing(coach=fei, student=kelly, date = timezone.now(), skill_stars = 2, communication_stars = 3, helpfulness_stars=5, comment = "Beware! He was nice at first, but as we played together, I saw that his attitude and playstyle became very aggressive. At the end of our first session he linked me videos that were for beginners, which did not help at all.' Upon asking me why I didn't want to do another session with him, he became angry with me and accused me of using DotaCoach.org for hook-ups just because I wanted a coach from the Americas! He then told me I needed to change my lifestyle, and that's the last I'm ever planning to talk to him. I was trying to be nice, being one of his very students, but I cannot overlook the fact that he is just too bad-manned and aggressive for me, and probably the same for most kind people who are trying to navigate this site.")
 
+rfei3 = Reviewing(coach=fei, student=markous, date = timezone.now(), skill_stars = 4, communication_stars = 4, helpfulness_stars=5, comment = "For an affordable and convenient price my coach was able to give me the best feedback I could have asked for. Not only did he have a clear understanding of the session's topic but effective in communicating instructions. He is polite and ready to teach per any level or skill of play. Overall 5/5 would recommend.")
+
+rfei4 = Reviewing(coach=fei, student=wujimama, date = timezone.now(), skill_stars = 4, communication_stars = 3, helpfulness_stars=5, comment = "Coached me on learning a new hero, storm. First watched him play a pub match using storm and went through decision making and how to play storm at a higher level. We then went into a lobby where he went through patiently on techniques and tricks of using the hero. Really helpful and would definitely get more sessions in the future. ")
+
+rfei5 = Reviewing(coach=fei, student=luke, date = timezone.now(), skill_stars = 4, communication_stars = 3, helpfulness_stars=5, comment = "Eddy is a nice young man, he's a very good wr and ofc he plays others heroes as well. I surely recommend him.")
+
+rder1 = Reviewing(coach=der, student=won, date = timezone.now(), skill_stars = 3, communication_stars = 3, helpfulness_stars=4, comment = "Terrific session, very positive and friendly coach, had great ideas on how to improve, notable large improvement over only two hours!")
+
+rder2 = Reviewing(coach=der, student=kelly, date = timezone.now(), skill_stars = 5, communication_stars = 3, helpfulness_stars=5, comment = "Gave lots of valuable inputs throughout a game and explained in a really good and simple way why he did what he did, and why he bought the items he bought. Really patient and relaxed guy. You should totally try him out!")
+
+rder3 = Reviewing(coach=der, student=markous, date = timezone.now(), skill_stars = 3, communication_stars = 5, helpfulness_stars=5, comment = "A good coach and a great player. Looking forward to getting more lessons!")
+
+rder4 = Reviewing(coach=der, student=wujimama, date = timezone.now(), skill_stars = 5, communication_stars = 5, helpfulness_stars=5, comment = "Took a second lesson, with a new character, and still awesome. Got a new point of view on certain things. He's the man!")
+
+rsam1 = Reviewing(coach=sam, student=won, date = timezone.now(), skill_stars = 5, communication_stars = 3, helpfulness_stars=5, comment = "I would recommend him to anyone but be aware that he is not a sugar coated coach, which means that if you make a mistake he will explain you what you did wrong and how to fix it, but he will not have mercy if you persist in repeating it.")
+
+rsam2 = Reviewing(coach=sam, student=kelly, date = timezone.now(), skill_stars = 3, communication_stars = 5, helpfulness_stars=5, comment = "Friendly and down to earth guy. Managed to learn a lot during our session. Will come back for more lessons.")
+
+rsam3 = Reviewing(coach=sam, student=markous, date = timezone.now(), skill_stars = 5, communication_stars = 5, helpfulness_stars=3, comment = "Huntaela is a good guy. I wasn't really too sure what to expect, but he explained everything to me and was very patient and understanding. From all my interactions with the guy, it seems like his intentions are good. I would recommend him to others and trust him again.")
+
+rpab1 = Reviewing(coach=pab, student=won, date = timezone.now(), skill_stars = 3, communication_stars = 5, helpfulness_stars=3, comment = "This guy is a fantastic coach! He really goes in depth for what needs to be done! I learnt some advanced mechanics for mid lane as well as some cool SHADOW FIEND tricks that aren't easy to learn. ps, whoever wrote that negative review has no idea what they're talking about 10/10 for Huntaela")
+
+rpab2 = Reviewing(coach=pab, student=kelly, date = timezone.now(), skill_stars = 5, communication_stars = 4, helpfulness_stars=3, comment = "Great coach, I plan on returning for many sessions in the future. Obviously knowledgeable with much experience in Dota.")
+
+rton1 = Reviewing(coach=ton, student=won, date=timezone.now(), skill_stars=5, communication_stars = 4, helpfulness_stars=4, comment = "We watched several replays together as practice for some upcoming low-level tournament games. I learned a lot about efficient spell and item usage and some of the things that I could do to get more out of both laning and my spells. HuntaeLa did a good job of balancing what we needed to work on as a team, while also helping me individually and answering my questions. Very knowledgeable about the game, and made clear and easy to understand points. He also did a really good job of making sure I understood the concepts he was trying to explain. Overall a great experience, 5 stars.")
+
+rfei1.save()
+rfei2.save()
+rfei3.save()
+rfei4.save()
+rfei5.save()
+rder1.save()
+rder2.save()
+rder3.save()
+rder4.save()
+rsam1.save()
+rsam2.save()
+rsam3.save()
+rpab1.save()
+rpab2.save()
+rton1.save()
 
