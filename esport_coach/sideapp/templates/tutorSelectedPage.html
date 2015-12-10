@@ -148,34 +148,9 @@
 
         <!-- Lesson Schedule Info -->
         <div class="panel panel-default" style="padding-top:1%; margin-right:15%; margin-left:15%;" align="center">
-            <div class="panel-body">
-
-                
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <span style="font-size:20px;"><input type="number" name="ratingSkill" id="ratingSkill" class="rating"/></span>
-                        </div>
-                        <div class="form-group">Skill</div>
-                    </div>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <span style="font-size:20px;"><input type="number" name="ratingCommunication" id="ratingCommunication" class="rating"/></span>
-                        </div>
-                        <div class="form-group">Communication</div>
-                    </div>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <span style="font-size:20px;"><input type="number" name="ratingHelpfulness" id="ratingHelpfulness" class="rating"/></span>
-                        </div>
-                        <div class="form-group">Helpfulness</div>
-                    </div>
-                    <br>
-                    <textarea id="textarea_review" name="textarea_review" class="form-control" maxlength="300" placeholder="Write your honest review (max: 300 chars)..."></textarea>
-                    <button id="submitButton" type="submit" class="btn btn-default">Submit</button>
-                </form>
-
-                            
-                <form id="form_payment" method="get" action="/sideapp/paymentpage/{{coach.username}}">
+            <div class="panel-body">                            
+                <form id="form_payment" method="POST" action="/sideapp/paymentpage/{{coach.username}}">
+                    {% csrf_token %}
                     <div class="col-xs-0 col-sm-4 text-left" style="width:25%; padding:0;">
                         <a href="/sideapp/paymentpage/{{coach.username}}" ><img src="{% static 'pictures/stripe-logo.png' %}" style="width: 350px; height: 150px;" alt="Pay now with Stipe" /></a>
                     </div>
@@ -207,7 +182,9 @@
                             <textarea id="request_comment" name="lesson_date_time" class="form-control" style="width:390px" maxlength="100" placeholder=" Enter all available date and time (max: 300 chars)..."></textarea>
                         </div>
                     </div>
-                    <button id="submitPayment" type="submit" class="btn btn-default">Submit</button>
+                    <div style="width:88%;" align="right">
+                        <button id="submitPayment" type="submit" class="btn btn-default">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -340,7 +317,22 @@
                 });
         </script>
         
-       
+        <!-- Script for the lesson schedule and payment information  -->
+        // <script>
+        //     $(function() {
+        //         var form = $('#form_payment');                   // Get the form.
+
+        //         $(form).submit(function(event){                // Set up an event listener for the contact form.
+        //             event.preventDefault();                     // Stop the browser from submitting the form.
+        //             var formData = $(form).serialize(); 
+        //             $.ajax({                                    // Submit the form using AJAX.
+        //                 type: 'GET',
+        //                 url: $(form).attr('action'),
+        //                 data: formData,
+        //             })
+        //         });
+        //     });
+        // </script>
 
         <!-- Script for script pagination -->
         <!---

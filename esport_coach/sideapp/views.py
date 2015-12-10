@@ -170,7 +170,6 @@ def reviewcoach(request, tutor_username):
             return HttpResponse(response_error2)
 
         coach_selected = Signup.objects.get(username=tutor_username)
-        all_users_reviews = coach_selected.reviews_set.all()
         rating = Reviews(id=None, coach=coach_selected, reviewer=user_reviewer, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=review_comment)
         rating.save()
         return HttpResponse(response_sucess)
@@ -193,8 +192,13 @@ def renderReviews(request,tutor_username):
         raise Http404
 
 def paymentpage(request, tutor_username):
-    tutor = Signup.objects.get(username=tutor_username)
-    context = {'coachname': tutor.username, 'coachprice': tutor.pricerate}
+    lesson_duration = int(request.POST['lesson_duration'])
+    lesson_date_time = request.POST['lesson_date_time']
+
+    context = {
+        "duration": lesson_duration,
+        "lesson_date_time": lesson_date_time
+    }
     return render(request, "summaryReceiptPage.html", context)
 
 def streampage(request, tutor_username):
