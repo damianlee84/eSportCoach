@@ -65,6 +65,7 @@ class Coach(models.Model):
 	 avatar = models.URLField(blank=False, null=False)
 	 rating = models.IntegerField(default = 0,  blank = False, null = False)
 	 overview = models.TextField(blank=True)
+	 # user = User
 	 def __str__(self):
 				return   " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate) + " " + self.overview
 
@@ -106,7 +107,6 @@ class Report(models.Model):
 	 date = models.DateTimeField(auto_now_add=False, auto_now=False)
 	 def __str__(self):
 			return self.student + " " + self.coach + " "  + str(self.date) + " " + self.reason
-
 
 
 class Champions(models.Model):
