@@ -64,6 +64,11 @@ def signup(request):
         context = {"title": "Signup Succesful"}
     return render(request, "forms.html", context)
 
+def findcoach(request):
+    title = 'Testing'
+    context = {"title": title}
+    return render(request, "find_coach.html", context)
+
 
 def list_of_coaches(request):
     coaches_list = []
@@ -75,53 +80,18 @@ def list_of_coaches(request):
     context = {'coaches': coaches_list}
     return render(request, "listOfCoachesPage.html", context)
 
-def searchCoach(request):
-    if request.is_ajax:
-        try:
-            server = request.GET.get('Server')
-            role = request.GET.get('Role')
-            hero = request.GET.get('Hero')
-            mmrRange = request.GET.get('MMR')
-            if (mmrRange == "100-300"):
-                minRange = 100
-                maxRange = 300
-            elif mmrRange == "300-500":
-                minRange = 300
-                maxRange = 500
-            elif mmrRange == "500-700":
-                minRange = 500
-                maxRange = 700
-            elif mmrRange == "700-900":
-                minRange = 700
-                maxRange = 900
-            elif mmrRange == "900-1100":
-                minRange = 900
-                maxRange = 1100
-            elif mmrRange == "1100-1300":
-                minRange = 1100
-                maxRange = 1300
-
-            #searchQueryList = Signup.objects.all()
-            searchQueryList = (Signup.objects.filter(server=server).filter(hero=hero)
-                                .filter(mmr__range=(minRange,maxRange)))
-            formData = serializers.serialize('json',searchQueryList)
-
-        except KeyError:
-            return HttpResponse('Error')
-        return HttpResponse(formData)
-    else:
-        raise Http404
-
 
 def tutorselected(request, tutor_username):
     sum_all_avg_reviews = 0
     num_reviews = 0
     final_avg_review = 0
+    list_reviews = []
     coach_selected = Signup.objects.get(username=tutor_username)
     all_users_reviews = coach_selected.reviews_set.all()
 
     for user_review in all_users_reviews:
         avg_review = (user_review.skill_stars + user_review.communication_stars + user_review.helpfulness_stars)/3
+        list_reviews.append({"skill":user_review.skill_stars, "communication":user_review.communication_stars, "helpfulness":user_review.helpfulness_stars, "avg_rating":avg_review, "comment":user_review.comment, "reviewer":user_review.reviewer})
         sum_all_avg_reviews += avg_review
         num_reviews += 1
 
@@ -130,11 +100,12 @@ def tutorselected(request, tutor_username):
 
     context = {
         'coach': coach_selected,
+        'reviews': list_reviews,
         'final_avg_review': final_avg_review
         }
     return render(request, "tutorSelectedPage.html", context)
 
-
+ 
 def reviewcoach(request, tutor_username):
     if request.is_ajax:
         # Response messages:
@@ -150,7 +121,7 @@ def reviewcoach(request, tutor_username):
             communication = request.GET.get('ratingCommunication')
             helpfulness = request.GET.get('ratingHelpfulness')
             review_comment = request.GET.get('textarea_review')
-
+            
             if skill == "":
                 skill == 0
             else:
@@ -162,7 +133,7 @@ def reviewcoach(request, tutor_username):
             if helpfulness == "":
                 helpfulness == 0
             else:
-                helpfulness = int(helpfulness)
+                helpfulness = int(helpfulness)      
             if review_comment == "":
                 return HttpResponse(response_error1)
 
@@ -170,26 +141,30 @@ def reviewcoach(request, tutor_username):
             return HttpResponse(response_error2)
 
         coach_selected = Signup.objects.get(username=tutor_username)
-        all_users_reviews = coach_selected.reviews_set.all()
-        rating = Reviews(id=None, coach=coach_selected, reviewer=user_reviewer, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=review_comment)
-        rating.save()
+        # all_users_reviews = coach_selected.reviews_set.all()
+        # rating = Reviews(id=None, coach=coach_selected, reviewer=user_reviewer, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=review_comment)
+        # rating.save()
+        # for user_review in all_users_reviews:
+        #     print user_review.skill_stars
+        #     print user_review.communication_stars
+        #     print user_review.helpfulness_stars
+        #     print user_review.comment
         return HttpResponse(response_sucess)
     else:
-        raise Http404
+        raise Http404     
 
-def renderReviews(request,tutor_username):
+def populateReviews(request, tutor_username):
     if request.is_ajax:
         try:
             coach_selected = Signup.objects.get(username=tutor_username)
-            all_users_reviews = coach_selected.reviews_set.all()
-
-            response = serializers.serialize('json',all_users_reviews)
+            response = serializers.serialze('json',coach_selected)
+            print response
         except KeyError:
+            print "Error"
             return HttpResponse("error")
-
-        response = serializers.serialize('json',all_users_reviews)
         return HttpResponse(response)
     else:
+        print "else"
         raise Http404
 
 def paymentpage(request, tutor_username):
@@ -197,7 +172,7 @@ def paymentpage(request, tutor_username):
     context = {'coachname': tutor.username, 'coachprice': tutor.pricerate}
     return render(request, "summaryReceiptPage.html", context)
 
-def streampage(request, tutor_username):
+def streampage(request):
     tutor = Signup.objects.get(username=tutor_username)
     context = {'coach': tutor.username}
     return render(request, "streamPage.html", context)
@@ -208,9 +183,3 @@ def charge(request):
         return render(request, "summaryReceiptPage.html", context)
     context = {"form" : form}
     return render(request, "checkout.html", context)
-
-def coachApp(request):
-    """
-    coach application
-    """
-    return render(request, "coachApp.html")
