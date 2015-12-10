@@ -231,7 +231,6 @@
 
         <!-- Script for the average rating stars -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="{% static 'jquery-2.1.0.min.js' %}"></script>
         <script src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
@@ -290,16 +289,67 @@
                 $.ajax({                                    
                         type: 'GET',
                         url: "/sideapp/renderReviews/{{coach.username}}/",
-                        dataType:'json',
+                        dataType: "json",
                     })
-                    .done(function(response,coach){      
-                        alert("DONE");       
-                        $("#coach_reviews").html("DONE"); 
+                    .done(function(response){       
+                        var overall = 0;
+                        var context = ""
+
+                        for (var review in response){       
+                            context += "<div class='panel panel-default' style='border:NONE;'><div class='panel-body' style='padding-left:0; padding-right:0; padding-bottom:5;'><div class='col-xs-0 col-sm-3 text-left' style='width:220px;'>";
+
+                            // For the overall stars
+                            context += "<div class='form-inline' style='width:215px;'><div class='form-group'>";
+                            overall = parseInt((response[review]["fields"]["skill_stars"] + response[review]["fields"]["communication_stars"] + response[review]["fields"]["helpfulness_stars"])/3);   
+                            for (i=0; i<overall; i++){
+                                context += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
+                            }
+                            for (i=overall; i<5; i++){
+                                context += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
+                            }
+                            context += "</div><div class='form-group' style='padding-left:1%;'>Overall</div></div>";
+
+                            // For the skill stars
+                            context += "<div class='form-inline' style='width:215px;'><div class='form-group'>";
+                            for (i=0; i<response[review]["fields"]["skill_stars"]; i++){
+                                context += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
+                            }
+                            for (i=response[review]["fields"]["skill_stars"]; i<5; i++){
+                                context += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
+                            }
+                            context += "</div><div class='form-group' style='padding-left:1%'>Skill</div></div>";
+
+                            // For the Communication stars
+                            context += "<div class='form-inline' style='width:215px;'><div class='form-group'>";
+                            for (i=0; i<response[review]["fields"]["communication_stars"]; i++){
+                                context += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
+                            }
+                            for (i=response[review]["fields"]["communication_stars"]; i<5; i++){
+                                context += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
+                            }
+                            context += "</div><div class='form-group' style='padding-left:1%;'>Communication</div></div>";
+
+                            // For the skill stars
+                            context += "<div class='form-inline' style='width:215px;'><div class='form-group'>";
+                            for (i=0; i<response[review]["fields"]["helpfulness_stars"]; i++){
+                                context += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
+                            }
+                            for (i=response[review]["fields"]["helpfulness_stars"]; i<5; i++){
+                                context += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
+                            }
+                            context += "</div><div class='form-group' style='padding-left:1%;'>Helpfulness</div></div>";
+
+                            // For the comment
+                            context += "</div><div class='col-xs-12 col-sm-2 text-left' style='width:510px; '>"+response[review]["fields"]["comment"]+"<br>- <em>"+response[review]["fields"]["reviewer"]+"</em></div></div>";
+                        }
+
+                        console.log("{{ user.social_auth.get.extra_data.player.personaname }}")
+                        $("#coach_reviews").html(context);
                     })
                     .fail(function(response){
-                        alert("Oops! An error occured when loading the reviews.");
+                        alert("Oops! An error occured loading the reviews.");
                     });
-            });
+                });
         </script>
         
 
