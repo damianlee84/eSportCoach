@@ -189,20 +189,24 @@ def reviewcoach(request, tutor_username):
 
 def renderReviews(request,tutor_username):
     if request.is_ajax:
-        sum_all_avg_reviews = 0
-        num_reviews = 0
-        list_reviews = []
+        # sum_all_avg_reviews = 0
+        # num_reviews = 0
+        # response = []
+        
         try:
             coach_selected = Signup.objects.get(username=tutor_username)
             all_users_reviews = coach_selected.reviews_set.all()
+
+            response = serializers.serialize('json',all_users_reviews)
         except KeyError:
             return HttpResponse("error")
 
-        for user_review in all_users_reviews:
-            avg_review = (user_review.skill_stars + user_review.communication_stars + user_review.helpfulness_stars)/3
-            list_reviews.append({"skill":user_review.skill_stars, "communication":user_review.communication_stars, "helpfulness":user_review.helpfulness_stars, "avg_review":avg_review, "comment":user_review.comment,"reviewer":user_review.reviewer})
+        # for user_review in all_users_reviews:
+        #     avg_review = (user_review.skill_stars + user_review.communication_stars + user_review.helpfulness_stars)/3
+        #     response.append({"skill":user_review.skill_stars, "communication":user_review.communication_stars, "helpfulness":user_review.helpfulness_stars, "avg_review":avg_review, "comment":user_review.comment,"reviewer":user_review.reviewer})
         
-        response = serializers.serialize('json',all_users_reviews)
+        # print r
+
         return HttpResponse(response)
     else:
         raise Http404     
