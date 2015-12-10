@@ -11,3 +11,13 @@ User.objects.create(userid='wujimama',email='wuji199@yahoo.com', pname='wuji199'
 User.objects.create(userid='luke',email='luke23@yahoo.com', pname='lukely', MMR="790", skypeid="luke221", twitchid = "luke221")
 
 
+coa = User.objects.get(userid='fei')
+k = Coach(userid=coa, server='NA', champion='Jungler', role='mid', pricerate=5.20, avatar='http://static.mnium.org/images/contenu/actus/DotA2/Guides/Dota2_ursa_guide.png', rating=5)
+coa1 = User.objects.get(userid='der')
+j = Coach(userid=coa1, server='NA', champion='Axe', role='top', pricerate=22.00, avatar='http://hydra-media.cursecdn.com/dota2.gamepedia.com/thumb/2/22/Axedota2.png/250px-Axedota2.png?version=3febcaad1e01172dbb70bd7024e20eb6', rating=5)
+coa2 = User.objects.get(userid='sam')
+l = Coach(userid=coa2, server='NA', champion='Earthshacker', role='low', pricerate=30.20, avatar='http://hydra-media.cursecdn.com/dota2.gamepedia.com/7/7b/Earthshaker_ingame.png', rating=5)
+coa3 = User.objects.get(userid='pab')
+d = Coach(userid=coa3, server='NA', champion='Pudge', role='mid', pricerate=40.20, avatar='http://hydra-media.cursecdn.com/dota2.gamepedia.com/9/9f/Pudge.png?version=5b76eeddc9ff60a553d8ecdebbd45d82', rating=5)
+coa4 = User.objects.get(userid='ton')
+c = Coach(userid=coa4, server='NA', champion='Clockwerk', role='mid', pricerate=10.20, avatar='https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR0oVw5F7Yf4cNavC4eU8ckT7bX-lVuqCdi1oiBugGAOtenSDvL', rating=5)

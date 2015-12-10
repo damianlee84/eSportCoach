@@ -41,7 +41,7 @@ class User(models.Model):
 		skypeid = models.CharField(max_length=100, blank=False, null=False)
 		twitchid = models.CharField(max_length=100, blank=False, null=False)
 		def __str__(self):
-				return self.userid + " " + self.email + " " + self.pname
+				return  " " + self.email + " " + self.pname
 
 class Coach(models.Model):
 	 userid = models.ForeignKey('User', on_delete=models.CASCADE)
@@ -51,8 +51,9 @@ class Coach(models.Model):
 	 pricerate = models.FloatField(default = 0.00)
 	 avatar = models.URLField(blank=False, null=False)
 	 rating = models.IntegerField(default = 0,  blank = False, null = False)
+	 Overview = models.TextField(blank=True)
 	 def __str__(self):
-				return self.userid + " " + self.hero + " " + str(self.rating) + " " + self.server + " " + str(self.hour_rate)
+				return  " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate)
 
 class Coaching(models.Model):
 	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)

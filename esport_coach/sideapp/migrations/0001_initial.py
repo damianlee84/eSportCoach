@@ -98,7 +98,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='User',
             fields=[
-                ('userid', models.CharField(max_length=100, serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('userid', models.CharField(max_length=100)),
                 ('email', models.EmailField(max_length=254)),
                 ('pname', models.CharField(max_length=100)),
                 ('MMR', models.IntegerField(default=0)),
