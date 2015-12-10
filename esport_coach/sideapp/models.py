@@ -27,15 +27,13 @@ class Reviews(models.Model):
 		comment = models.CharField(max_length=300, blank=False, null=True)
 
 """
-User Table:	A database table is stores all user information for either a student or a coach. It contains all basic info of what a user should have.
-Fields: 
-			userid: character field used to grab the ID from steam
-			email: email of the user
-			pname: steam persona
-			MMR: Containing the Rank or how experience a user is
-			skypeid: Skeype ID that need to do audio chat 
-			twitchid: twitchid ID that is used for video streaming
-
+*User Table:	A database table is stores all user information for either a student or a coach. It contains all basic info of what a user should have.
+*Fields: 		userid: character field used to grab the ID from steam
+				email: email of the user
+				pname: steam persona
+				MMR: Containing the Rank or how experience a user is
+				skypeid: Skeype ID that need to do audio chat 
+				twitchid: twitchid ID that is used for video streaming
 """
 class User(models.Model):
 		userid = models.CharField(primary_key=True, max_length=100, blank=False, null=False)
@@ -47,9 +45,19 @@ class User(models.Model):
 		def __str__(self):
 				return  self.userid + " " + self.email + " " + self.pname
 
+"""
+*Coach Table:	A database table containing coach and it's atrributese, where has to be in User table.
+*Fields: 		userid: ForeignKey meaning it has to be a instance of coach
+				server: server of the the coach.
+				champion: A list of heros that the Coach is good at.
+				role: positions the coach is expert in.
+				pricerate: FloatField rate the coach is charing the student
+				avatar: Profile picture we grab from steam
+				rating: the overall rating of the coach
+				overview: A TextField containing the description of the Coach and the information the coach want to let the user know
+"""
 class Coach(models.Model):
 	 userid = models.ForeignKey('User', on_delete=models.CASCADE)
-	#  pname =  models.ForeignKey('User', on_delete=models.CASCADE)
 	 server = models.CharField(max_length = 50, blank = False, null = False)
 	 champion = models.CharField(max_length = 500, blank = False, null = False)
 	 role = models.CharField(max_length = 500, blank = False, null = False)
@@ -57,7 +65,6 @@ class Coach(models.Model):
 	 avatar = models.URLField(blank=False, null=False)
 	 rating = models.IntegerField(default = 0,  blank = False, null = False)
 	 overview = models.TextField(blank=True)
-	 user = User
 	 def __str__(self):
 				return   " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate) + " " + self.overview
 
