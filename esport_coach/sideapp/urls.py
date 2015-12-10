@@ -12,7 +12,11 @@ urlpatterns = [
     url(r'^searchCoach/', views.searchCoach, name='searchCoach'),
     url(r'^tutorselected/(?P<tutor_username>[-\w]+)', views.tutorselected, name='tutorselected'),
     url(r'^reviewcoach/(?P<tutor_username>[-\w]+)', views.reviewcoach, name='reviewcoach'),
-    url(r'^renderReviews/(?P<tutor_username>[-\w]+)', views.renderReviews, name='renderReviews'),
     url(r'^paymentpage/(?P<tutor_username>[-\w]+)', views.paymentpage, name='paymentpage'),
-    url(r'^streampage/(?P<tutor_username>[-\w]+)', views.streampage, name='streampage'),
+    #url(r'^streampage/(?P<tutor_username>[-\w]+)', views.streampage, name='streampage'),
+    url(r'^stream/', views.url, name='stream'),
+    url(r'^coachApp/', views.coachApp, name='coachApp'),
+    url(r'^signupCoach/', views.signupCoach, name='signupCoach'),
+    #url(r'^player_rank/', views.player_rank, name='player_rank'),
+    
 ]
