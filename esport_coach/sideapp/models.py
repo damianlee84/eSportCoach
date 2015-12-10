@@ -60,7 +60,7 @@ class Coach(models.Model):
 	 rating = models.IntegerField(default = 0,  blank = False, null = False)
 	 overview = models.TextField(blank=True)
 	 def __str__(self):
-				return   " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate)
+				return   " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate) + " " + self.overview
 
 class Coaching(models.Model):
 	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)

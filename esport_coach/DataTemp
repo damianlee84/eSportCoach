@@ -122,3 +122,78 @@ rpab1.save()
 rpab2.save()
 rton1.save()
 
+
+
+Coach.objects.filter(userid='fei').update(overview="Hi, im Rallphy from Serbia, 25 yrs old, been playing Dota since 2004. I play for semi-pro team Chilly Willy, competing in various online tours, as well as domestic LANs, and we are currently playing Join Dota Pro MLG league season 5 in Divison 2. My main role is support, but over 10 years of experience means that i understand every role equally and can play it as good. I have a lot of experience in Dota coaching, since i\'ve been coaching a lot of friends for a long time :) I tend to be very detailed and straightforward. I offer: \
+1. Pub game party, playing the heroes/combinations of your choice \
+2. Observing (i play, you watch as spectator or coach, or vice -versa with explanations for every build, your hero choice) \
+3. Drafting and itemization explanations \
+4. 1v1 lobby games or vs bots \
+5. Replay analysis \
+I am specialized mainly in support role (4th and 5th position, jungle included) but as i\'ve mentioned, vast experience and years contribute towards knowing each role equally. \
+My dotabuff profile: \
+http://www.dotabuff.com/players/71625048\
+NEW STUDENTS OFFER Send me a replay of your choice (your own, pro games, any game) before or after training session and i will analyze it and give feedback, for free. \
+Feel free to add me or ask any question u might have, see u ingame! ")
+
+
+Coach.objects.filter(userid='der').update(overview="I'm an experienced coach available to help both beginning and experienced players make the transition from being a casual player to one with advanced mechanics and sharper skills.\
+I\'ve played DotA for over 7 years and DotA 2 since its release. In the original DotA I competed in the Dota League Division 3.\
+In DotA 2 I got more serious about improving, and forced myself to do many of the exercises and drills that I now have my students doing.\
+When I got to 6000 MMR, I began playing in amateur leagues on a few different teams, and coaching some players on the side. We competed in the Amateur Dota 2 League, League of Dota, the Starladder Amateur Series, the JoinDota League, and finally in the ESL Qualifiers in April 2014.\
+I decided to focus primarily on coaching after that, and have taken on several new students since then. My students\' MMRs have ranged from below 2000 to just under 5000, but all of them began to demonstrate improvement after just a few sessions.\
+We drill specific skills and maneuvers, practice different lane scenarios, and play lots of 1v1s. We do live coaching, work our way through replays, and analyze professional games together. I also regularly play public games with my students.\
+If you'd like to contact me with questions or concerns prior to booking, please contact me.")
+
+Coach.objects.filter(userid='sam').update(overview="Hey guys, I\'m D3XTR and if you are interested in becoming an awesome support, getting your mmr higher, or improving your mechanics of the game, you are at the right place! I specialize at Wisp, but I also play mid / carry / offlane, basically anything. My MMR on my main account is 6600, but lately I\'ve made a lot of smurfs. I also stream on twitch from time to time, you can check me out at twitch.tv/D3XTR\
+Highlight of my wisp (gameplay): http://youtu.be/qdGq4FsgQps \
+Made by NoobfromUA.\
+I speak fluent English and Russian!\
+I hope to see you guys soon!\
+Sincerely,\
+D3XTR")
+
+Coach.objects.filter(userid='pab').update(overview="Hello, I\'m SunBhie from formerly of MVP.Hot6. I\'m a TI5 Qualifiers winner (SEA), TI5 last placer, and MPGL7 winner.\
+I used to play poker, and there was a time where I got stuck at a certain limit, and had to get coaching. It was like mad expensive too. I don\'t even think it helped me that much, so I felt a little bitter about it. So here\'s wassup. We can talk about my coaching for like 10-15min free, no pressure, and you can see for yourself if you want to commit or not.\
+You can contact me on Skype: PJLWORLD\
+My steam friendlist is nearing full, please try to talk to me through Skype, I may not accept requests on Steam!\
+Just mention coaching when you add me. I\'m currently in Ontario CA.\
+No regional preference. I\'ll coach any region as long as we can communicate. Scheduling should be adjustable for the most part.\
+Coaching programs will be unique from player to player, tailoring to each player\'s needs. \
+Here are some of the things you can expect:\
+* I\'ll sit as a coach in-game and watch your game. We may even do live sweat sessions through screenshare in a ranked match.\
+* We\'ll watch replay together and talk dota, and discuss game theory.\
+* Attitude, mindset adjustments and tryharding\
+I can teach every role. You can check my dotabuff for validity. And if I\'m not comfortable with something I won\'t bullshit you, I\'ll tell you straight up.\
+I think the most important thing when it comes to purchasing a coaching session is some form of security. Security in that you will improve. And quite frankly, I don\'t know if I can give you that. I\'m not sure if anyone could. Much of that is on you just as it\'s on me. What I can promise you is my absolute best.\
+10/29/2015 Edit\
+Hey, fam. I\'ve decided to increase my rate for a few reasons. I\'ve been undercutting other 6k coaches which is unfair and rather cutthroat. I\'ve also recently hit my MMR milestone, so I think I have more to offer than before. And generally speaking, I think I\'m worth your time for the new rate. My former students will be *grandfathered in for the previous rate, and the same will apply to future rate adjustments.\
+*this means that, if I charged you $19.50 before, the rate won\'t change for you. And so on and so forth for future adjustments.\
+I know I\'ve lost some students lately because I\'ve been busy, and I forget to speak to them again (sorry). Sometimes, I feel hesitant to talk to potential students because I feel as though that coaching\'s a sort of an impulse purchase. You may feel like you need a coach right now, and then maybe three days later you feel otherwise. I do take this very seriously, but I just want to avoid being a pestering salesman. So, don\'t be afraid of opening a convo with me on your end if this is something you really want.")
+
+Coach.objects.filter(userid='ton').update(overview="Hello! \
+My name is HellioN, I am 20 and I'll coach the shit out of you.\
+I played wc3 dota 1 like 5 years from battle.net to garena.\
+Moved to dota 2 about 3 years ago and practiced since then seriously. Played some competitive stuff at amateur and semi-pro level on starladder and jd leagues. Since ranked system I\'ve been trying to climb and got 6 from 4.4. After that I didn\'t enjoy playing with 1.5k+ lower MMRs than I were(no offence) that much, so I played some NEL and EEL stuff.\
+Now I coach people, it\'s been a lot of fun for me and most of the students that I had were satisfied, so I expect more fun and more coaching. Through the Dota Coaching Progress Experiment, I was part of a team of two who coached a student to improve 1600 MMR (highest among all students) over two months 1000 party and 600 solo. My main role is mid but I will try my best to explain all the stuff despite different levels of skill. There are several ways of coaching :\
+• First one is live coaching, I coach, tell you tips give you orders where to farm or when to push or anything like that and information in general about the current game while you play.\
+• Second is replay analysis, if you have any questions regarding the game you played or any other game, we could make things more clear whether its teamfight or just decision making or whatever you wonder about. Most informative analyses could be made from games that didn't go really well and you have a lot questions.(not ones you carried 21-0)\
+(You can also send me replay I analyze it before we meet and then I will explain what happened and emphasize key points in live session with you, it does not matter if its team game or just pub game, any kind of game that you wanna know more works.)\
+•Third is I play and student watches, during that time I talk about my decisions what I am going to do and why, at the same time student asks me questions if he wonders about anything.\
+• Fourth is 1v1, its mostly used by core players, I teach things about laning phase, how to stand, when to be aggressive, how control lane or how to aggro creepwave when necessary etc...\
+Sometimes If we have time left after live coaching or replay analysis we do 1v1s or just general question answering. Also if the time is over and I still have left something to explain or you have questions I will stay extra time and will make it done without any additional payments.\
+I get (14$) per hour via paypal. If you want to contact me or have any questions you can add me directly form here : http://steamcommunity.com/profiles/76561198057535528/ or write me an e-mail : Qishmishi@ymail.com \
+IF I DON\'T RESPOND ON STEAM ON TIME YOU CAN ADD ME ON SKYPE DIRECTLY.")
+
+
+
+
+
+
+
+
+
+
+
+
+
