@@ -148,80 +148,80 @@
 
 
 
-        <!-- Info Panel -->
+        <!-- Lesson Schedule Info -->
         <div class="panel panel-default" style="margin-right:15%; margin-left:15%;" align="center">
             <div class="panel-body">
-                <!-- Date and hour pickers Div -->
-                <div style="margin-right:24%; margin-left:24%;">
-                    <!-- Datepicker -->
-                    <div class="input-append date" id="dp3" data-date="10-29-2015" data-date-format="mm-dd-yyyy">
-                        <input class="span2" size="16" type="text" placeholder="Select a Date" readonly="" style="background-color:white; width:100px; height:28px;">
-                        <span class="add-on" style="height: 28px; margin-right:25px"><i class="glyphicon glyphicon-calendar"></i></span>
-                    </div>
-
-                    <!-- Hourpicker -->
-                    <select class="dropdown" style="width:80px">
-                        <option value="hour">Hour</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select> :
-
-                    <!-- MinutePicker -->
-                    <select class="dropdown" style="width:80px">
-                        <option value="minute">Minute</option>
-                        <option value="00">00</option>
-                        <option value="15">15</option>
-                        <option value="30">30</option>
-                        <option value="45">45</option>
-                    </select>
-
-                    <!-- AM/PM -->
-                    <select class="dropdown" style="width:60px">
-                        <option value="am">AM</option>
-                        <option value="pm">PM</option>
-                    </select>
+                <div class="col-xs-0 col-sm-4 text-left" style="width:25%; padding:0;">
+                    <a href="/sideapp/paymentpage/{{coach.username}}" ><img src="{% static 'pictures/stripe-logo.png' %}" style="width: 350px; height: 150px;" alt="Pay now with Stipe" /></a>
                 </div>
 
-                <!-- Textinput for Skype and TwitchTV accounts -->
-                <div style="margin-right:24%; margin-left:24%;">
-                    <div class="input-group">
-                      <span class="input-group-addon">
-                        <input type="checkbox" aria-label="...">
-                      </span>
-                      <input type="text" class="form-control" aria-label="..." placeholder="Skype account" style="height:28px;">
+                <div class="col-xs-0 col-sm-3 text-left" style="width:75%; padding-left:5%;">
+                    <!-- When? -->
+                    <div class="col-xs-0 col-sm-3 text-right" style="width:25%; padding-right:3%;">
+                        <span style="font-size:16px; font-weight:bold;">When?</span>
                     </div>
-                    <div class="input-group">
-                      <span class="input-group-addon">
-                        <input type="checkbox" aria-label="...">
-                      </span>
-                      <input type="text" class="form-control" aria-label="..." placeholder="Twitch account" style="height: 28px">
+                    <div class="col-xs-0 col-sm-3 text-left" style="width:75%;padding:0%;">
+                        <!-- Datepicker -->
+                        <div class="input-append date" id="dp3" data-date="10-29-2015" data-date-format="mm-dd-yyyy">
+                            <input class="span2" size="16" type="text" placeholder="Select a Date" readonly="" style="background-color:white; width:100px; height:28px;">
+                            <span class="add-on" style="height: 28px; margin-right:25px"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+
+                        <!-- Hourpicker -->
+                        <select class="dropdown" style="width:80px">
+                            <option value="hour">Hour</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select> :
+
+                        <!-- MinutePicker -->
+                        <select class="dropdown" style="width:80px">
+                            <option value="minute">Minute</option>
+                            <option value="00">00</option>
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                        </select>
+
+                        <!-- AM/PM -->
+                        <select class="dropdown" style="width:60px">
+                            <option value="am">AM</option>
+                            <option value="pm">PM</option>
+                        </select>
+                    </div>
+
+                    <!-- How long? -->
+                    <div class="col-xs-0 col-sm-3 text-right" style="width:25%; padding-right:3%;">
+                        <span style="font-size:16px; font-weight:bold;">How Long?</span>
+                    </div>
+                    <div class="col-xs-0 col-sm-3 text-left" style="width:75%;padding:0%;">
+                    <!-- Quantity -->
+                        <select class="dropdown" style="width:390px">
+                            <option value="lesson_length">Lesson duration in hours</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+
+                    <!-- Textarea for addition comments or questions -->
+                    <div class="col-xs-0 col-sm-3 text-right" style="width:25%; padding-right:3%;">
+                        <span style="font-size:16px; font-weight:bold;">Request?</span>
+                    </div>
+                    <div class="col-xs-0 col-sm-3 text-left" style="width:75%;padding:0%;">
+                        <textarea id="request_comment" name="data" class="form-control" style="width:390px" maxlength="100" placeholder="Comments or addition requests (max: 100 chars)..."></textarea>
                     </div>
                 </div>
-                <br>
-
-                <!-- Textarea for addition comments or questions -->
-                <div style="margin-right:24%; margin-left:24%;">
-                    <textarea id="request_comment" name="data" class="form-control" maxlength="100" placeholder="Comments or addition requests (max: 100 chars)..."></textarea>
-                </div>
-            </div>
-        </div>
-
-        <!-- Payment Method Panel -->
-        <div class="panel panel-default" style="margin-right:15%; margin-left:15%;" align="center">
-            <div class="panel-body">
-                <span style="color:solid grey">Payment Method options</span>
-                <br><br>
-                <a href="/sideapp/paymentpage/{{coach.username}}" ><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" /></a>
             </div>
         </div>
 
