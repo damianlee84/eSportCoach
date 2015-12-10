@@ -135,18 +135,7 @@
                             <br>
 
                             <!-- Latest coach ratings -->
-                            <div id="coach_reviews">
-                                {% if list_reviews %}
-                                    {% for review in list_reviews %}
-                                        <script>
-                                            review_stars(3);
-                                        </script>
-                                        <p id="review_stars"></p>                                    
-                                    {% endfor %}
-                                {% else %}
-                                    <p>No Reviews available. Be the first one to review coach {{ coach.username }}...</p>
-                                {% endif %}
-                            </div>
+                            <div id="coach_reviews"></div>
 
                             <!-- Button for pagination -->
                             <!-- <a id="button_list" class="btn btn-info navbar-btn navbar-left">List</a> -->
@@ -246,46 +235,13 @@
         <script src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
-<<<<<<< local
-        <!-- Script to render the correct coach average rating stars in the page when loaded.  -->
-=======
-        <script>
-            $(function() {
-                var form = $('#form_review');                   // Get the form.
-                var formMessages = $('#form_review_messages');  // Get the messages div.
-
-                $(form).submit(function(event) {                // Set up an event listener for the contact form.
-                    event.preventDefault();                     // Stop the browser from submitting the form.
-                    var formData = $(form).serialize();         // Serialize the form data.
-                    $.ajax({                                    // Submit the form using AJAX.
-                        type: 'GET',
-                        url: $(form).attr('action'),
-                        data: formData,
-                        dataType:'text',
-                    })
-                    .done(function(response) {
-                        if (response == "success"){
-                            alert("Thanks for your honest review!");
-                            $('#textarea_review').val('');        // Clear the form.
-                        }
-                        else{
-                             alert("Key Error when sending review");
-                        }
-                    })
-                    .fail(function(response) {
-                        alert("Oops! An error occured sending your review.");
-                    });
-                });
-            });
-        </script>
-
->>>>>>> other
+        <!-- Script to render the reviews rating stars in the page when loaded.  -->
         <script>
             $(function (){
-                document.getElementById("finalRating").innerHTML = calcAvgStars({{ final_avg_review }});
+                document.getElementById("finalRating").innerHTML = renderAllReviews({{ final_avg_review }});
             });
 
-            function calcAvgStars(final_avg_review){
+            function renderAllReviews(final_avg_review){
                 temp = "";
                 for (i = 0; i < final_avg_review; i++) {
                     temp += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
@@ -297,7 +253,7 @@
             }
         </script>
 
-        <!-- Script to rate the selected coach -->
+        <!-- Script to render the correct coach average rating stars in the page when loaded.  -->
         <script>
             $(function() {
                 var form = $('#form_review');                   // Get the form.
@@ -312,13 +268,13 @@
                         data: formData,
                         dataType:'text',
                     })
-                    .done(function(response,coach){             
+                    .done(function(response){             
                             if (response.includes("Error")){
                                 $("#form_review_messages").html("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+response+"</div>");
                             }
                             else {
                                 $("#form_review_messages").html("<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+response+"</div>");
-                                $('#textarea_review').val('');        // Clear the form.  
+                                $('#textarea_review').val('');        // Clear the textarea.  
                             }     
                     })
                     .fail(function(response){
@@ -328,44 +284,24 @@
             });
         </script>
 
-        <!-- Script to render the reviews rating stars in the page when loaded.  -->
+        <!-- Script to render the reviews in the page when loaded.  -->
         <script>
-            function review_stars(stars){
-                document.getElementById("review_stars").innerHTML = calcAvgStars(stars);
-            };
-
-            function calcAvgStars(final_avg_review){
-                temp = "";
-                for (i = 0; i < final_avg_review; i++) {
-                    temp += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
-                }
-                for (i = final_avg_review; i < 5; i++) {
-                    temp += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
-                }
-                return temp;
-            }
-        </script>
-
-        <!-- Script to populate the reviews -->
-        <!--
-        <script>
-            $(function() {
-                $("#button_list").click(function(event){                
-                    event.preventDefault();                             
-                    $.ajax({                                            
-                        type: 'POST',
-                        url: "/sideapp/populateReviews/{{coach.username}}",
+            $(window).load(function() {
+                $.ajax({                                    
+                        type: 'GET',
+                        url: "/sideapp/renderReviews/{{coach.username}}/",
                         dataType:'json',
                     })
-                    .done(function(response){              
-                        $("#page-selection1").html("<p>Pablo Sucks!</p><p>"+response+"</p>");
+                    .done(function(response,coach){      
+                        alert("DONE");       
+                        $("#coach_reviews").html("DONE"); 
                     })
                     .fail(function(response){
-                        alert("Oops! An error occured sending your review.");
+                        alert("Oops! An error occured when loading the reviews.");
                     });
-                });
             });
-        </script> -->
+        </script>
+        
 
         <!-- Script for script pagination -->
         <!---

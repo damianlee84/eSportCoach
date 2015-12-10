@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^searchCoach/', views.searchCoach, name='searchCoach'),
     url(r'^tutorselected/(?P<tutor_username>[-\w]+)', views.tutorselected, name='tutorselected'),
     url(r'^reviewcoach/(?P<tutor_username>[-\w]+)', views.reviewcoach, name='reviewcoach'),
-    url(r'^renderReviews/(?P<tutor_username>[-\w]+)', views.renderReviews, name='renderReviews'),
+    url(r'^populateReviews/(?P<tutor_username>[-\w]+)', views.populateReviews, name='populateReviews'),
     url(r'^paymentpage/(?P<tutor_username>[-\w]+)', views.paymentpage, name='paymentpage'),
     url(r'^streampage/(?P<tutor_username>[-\w]+)', views.streampage, name='streampage'),
 ]
