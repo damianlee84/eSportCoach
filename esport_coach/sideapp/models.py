@@ -47,7 +47,7 @@ class Coach(models.Model):
 	 avatar = models.URLField(blank=False, null=False)
 	 rating = models.IntegerField(default = 0,  blank = False, null = False)
 	 overview = models.TextField(blank=True)
-	 user = User
+	 # user = User
 	 def __str__(self):
 				return   " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate) + " " + self.overview
 
@@ -89,24 +89,6 @@ class Report(models.Model):
 	 date = models.DateTimeField(auto_now_add=False, auto_now=False)
 	 def __str__(self):
 			return self.student + " " + self.coach + " "  + str(self.date) + " " + self.reason
-
-class Reviewing(models.Model):
-   student = models.ForeignKey('User', on_delete=models.CASCADE)
-   coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
-   review = models.TextField(blank=False, null=False)
-   date = models.DateTimeField(auto_now_add=False, auto_now=False)
-   rating = models.IntegerField(default=0, blank=False, null=False)
-   def __str__(self):
-        return self.student + " " + self.coach + " " + str(self.rating) + " " + str(self.date) + " " + self.review
-
-
-class Report(models.Model):
-   student = models.ForeignKey('User', on_delete=models.CASCADE)
-   coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
-   reason = models.TextField(blank=False, null=False)
-   date = models.DateTimeField(auto_now_add=False, auto_now=False)
-   def __str__(self):
-        return self.student + " " + self.coach + " "  + str(self.date) + " " + self.reason
 
 
 class Champions(models.Model):

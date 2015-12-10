@@ -67,12 +67,17 @@ def signup(request):
 
 def list_of_coaches(request):
     coaches_list = []
-    coach = Coach.objects.all()
-    for i in range(len(coach)):
-        user = User.objects.get(userid=coach[i].userid)
-        coaches_list.append([user.pname, user.MMR, coach[i].server,
-                            coach[i].champion, coach[i].rating, coach[i].reputation,
-                            coach[i].pricerate, coach[i].userid])
+
+    all_users = User.objects.all()
+    for user in all_users:
+        coaches = user.coach_set.all()    # It should always return a query set of one coach instance.
+        for coach in coaches:
+            reviews = coach.reviewing_set.all()
+            avg_review = 0;
+            for review in reviews:
+                avg_review = int((review.skill_stars+review.communication_stars+review.helpfulness_stars)/3)
+            coaches_list.append([user.pname, user.MMR, coach.server, coach.champion, avg_review, coach.pricerate])
+
     context = {'coaches': coaches_list}
     return render(request, "listOfCoachesPage.html", context)
 
@@ -171,14 +176,9 @@ def reviewcoach(request, tutor_username):
             return HttpResponse(response_error2)
 
         coach_selected = Signup.objects.get(username=tutor_username)
-        # all_users_reviews = coach_selected.reviews_set.all()
-        # rating = Reviews(id=None, coach=coach_selected, reviewer=user_reviewer, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=review_comment)
-        # rating.save()
-        # for user_review in all_users_reviews:
-        #     print user_review.skill_stars
-        #     print user_review.communication_stars
-        #     print user_review.helpfulness_stars
-        #     print user_review.comment
+        all_users_reviews = coach_selected.reviews_set.all()
+        rating = Reviews(id=None, coach=coach_selected, reviewer=user_reviewer, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=review_comment)
+        rating.save()
         return HttpResponse(response_sucess)
     else:
         raise Http404
@@ -204,8 +204,15 @@ def renderReviews(request,tutor_username):
         raise Http404
 
 def paymentpage(request, tutor_username):
-    tutor = Signup.objects.get(username=tutor_username)
-    context = {'coachname': tutor.username, 'coachprice': tutor.pricerate}
+    coach_selected = Signup.objects.get(username=tutor_username)
+    lesson_duration = int(request.POST['lesson_duration'])
+    lesson_date_time = request.POST['lesson_date_time']
+
+    context = {
+        "coach": coach_selected,
+        "duration": lesson_duration,
+        "lesson_date_time": lesson_date_time
+    }
     return render(request, "summaryReceiptPage.html", context)
 
 def streampage(request, tutor_username):
@@ -220,8 +227,9 @@ def charge(request):
     context = {"form" : form}
     return render(request, "checkout.html", context)
 
-def coachApp(request):
-    """
-    coach application
-    """
-    return render(request, "coachApp.html")
+
+# def coachApp(request):
+#     """
+#     coach application
+#     """
+#     return render(request, "coachApp.html")
