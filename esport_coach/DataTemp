@@ -1,0 +1,13 @@
+from sideapp.models import *
+User.objects.create(userid='fei',email='fchen00@citymail.cuny.edu', pname='TheGiant', MMR="500", skypeid="giant00", twitchid = "giantwich1")
+User.objects.create(userid='der',email='der@yahoo.com', pname='LittleMonkey', MMR="400", skypeid="monkey01", twitchid = "monkey01" )
+User.objects.create(userid='sam',email='sammy00@yahoo.com', pname='Samma', MMR="658", skypeid="samma123", twitchid = "samma123" )
+User.objects.create(userid='pab',email='paby@yahoo.com', pname='pabybaby', MMR="558", skypeid="paby432", twitchid = "paby432")
+User.objects.create(userid='ton',email='tonna@yahoo.com', pname='tona', MMR="839", skypeid="tona239", twitchid = "tona239")
+User.objects.create(userid='won',email='wonda@yahoo.com', pname='wonda', MMR="600", skypeid="won320", twitchid = "won320")
+User.objects.create(userid='kelly',email='kell1993@yahoo.com', pname='killy', MMR="300", skypeid="kill2341", twitchid = "kill2341")
+User.objects.create(userid='markous',email='markous01@yahoo.com', pname='makamarkous', MMR="450", skypeid="Markous29", twitchid = "Markous29")
+User.objects.create(userid='wujimama',email='wuji199@yahoo.com', pname='wuji199', MMR="780", skypeid="wuji199", twitchid = "wuji199")
+User.objects.create(userid='luke',email='luke23@yahoo.com', pname='lukely', MMR="790", skypeid="luke221", twitchid = "luke221")
+
+
