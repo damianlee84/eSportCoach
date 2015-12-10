@@ -26,7 +26,17 @@ class Reviews(models.Model):
 		helpfulness_stars = models.PositiveIntegerField(blank=False, null=True)
 		comment = models.CharField(max_length=300, blank=False, null=True)
 
+"""
+User Table:	A database table is stores all user information for either a student or a coach. It contains all basic info of what a user should have.
+Fields: 
+			userid: character field used to grab the ID from steam
+			email: email of the user
+			pname: steam persona
+			MMR: Containing the Rank or how experience a user is
+			skypeid: Skeype ID that need to do audio chat 
+			twitchid: twitchid ID that is used for video streaming
 
+"""
 class User(models.Model):
 		userid = models.CharField(primary_key=True, max_length=100, blank=False, null=False)
 		email = models.EmailField(blank=False, null=False)
