@@ -25,7 +25,9 @@
                             <h1>Your Information</h1>
                             <p>SteamID: {{ user.social_auth.get.extra_data.player.steamid}}</p>
                             <p>Profile Page: <a href="{{ user.social_auth.get.extra_data.player.profileurl}}">{{ user.social_auth.get.extra_data.player.profileurl}}</a></p>
-                        
+                            <p>Full Name: {{ user.social_auth.get.extra_data.player.realname}}</p>
+                            <p>Persona Name: {{ user.social_auth.get.extra_data.player.personaname}}</p>
+                            
                                 <div class="btn-group">
                                     <a href="/sideapp/signupCoach" class="btn-lg btn-primary">Submit</a>
                             </div>
