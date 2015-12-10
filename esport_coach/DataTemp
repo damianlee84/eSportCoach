@@ -1,4 +1,5 @@
 from sideapp.models import *
+from django.utils import timezone
 User.objects.create(userid='fei',email='fchen00@citymail.cuny.edu', pname='TheGiant', MMR="500", skypeid="giant00", twitchid = "giantwich1")
 User.objects.create(userid='der',email='der@yahoo.com', pname='LittleMonkey', MMR="400", skypeid="monkey01", twitchid = "monkey01" )
 User.objects.create(userid='sam',email='sammy00@yahoo.com', pname='Samma', MMR="658", skypeid="samma123", twitchid = "samma123" )
@@ -21,3 +22,60 @@ coa3 = User.objects.get(userid='pab')
 d = Coach(userid=coa3, server='NA', champion='Pudge', role='mid', pricerate=40.20, avatar='http://hydra-media.cursecdn.com/dota2.gamepedia.com/9/9f/Pudge.png?version=5b76eeddc9ff60a553d8ecdebbd45d82', rating=5)
 coa4 = User.objects.get(userid='ton')
 c = Coach(userid=coa4, server='NA', champion='Clockwerk', role='mid', pricerate=10.20, avatar='https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR0oVw5F7Yf4cNavC4eU8ckT7bX-lVuqCdi1oiBugGAOtenSDvL', rating=5)
+k.save()
+j.save()
+l.save()
+d.save()
+c.save()
+
+
+fei = Coach.objects.get(userid='fei')
+der = Coach.objects.get(userid='der')
+sam = Coach.objects.get(userid='sam')
+pab = Coach.objects.get(userid='pab')
+ton = Coach.objects.get(userid='ton')
+won = User.objects.get(userid='won')
+kelly = User.objects.get(userid='kelly')
+markous = User.objects.get(userid='markous')
+wujimama = User.objects.get(userid='wujimama')
+luke = User.objects.get(userid='luke')
+fei1 = Coaching(coach=fei, student=won, date=timezone.now(), pricerate =5.20, quantity = 2)
+fei2 = Coaching(coach=fei, student=kelly, date=timezone.now(), pricerate =5.20, quantity = 1)
+fei3 = Coaching(coach=fei, student=markous, date=timezone.now(), pricerate =5.20, quantity = 5)
+fei4 = Coaching(coach=fei, student=wujimama, date=timezone.now(), pricerate =5.20, quantity = 10)
+fei5 = Coaching(coach=fei, student=luke, date=timezone.now(), pricerate =5.20, quantity = 8)
+
+der1 = Coaching(coach=der, student=won, date=timezone.now(), pricerate =22.0, quantity = 1)
+der2 = Coaching(coach=der, student=kelly, date=timezone.now(), pricerate =22.0, quantity = 2)
+der3 = Coaching(coach=der, student=markous, date=timezone.now(), pricerate =22.0, quantity = 1)
+der4 = Coaching(coach=der, student=wujimama, date=timezone.now(), pricerate =22.0, quantity = 3)
+
+sam1 = Coaching(coach=sam, student=won, date=timezone.now(), pricerate =30.20, quantity = 1)
+sam2 = Coaching(coach=sam, student=kelly, date=timezone.now(), pricerate =30.20, quantity = 4)
+sam3 = Coaching(coach=sam, student=markous, date=timezone.now(), pricerate =30.20, quantity = 2)
+
+pab1 = Coaching(coach=pab, student=won, date=timezone.now(), pricerate =40.20, quantity = 1)
+pab2 = Coaching(coach=pab, student=kelly, date=timezone.now(), pricerate =40.20, quantity = 4)
+
+ton1 = Coaching(coach=ton, student=won, date=timezone.now(), pricerate =10.20, quantity = 3)
+
+fei1.save()
+fei2.save()
+fei3.save()
+fei4.save()
+fei5.save()
+der1.save()
+der2.save()
+der3.save()
+der4.save()
+sam1.save()
+sam2.save()
+sam3.save()
+pab1.save()
+pab2.save()
+ton1.save()
+
+
+
+
+

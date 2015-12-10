@@ -28,6 +28,13 @@ class Reviews(models.Model):
 
 
 
+class Reviews(models.Model):
+		coach = models.ForeignKey(Signup, on_delete=models.CASCADE)
+		reviewer = models.CharField(max_length=100, blank=False, null=True)
+		skill_stars = models.PositiveIntegerField(blank=False, null=True)
+		communication_stars = models.PositiveIntegerField(blank=False, null=True)
+		helpfulness_stars = models.PositiveIntegerField(blank=False, null=True)
+		comment = models.CharField(max_length=300, blank=False, null=True)
 
 
 
@@ -41,7 +48,7 @@ class User(models.Model):
 		skypeid = models.CharField(max_length=100, blank=False, null=False)
 		twitchid = models.CharField(max_length=100, blank=False, null=False)
 		def __str__(self):
-				return  " " + self.email + " " + self.pname
+				return  self.userid + " " + self.email + " " + self.pname
 
 class Coach(models.Model):
 	 userid = models.ForeignKey('User', on_delete=models.CASCADE)
@@ -51,9 +58,9 @@ class Coach(models.Model):
 	 pricerate = models.FloatField(default = 0.00)
 	 avatar = models.URLField(blank=False, null=False)
 	 rating = models.IntegerField(default = 0,  blank = False, null = False)
-	 Overview = models.TextField(blank=True)
+	 overview = models.TextField(blank=True)
 	 def __str__(self):
-				return  " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate)
+				return   " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate)
 
 class Coaching(models.Model):
 	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
@@ -61,8 +68,22 @@ class Coaching(models.Model):
 	 date = models.DateTimeField(auto_now_add = False, auto_now = "True")
 	 pricerate = models.FloatField(default = 0, blank = False, null = False)
 	 quantity = models.IntegerField(default = 0,  blank = False, null = False)
+	 request = models.TextField(blank=True)
 	 def __str__(self):
-				return self.coach + " " + self.student + " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
+				return  " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
+
+
+class reviewing(models.Model):
+	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
+	 student = models.ForeignKey('User', on_delete=models.CASCADE)
+	 skill_stars = models.PositiveIntegerField(blank=False, null=True)
+	 communication_stars = models.PositiveIntegerField(blank=False, null=True)
+	 helpfulness_stars = models.PositiveIntegerField(blank=False, null=True)
+	 comment = models.TextField(blank=False, null=False)
+	 date = models.DateTimeField(auto_now_add=False, auto_now=False)
+	 def __str__(self):
+			return " " + str(self.skill_stars) + " " + str(self.date) + " " + self.comment
+
 
 class Blacklist(models.Model):
 	 userid = models.ForeignKey('User', on_delete=models.CASCADE)
@@ -70,16 +91,7 @@ class Blacklist(models.Model):
 	 reason = models.TextField(blank = False, null=False)
 	 #should we add another field of admin so taht we know who put these people into the blacklist
 	 def __str__(self):
-				return self.usr + " " + str(self.date) + " " + self.reason
-
-class reviewing(models.Model):
-	 student = models.ForeignKey('User', on_delete=models.CASCADE)
-	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
-	 review = models.TextField(blank=False, null=False)
-	 date = models.DateTimeField(auto_now_add=False, auto_now=False)
-	 rating = models.IntegerField(default=0, blank=False, null=False)
-	 def __str__(self):
-			return self.student + " " + self.coach + " " + str(self.rating) + " " + str(self.date) + " " + self.review
+				return  " " + str(self.date) + " " + self.reason
 
 class report(models.Model):
 	 student = models.ForeignKey('User', on_delete=models.CASCADE)
