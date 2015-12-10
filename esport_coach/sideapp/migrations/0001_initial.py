@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import migrations, models
+from django.db import models, migrations
 
 
 class Migration(migrations.Migration):
@@ -19,6 +19,12 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='Champions',
+            fields=[
+                ('champion', models.CharField(max_length=100, serialize=False, primary_key=True)),
+            ],
+        ),
+        migrations.CreateModel(
             name='Coach',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -26,9 +32,8 @@ class Migration(migrations.Migration):
                 ('champion', models.CharField(max_length=500)),
                 ('role', models.CharField(max_length=500)),
                 ('pricerate', models.FloatField(default=0.0)),
-                ('avatar', models.URLField()),
+                ('avatar', models.ImageField(upload_to=b'')),
                 ('rating', models.IntegerField(default=0)),
-                ('overview', models.TextField(blank=True)),
             ],
         ),
         migrations.CreateModel(
@@ -38,7 +43,6 @@ class Migration(migrations.Migration):
                 ('date', models.DateTimeField(auto_now=True)),
                 ('pricerate', models.FloatField(default=0)),
                 ('quantity', models.IntegerField(default=0)),
-                ('request', models.TextField(blank=True)),
                 ('coach', models.ForeignKey(to='sideapp.Coach')),
             ],
         ),
@@ -55,11 +59,9 @@ class Migration(migrations.Migration):
             name='Reviewing',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('skill_stars', models.PositiveIntegerField(null=True)),
-                ('communication_stars', models.PositiveIntegerField(null=True)),
-                ('helpfulness_stars', models.PositiveIntegerField(null=True)),
-                ('comment', models.TextField()),
+                ('review', models.TextField()),
                 ('date', models.DateTimeField()),
+                ('rating', models.IntegerField(default=0)),
                 ('coach', models.ForeignKey(to='sideapp.Coach')),
             ],
         ),
@@ -104,10 +106,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('userid', models.CharField(max_length=100, serialize=False, primary_key=True)),
                 ('email', models.EmailField(max_length=254)),
-                ('pname', models.CharField(max_length=100)),
+                ('name', models.CharField(max_length=100)),
                 ('MMR', models.IntegerField(default=0)),
-                ('skypeid', models.CharField(max_length=100)),
-                ('twitchid', models.CharField(max_length=100)),
+                ('skype', models.CharField(max_length=100)),
             ],
         ),
         migrations.AddField(
@@ -132,12 +133,12 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='coach',
-            name='userid',
+            name='username',
             field=models.ForeignKey(to='sideapp.User'),
         ),
         migrations.AddField(
             model_name='blacklist',
-            name='userid',
+            name='usr',
             field=models.ForeignKey(to='sideapp.User'),
         ),
     ]
