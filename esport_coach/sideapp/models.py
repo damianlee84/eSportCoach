@@ -67,7 +67,7 @@ class Coach(models.Model):
 	 overview = models.TextField(blank=True)
 	 # user = User
 	 def __str__(self):
-				return   " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate) + " " + self.overview
+				return  self.userid.userid + " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate) + " " + self.overview 
 
 class Coaching(models.Model):
 	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
@@ -77,7 +77,7 @@ class Coaching(models.Model):
 	 quantity = models.IntegerField(default = 0,  blank = False, null = False)
 	 request = models.TextField(blank=True)
 	 def __str__(self):
-				return  " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
+				return self.coach.userid.userid + " " + self.student.userid + " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
 
 
 class Reviewing(models.Model):
@@ -89,7 +89,7 @@ class Reviewing(models.Model):
 	 comment = models.TextField(blank=False, null=False)
 	 date = models.DateTimeField(auto_now_add=False, auto_now=False)
 	 def __str__(self):
-			return " " + str(self.skill_stars) + " " + str(self.date) + " " + self.comment
+			return self.coach.userid.userid + " " + self.student.userid + " " + str(self.skill_stars) + " " + str(self.date) + " " + self.comment
 
 
 class Blacklist(models.Model):
