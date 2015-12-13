@@ -76,7 +76,7 @@ def list_of_coaches(request):
             avg_review = 0;
             for review in reviews:
                 avg_review = int((review.skill_stars+review.communication_stars+review.helpfulness_stars)/3)
-            coaches_list.append([user.pname, user.MMR, coach.server, coach.champion, avg_review, coach.pricerate, user.userid])
+            coaches_list.append([user.pname, user.MMR, coach.server, coach.champion, coach.role, avg_review, coach.pricerate, user.userid])
 
     context = {'coaches': coaches_list}
     return render(request, "listOfCoachesPage.html", context)
@@ -107,23 +107,13 @@ def searchCoach(request):
                 minRange = 1100
                 maxRange = 1300
 
-            searchQueryList = User.objects.get(pname="Samma")
-            print searchQueryList
+            coaches = User.objects.filter(MMR__range=(minRange,maxRange)).filter(coach__server=server, coach__champion=hero)
 
-            
-            # for user in users:
-            #     searchQueryList = user.objects.get(server=server)
-            #     # if searchQueryList != []:
-            #     #     break
-            #     coach = Coach.objects.get(userid=tutor_username)
-
-            # print searchQueryList
-
-            formData = serializers.serialize('json',searchQueryList)
+            formData = serializers.serialize('json',coaches)
 
         except KeyError:
             return HttpResponse('Error')
-        return HttpResponse(searchQueryList)
+        return HttpResponse(formData)
     else:
         raise Http404
 

@@ -100,6 +100,7 @@
                                             <th>MMR</th>
                                             <th>Server</th>
                                             <th>Heroes</th>
+                                            <th>Role</th>
                                             <th class="col-md-1">Rating</th>
                                             <th>Price/hr($)</th>
                                     </tr>
@@ -108,9 +109,9 @@
                                 <tbody style = "font-size:16px" id="test">
                                     {% if coaches %}
                                         {% for coach in coaches %}
-                                            <tr onclick="window.location.href='/sideapp/tutorselected/{{coach.6}}'" style="cursor: pointer;">
+                                            <tr onclick="window.location.href='/sideapp/tutorselected/{{coach.7}}'" style="cursor: pointer;">
                                                 {% for attribute in coach %}
-                                                    {% if forloop.counter != 7 %}
+                                                    {% if forloop.counter != 8 %}
                                                         <td>{{attribute}}</td>
                                                     {% endif %}
                                                 {% endfor %}
@@ -158,21 +159,22 @@
                         dataType:'json',
                     })
                     .done(function(response) {
-                        // list = response //list of objects
-                        // var listLength = list.length;
-                        // var s = "";
-                        // var field;
+                        list = response //list of objects
+                        var listLength = list.length;
+                        var s = "";
+                        var field;
 
-                        for (var i=0; i < 1; i++)
+                        for (var i=0; i < list.length; i++)
                         {
-                          // field = list[i]["fields"]
-                          s += "<tr onclick=\"window.location.href='/sideapp/tutorselected/"+"Samma"+"'\" style=\"cursor: pointer;\">";
-                          s += "<td>" + "Samma" + "</td>" +
-                            "<td>" + "658" + "</td>" +
-                            "<td>" + "SA" + "</td>" +
-                            "<td>" + "Earthshaker" + "</td>" +
-                            "<td>" + "4" + "</td>" +
-                            "<td>" + "30.2" + "</td>";
+                          field = list[i]["fields"]
+                          s += "<tr onclick=\"window.location.href='/sideapp/tutorselected/"+field["userid"]+"'\" style=\"cursor: pointer;\">";
+                          s += "<td>" + field["pname"] + "</td>" +
+                            "<td>" + field["MMR"] + "</td>" +
+                            "<td>" + field["server"] + "</td>" +
+                            "<td>" + field["champion"] + "</td>" +
+                            "<td>" + field["role"] + "</td>" +
+                            "<td>" + field["rating"] + "</td>" +
+                            "<td>" + field["pricerate"] + "</td>";
                           s += "</tr>";
                         }
                         // console.log(list);
