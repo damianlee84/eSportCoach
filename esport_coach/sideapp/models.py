@@ -70,11 +70,12 @@ class Coach(models.Model):
 	 def __str__(self):
 				return  self.userid.userid + " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate) + " " + self.overview 
 
-	 def num_student(self, name):
+
+	 def num_student(self):
 	 		students = Coaching.objects.filter(coach=self)
 	 		num_stu = students.aggregate(Count('student',distinct=True))
-
 	 		return num_stu['student__count']
+
 
 """
 *Coaching Table:A database table containing the information of user been coached
