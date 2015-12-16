@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from datetime import date, datetime
 from calendar import monthrange
+from django.db.models import Count
 
 class Signup(models.Model):
 		username = models.CharField(max_length=50, blank=False, null=False)
@@ -69,6 +70,12 @@ class Coach(models.Model):
 	 def __str__(self):
 				return  self.userid.userid + " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate) + " " + self.overview 
 
+	 def num_student(self, name):
+	 		students = Coaching.objects.filter(coach=self)
+	 		num_stu = students.aggregate(Count('student',distinct=True))
+
+	 		return num_stu['student__count']
+
 """
 *Coaching Table:A database table containing the information of user been coached
 *Fields: 		coach: ForeignKey meaning it has to be a instance of coach
@@ -87,6 +94,7 @@ class Coaching(models.Model):
 	 request = models.TextField(blank=True)
 	 def __str__(self):
 				return self.coach.userid.userid + " " + self.student.userid + " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
+
 
 """
 *ReviewingTable:A database table containing the information of students reviewing coach
@@ -131,6 +139,10 @@ class Champions(models.Model):
    champion = models.CharField(primary_key=True, max_length=100, blank=False, null=False)
    def __str__(self):
         return self.champion
+
+
+
+
 
 class transaction(models.Model):
 	def __init__(self, *args, **kwargs):

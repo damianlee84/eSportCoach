@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.core import serializers
+from django.db.models import Count
 
 
 def home(request):
@@ -226,6 +227,9 @@ def charge(request):
         return render(request, "summaryReceiptPage.html", context)
     context = {"form" : form}
     return render(request, "checkout.html", context)
+
+
+
 
 
 # def coachApp(request):
