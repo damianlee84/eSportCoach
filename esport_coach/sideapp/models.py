@@ -71,6 +71,13 @@ class Coach(models.Model):
 				return  self.userid.userid + " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate) + " " + self.overview 
 
 
+	 # How to use this function 
+	 # Ex: 
+	 #   Before doing anything, first select a coach 
+	 #			selected_coach = Coach.objects.get(userid='Name')  Name is the name of your coach ex: Name='fei'.
+	 #   														   By Doing get(), you are getting the object of the Coach.
+	 #	 Next:
+	 #			selected_coach.num_student()					   Use the selected coach to call this function and you will get the number of student such coach has
 	 def num_student(self):
 	 		students = Coaching.objects.filter(coach=self)
 	 		num_stu = students.aggregate(Count('student',distinct=True))
