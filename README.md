@@ -1,12 +1,8 @@
-# README #
+# Esport Coach #
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+Esport Coach is a website that allow user to find a professional coach to improve their gaming skill. This website is currently support only The Dota2, a free-to-play multiplayer online battle arena (MOBA) video game developed and published by Valve Corporation. 
+    
+* Version 1.0
 
 ### How do I get set up? ###
 
