@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from datetime import date, datetime
 from calendar import monthrange
+from django.db.models import Count
 
 class Signup(models.Model):
 		username = models.CharField(max_length=50, blank=False, null=False)
@@ -67,8 +68,31 @@ class Coach(models.Model):
 	 overview = models.TextField(blank=True)
 	 # user = User
 	 def __str__(self):
-				return   " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate) + " " + self.overview
+				return  self.userid.userid + " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate) + " " + self.overview 
 
+
+	 # How to use this function 
+	 # Ex: 
+	 #   Before doing anything, first select a coach 
+	 #			selected_coach = Coach.objects.get(userid='Name')  Name is the name of your coach ex: Name='fei'.
+	 #   														   By Doing get(), you are getting the object of the Coach.
+	 #	 Next:
+	 #			selected_coach.num_student()					   Use the selected coach to call this function and you will get the number of student such coach has
+	 def num_student(self):
+	 		students = Coaching.objects.filter(coach=self)
+	 		num_stu = students.aggregate(Count('student',distinct=True))
+	 		return num_stu['student__count']
+
+
+"""
+*Coaching Table:A database table containing the information of user been coached
+*Fields: 		coach: ForeignKey meaning it has to be a instance of coach
+				student: Student is the person who hires coach, this has to be in the database
+				date: The date that this order was submitted
+				pricerate: FloatField rate the coach is charing the student
+				quantity: The unit of hour the user is applying for
+				request: Special requests for any other adiditional information.
+"""
 class Coaching(models.Model):
 	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
 	 student = models.ForeignKey('User', on_delete=models.CASCADE)
@@ -77,9 +101,19 @@ class Coaching(models.Model):
 	 quantity = models.IntegerField(default = 0,  blank = False, null = False)
 	 request = models.TextField(blank=True)
 	 def __str__(self):
-				return  " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
+				return self.coach.userid.userid + " " + self.student.userid + " " + str(self.date) + " " + str(self.pricerate) + " " + str(self.quantity)
 
 
+"""
+*ReviewingTable:A database table containing the information of students reviewing coach
+*Fields: 		coach: ForeignKey meaning it has to be a instance of coach
+				student: Student is the person who hires coach, this has to be in the database
+				skill_stars: rating coach skill
+				communication_stars: rating coach commnunication
+				helpfulness_stars: rating eoach helpfulness
+				comment: Comment that the student had on the coach
+				date: The date that the review is submitted
+"""
 class Reviewing(models.Model):
 	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
 	 student = models.ForeignKey('User', on_delete=models.CASCADE)
@@ -89,7 +123,7 @@ class Reviewing(models.Model):
 	 comment = models.TextField(blank=False, null=False)
 	 date = models.DateTimeField(auto_now_add=False, auto_now=False)
 	 def __str__(self):
-			return " " + str(self.skill_stars) + " " + str(self.date) + " " + self.comment
+			return self.coach.userid.userid + " " + self.student.userid + " " + str(self.skill_stars) + " " + str(self.date) + " " + self.comment
 
 
 class Blacklist(models.Model):
@@ -113,6 +147,10 @@ class Champions(models.Model):
    champion = models.CharField(primary_key=True, max_length=100, blank=False, null=False)
    def __str__(self):
         return self.champion
+
+
+
+
 
 class transaction(models.Model):
 	def __init__(self, *args, **kwargs):
