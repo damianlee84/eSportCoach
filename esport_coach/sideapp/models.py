@@ -82,7 +82,11 @@ class Coach(models.Model):
 	 		students = Coaching.objects.filter(coach=self)
 	 		num_stu = students.aggregate(Count('student',distinct=True))
 	 		return num_stu['student__count']
-
+	 # The function below allows you to get MMR of Coach
+	 # How to use this function
+	 #	selected_coach = Coach.objects.get(userid= 'name')   input Coach object, and userid name. and get a specific coach object
+	 # 	Then just 
+	 #			selected_coach.getMMR()    This will return you the MMR of the selected coach.
 	 def getMMR(self):
 	 		return self.userid.MMR
 
