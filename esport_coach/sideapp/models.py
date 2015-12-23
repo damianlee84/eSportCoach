@@ -83,6 +83,9 @@ class Coach(models.Model):
 	 		num_stu = students.aggregate(Count('student',distinct=True))
 	 		return num_stu['student__count']
 
+	 def getMMR(self):
+	 		return self.userid.MMR
+
 
 """
 *Coaching Table:A database table containing the information of user been coached

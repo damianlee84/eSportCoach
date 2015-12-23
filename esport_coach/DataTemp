@@ -44,6 +44,7 @@ fei2 = Coaching(coach=fei, student=kelly, date=timezone.now(), pricerate =5.20, 
 fei3 = Coaching(coach=fei, student=markous, date=timezone.now(), pricerate =5.20, quantity = 2)
 fei4 = Coaching(coach=fei, student=wujimama, date=timezone.now(), pricerate =5.20, quantity = 3)
 fei5 = Coaching(coach=fei, student=luke, date=timezone.now(), pricerate =5.20, quantity = 3)
+fei6 = Coaching(coach=fei, student=luke, date=timezone.now(), pricerate =5.20, quantity = 1)
 
 der1 = Coaching(coach=der, student=won, date=timezone.now(), pricerate =22.0, quantity = 1)
 der2 = Coaching(coach=der, student=kelly, date=timezone.now(), pricerate =22.0, quantity = 2)
@@ -187,12 +188,22 @@ IF I DON\'T RESPOND ON STEAM ON TIME YOU CAN ADD ME ON SKYPE DIRECTLY.")
 
 
 
+from sideapp.models import *
+selected_coach = Coach.objects.get(userid='fei')
+selected_coach.num_student()
 
 
 
 
+count the number of student it has
 
+#first import count
+from django.db.models import Count
 
+This is a demo of how many student the coach has taught
+fei = Coach.objects.get(userid='fei')   //First get the object Fei
+students = Coaching.objects.filter(coach=fei)
+students.aggregate(Count('student',distinct=True))
 
 
 
