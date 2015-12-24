@@ -13,6 +13,7 @@ Contents:
 
    intro
    dev_info
+   api
 
 
 Indices and tables
