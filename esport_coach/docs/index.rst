@@ -6,6 +6,8 @@
 Welcome to esport_coach's documentation!
 ========================================
 
+.. image:: /image/logo.png
+
 Contents:
 
 .. toctree::
