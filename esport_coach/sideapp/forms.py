@@ -22,12 +22,13 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ['userid', 'email', 'pname', 'MMR', 'skypeid', 'twitchid']
 
-
-
 class ContactForm(forms.Form):
     full_name = forms.CharField()
     email = forms.EmailField()
     message = forms.CharField()
+
+class errorForm(forms.Form):
+    email = forms.EmailField()
 
 
 class CreditCardField(forms.IntegerField):

@@ -1,7 +1,7 @@
 """
 this file calls all page functions and renders the pages with given context.
 """
-from .forms import SignupForm, ContactForm, SalePaymentForm
+from .forms import SignupForm, ContactForm, SalePaymentForm, errorForm
 from .models import Signup, Reviews, Coach, User
 from django.core.mail import send_mail
 from django.conf import settings
@@ -243,6 +243,22 @@ def charge(request):
     context = {"form" : form}
     return render(request, "checkout.html", context)
 
+def fourOfour(request):
+    """
+    submit email for notice
+    """
+    form = errorForm(request.POST)
+
+    if form.is_valid():
+        email = form.cleaned_data.get('email')
+        subject = 'Player Ranking Page Down'
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [from_email, settings.EMAIL_HOST_USER]
+        contact_message = "Let me know if the page is up.... %s"%(email)
+        send_mail(subject, contact_message, from_email, to_email, fail_silently=True)
+        return render(request, "base.html")
+    context = {"form" : form}
+    return render(request, "404.html", context)
 
 
 
