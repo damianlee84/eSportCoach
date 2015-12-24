@@ -15,3 +15,6 @@ API
   - Bad thing about this API is Valve don't allow developer to grab match-making
     ranking(MMR) because of privacy term. And there is no other API out there at the
     moment to get the ranking information.
+
+  - There one other API that allow developer to grab information from steam, but
+    due to high volume of usage and the owner of the API stop distributing the API.
