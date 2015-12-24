@@ -19,6 +19,6 @@ urlpatterns = [
     #url(r'^stream/', views.url, name='stream'),
     # url(r'^coachApp/', views.coachApp, name='coachApp'),
     #url(r'^signupCoach/', views.signupCoach, name='signupCoach'),
-    #url(r'^player_rank/', views.player_rank, name='player_rank'),
+    url(r'^player_rank/', views.fourOfour, name='player_rank'),
 
 ]
