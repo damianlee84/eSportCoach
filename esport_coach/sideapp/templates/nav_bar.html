@@ -13,7 +13,7 @@
                 <div class ="collapse navbar-collapse" id="navbar-collapse">
                     {% if user and not user.is_anonymous %}
                         <a href="/logout" class = "btn btn-info navbar-btn navbar-right"> Hello, {{ user.social_auth.get.extra_data.player.personaname }}! </a>
-                        <img src="{{ user.social_auth.get.extra_data.player.avatar }}" align="right" hspace="10" vspace="10">
+                        <img src="{{ user.social_auth.get.extra_data.player.avatar }}" align="right" hspace="10" vspace="20">
                     {% else %}
                         <a href="{% url 'social:begin' 'steam' %}?next={{request.path}}" class="btn btn-info navbar-btn navbar-right">Login</a>
                     {% endif %}
