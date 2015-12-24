@@ -30,3 +30,8 @@ Other requirements libraries::
     stripe==1.27.1
 
 -----
+
+Host
+####
+
+Web site currently hosting on Heroku: <http://esportcoach.herokuapp.com>
