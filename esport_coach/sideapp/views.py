@@ -243,6 +243,12 @@ def charge(request):
     context = {"form" : form}
     return render(request, "checkout.html", context)
 
+def fourOfour(request):
+    
+    form = errorForm(request.POST)
+
+    context = {"form" : form}
+    return render(request, "404.html", context)
 
 
 
