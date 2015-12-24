@@ -244,11 +244,9 @@ def charge(request):
     return render(request, "checkout.html", context)
 
 def fourOfour(request):
-    
-    form = errorForm(request.POST)
-    
-    def fourOfour(request):
-    
+    """
+    submit email for notice
+    """
     form = errorForm(request.POST)
 
     if form.is_valid():
@@ -259,9 +257,6 @@ def fourOfour(request):
         contact_message = "Let me know if the page is up.... %s"%(email)
         send_mail(subject, contact_message, from_email, to_email, fail_silently=True)
 
-    context = {"form" : form}
-    return render(request, "404.html", context)
-    
     context = {"form" : form}
     return render(request, "404.html", context)
 
