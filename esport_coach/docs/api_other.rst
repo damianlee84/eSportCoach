@@ -18,3 +18,8 @@ API
 
   - There one other API that allow developer to grab information from steam, but
     due to high volume of usage and the owner of the API stop distributing the API.
+
+**Stripe** <https://stripe.com/docs/api>
+  - Stripe API provide developer to integrate stripe payment method into their application.
+
+------
