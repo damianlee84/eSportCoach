@@ -246,7 +246,22 @@ def charge(request):
 def fourOfour(request):
     
     form = errorForm(request.POST)
+    
+    def fourOfour(request):
+    
+    form = errorForm(request.POST)
 
+    if form.is_valid():
+        email = form.cleaned_data.get('email')
+        subject = 'Player Ranking Page Down'
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [from_email, settings.EMAIL_HOST_USER]
+        contact_message = "Let me know if the page is up.... %s"%(email)
+        send_mail(subject, contact_message, from_email, to_email, fail_silently=True)
+
+    context = {"form" : form}
+    return render(request, "404.html", context)
+    
     context = {"form" : form}
     return render(request, "404.html", context)
 
