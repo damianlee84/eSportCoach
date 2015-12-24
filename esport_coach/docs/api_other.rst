@@ -11,3 +11,7 @@ API
     information that they can present on their own sites. At the moment the
     only APIs we offer provide item data for Team Fortress 2, but this list
     will grow over time.
+
+  - Bad thing about this API is Valve don't allow developer to grab match-making
+    ranking(MMR) because of privacy term. And there is no other API out there at the
+    moment to get the ranking information.
