@@ -1,7 +1,7 @@
 """
 this file calls all page functions and renders the pages with given context.
 """
-from .forms import SignupForm, ContactForm, SalePaymentForm
+from .forms import SignupForm, ContactForm, SalePaymentForm, errorForm
 from .models import Signup, Reviews, Coach, User
 from django.core.mail import send_mail
 from django.conf import settings
