@@ -23,3 +23,13 @@ API
   - Stripe API provide developer to integrate stripe payment method into their application.
 
 ------
+
+Database
+########
+
+**Postgres**
+
+PostgreSQL is a powerful, open source object-relational database system. It is
+fully compatible with Django. The main reason Postgres was used in this project
+is because the database is store in the cloud instead of a local copy like MySQL
+did. It make our team access the database with ease, and very convenient.
