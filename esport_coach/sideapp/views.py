@@ -256,7 +256,7 @@ def fourOfour(request):
         to_email = [from_email, settings.EMAIL_HOST_USER]
         contact_message = "Let me know if the page is up.... %s"%(email)
         send_mail(subject, contact_message, from_email, to_email, fail_silently=True)
-
+        return render(request, "base.html")
     context = {"form" : form}
     return render(request, "404.html", context)
 
