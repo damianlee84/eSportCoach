@@ -15,7 +15,8 @@
                         <a href="/logout" class = "btn btn-info navbar-btn navbar-right"> Hello, {{ user.social_auth.get.extra_data.player.personaname }}! </a>
                         <img src="{{ user.social_auth.get.extra_data.player.avatar }}" align="right" hspace="10" vspace="20">
                     {% else %}
-                        <a href="{% url 'social:begin' 'steam' %}?next={{request.path}}" class="btn btn-info navbar-btn navbar-right">Login</a>
+                        <!-- <a href="{% url 'social:begin' 'steam' %}?next={{request.path}}" class="btn btn-info navbar-btn navbar-right">Login</a> -->
+                        <a href="/sideapp/login" class="btn btn-info navbar-btn navbar-right">Login</a>
                     {% endif %}
                     <!--   <a href="" class="btn btn-info navbar-btn navbar-right">Log in</a> -->
                     <ul class="nav navbar-nav">

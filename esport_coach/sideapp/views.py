@@ -12,7 +12,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.core import serializers
 from django.db.models import Count
-
+import requests
 
 def home(request):
     title = 'Welcome'
@@ -25,6 +25,19 @@ def home(request):
         context = {"title": "Signup Succesful"}
     return render(request, "home.html", context)
 
+def login(request):
+    #get request from lol api--------------------------------------------------------
+    r = requests.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/iminlovwithecoco?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
+    key = r.json()
+    #End request ---------------------------------------------------------------------
+    context = {"value":key}
+    return render(request, "test.html", context)
+
+def authenticate(request,summonerName):
+    r = requests.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+summonerName+'?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
+    key = r.json()
+    context = {"value":key}
+    return render(request, "authenticated.html", context)
 
 def logout(request):
     auth_logout(request)

@@ -6,7 +6,9 @@ from . import views
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^contact/', views.contact, name='contact'),
+    url(r'^login/', views.login, name='login'),
     url(r'^signup/', views.signup, name='signup'),
+    url(r'^authenticate/(?P<summonerName>[-\w]+)', views.authenticate, name='authenticate'),
     # url(r'^findcoach/$', views.findcoach, name='findcoach'),
     url(r'^list_of_coaches/', views.list_of_coaches, name='list_of_coaches'),
     url(r'^tutorselected/(?P<tutor_username>[-\w]+)', views.tutorselected, name='tutorselected'),
