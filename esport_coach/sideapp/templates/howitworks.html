@@ -1,4 +1,5 @@
-  <!--How it work-->
+  <!--How it works-->
+  {% load static from staticfiles %}
     <section id="how" style="background-color:black">
         <div class="container">
             <div class="row">
@@ -12,7 +13,7 @@
                     <ul class="timeline">
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/1.jpg" alt="">
+                                <img class="img-circle img-responsive" src="{% static 'pictures/findCoachCircle2.png' %}" style="border-radius:100px;">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -25,20 +26,22 @@
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/2.jpg" alt="">
+                              <img class="img-circle img-responsive" src="{% static 'pictures/timeSlotAndPayCircle.png' %}" style="border-radius:100px;">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>Choose a session</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Choose the time slot that suits you on the coach's calendar and click on it to book. Pay online using your stripe account through our 100% secure platform. You coach is directly notified and your Skype details are exchanged.</p>
+                                    <p class="text-muted">Choose the time slot that suits you on the coach's calendar and
+                                      click on it to book. Pay online using your stripe account through our 100% secure platform.
+                                      You coach is directly notified and your Skype details are exchanged.</p>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/3.jpg" alt="">
+                              <img class="img-circle img-responsive" src="{% static 'pictures/streamPageCircle.png' %}" style="border-radius:100px;">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">

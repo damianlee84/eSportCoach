@@ -243,7 +243,7 @@ ul.social-buttons li a:active {
     position: absolute;
     left: 0;
     opacity: 0px;
-    height: 80px;
+    height: 0px;
     margin-left: 0;
     border: 7px solid #f1f1f1;
     border-radius: 100%;
@@ -412,7 +412,7 @@ body{
 }
 .wrap{
 	width:1000px;
-	margin:0 auto;	
+	margin:0 auto;
 }
 .main{
 	text-align:center;
