@@ -49,10 +49,23 @@
         </div>
 
         <div class="panel panel-default" style="margin-right:15%; margin-left:15%;" align="center">
-            <div class="row promo-top" style="margin-right:5%; margin:3% 5% 3% 5%;">
-        {% for field in form %}
-            {{ field }}<br><br>
-        {% endfor %}
+            <div class="row promo-top" style="margin:8% 5% 8% 5%;">
+                <form id="form_login" type="GET" action="/sideapp/authenticateLogin/" method="get">
+                    <div class="input-group" style="width:65%; padding:0%;">
+                        <span class="input-group-addon" id="basic-addon1" style="width:100px">Userid</span>
+                        {{ form.userid }}
+                    </div>
+                    <br>
+                    <div class="input-group" style="width:65%; padding:0%;">
+                        <span class="input-group-addon" id="basic-addon1" style="width:100px">Password</span>
+                        {{ form.password }}
+                    </div>
+                    <br>
+                    <div class="input-group" style="width:65%; padding:0%;">
+                        <input type='submit' value='Login' id='login_button' class='btn btn-default' style='width:30%; background-color:#D3D3D3; color:black'>
+                    </div>
+                </form>
+                    <div id="form_login_error_message"></div>
             </div>
         </div>
 
@@ -63,3 +76,35 @@
         <script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script>
     </body>
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+    $(function() {
+        var form = $('#form_login');                        // Get the form.
+        var formMessages = $('#form_login_error_message');  // Get the messages div.
+
+        $(form).submit(function(event){                // Set up an event listener for the contact form.
+            event.preventDefault();                     // Stop the browser from submitting the form.
+            var formData = $(form).serialize();         // Serialize the form data.
+            $.ajax({                                    // Submit the form using AJAX.
+                type: 'GET',
+                url: $(form).attr('action'),
+                data: formData,
+                dataType:'text',
+            })
+            .done(function(response){  
+                if (response == 'not found'){
+                    var message = "Incorrent userid and/or password! Try again.";      
+                    $(formMessages).html("<br><div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+message+"</div>");
+                 }
+                else{
+                    console.log(response)
+                    window.location.assign('/sideapp/authenticated/'+response);
+                }
+            })
+            .fail(function(response){
+                alert("Oops! An error occured loging in.");
+            });
+        });
+    });
+</script>

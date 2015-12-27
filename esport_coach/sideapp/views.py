@@ -29,6 +29,34 @@ def login(request):
     return render(request, "test.html", context)
 
 
+def authenticated(request, userid):
+    print userid
+    context = {
+        'userid': userid,
+    }
+    return render(request, "home.html", context)
+
+
+def authenticateLogin(request):
+    if request.is_ajax:
+        # Response messages:
+        response_error1 = 'not found'
+        response_error2 = "Error getting your info from the form."
+
+        try:
+            userid = request.GET.get('userid')
+            password = request.GET.get('password')
+            try:
+                login_userid = User.objects.get(userid=userid, password=password)
+                return HttpResponse(userid)
+            except:
+                return HttpResponse(response_error1)
+        except:
+            return HttpResponse(response_error2)
+    else:
+        raise Http404
+
+
 def register(request):
     context = {"value":"must provide a Summoner name"}
     if request.method == 'GET':

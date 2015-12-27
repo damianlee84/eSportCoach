@@ -13,8 +13,8 @@ class SignupForm(forms.ModelForm):
         return email
 
 class AuthenticateForm(forms.Form):
-    userid = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'class': "input-lg"}))
-    password = forms.CharField(widget=forms.PasswordInput())
+    userid = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'id':'input_userid', 'name':'input_userid', 'class': "form-control", 'style':'border:1px solid #D3D3D3'}))
+    password = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={'id':'input_password', 'name':'input_password','class': "form-control"}))
 
 
 class RegistrationForm(forms.Form):
