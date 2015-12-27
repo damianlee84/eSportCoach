@@ -52,8 +52,8 @@ def login(request):
             summonerId = str(key[summonerName]["id"])
             r = requests.get('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/'+summonerId+'/entry?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
             summonerInfo = r.json()
-            summonerRank = summonerInfo['65250177'][0]["tier"]
-            summonerDivision = summonerInfo['65250177'][0]['entries'][0]['division']
+            summonerRank = summonerInfo[summonerId][0]["tier"]
+            summonerDivision = summonerInfo[summonerId][0]['entries'][0]['division']
             context = {"value":summonerRank,
                        "division":summonerDivision,
                        "name":summonerNameValue}
@@ -249,7 +249,7 @@ def reviewcoach(request, tutor_username):
             return HttpResponse(response_sucess)
 
         except:
-            return HttpResponse(response_error2)     
+            return HttpResponse(response_error2)
     else:
         raise Http404
 
