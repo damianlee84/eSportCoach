@@ -30,9 +30,12 @@
         <!--End NavBar-->
         <!-- <h1>{{value}}</h1> -->
 
-
+        {% if value %}
+          <h1 style="color:red">{{value}}</h1>
+          <br><br>
+        {% endif %}
         <h2>Please enter summoner name:</h2>
-        <form type="GET" action="sideapp/authenticate">
+        <form type="GET" action="/sideapp/login/" method="get">
           <input id="textbox" type="text" name="summonerName"></input>
           <input type="submit" value="Submit"></input>
         </form>

@@ -28,18 +28,39 @@ def home(request):
     return render(request, "home.html", context)
 
 def login(request):
-    #get request from lol api--------------------------------------------------------
-    r = requests.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/iminlovwithecoco?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
-    key = r.json()
-    #End request ---------------------------------------------------------------------
-    context = {"value":key}
+    context = {"value":"must provide a Summoner name"}
+    if request.method == 'GET':
+        summonerName = str(request.GET.get('summonerName'))
+        if summonerName == "None":
+            return render(request, "test.html")
+        r = requests.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+summonerName+'?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
+        if r.status_code == 404:
+            context = {"value":"Invalid Summoner name"}
+        elif r.status_code == 400:
+            context = {"value":"Bad request"}
+        elif r.status_code == 401:
+            context = {"value":"Unauthorized"}
+        elif r.status_code == 429:
+            context = {"value":"Rate Limit exceeded"}
+        elif r.status_code == 500:
+            context = {"value":"Internal server error"}
+        elif r.status_code == 503:
+            context = {"value":"Service unavailable"}
+        else:
+            key = r.json()
+            summonerNameValue = key[summonerName]["name"]
+            summonerId = str(key[summonerName]["id"])
+            r = requests.get('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/'+summonerId+'/entry?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
+            summonerInfo = r.json()
+            summonerRank = summonerInfo['65250177'][0]["tier"]
+            summonerDivision = summonerInfo['65250177'][0]['entries'][0]['division']
+            context = {"value":summonerRank,
+                       "division":summonerDivision,
+                       "name":summonerNameValue}
+            return render(request, "authenticated.html", context)
     return render(request, "test.html", context)
 
-def authenticate(request,summonerName):
-    r = requests.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+summonerName+'?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
-    key = r.json()
-    context = {"value":key}
-    return render(request, "authenticated.html", context)
+
 
 def logout(request):
     auth_logout(request)
