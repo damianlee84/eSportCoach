@@ -28,21 +28,33 @@
         <!--NavBar-->
         {% include "nav_bar.html" %}
         <!--End NavBar-->
-        <!-- <h1>{{value}}</h1> -->
 
-        {% if value %}
+        <!-- {% if value %}
           <h1 style="color:red">{{value}}</h1>
           <br><br>
-        {% endif %}
-        <h2>Please enter summoner name:</h2>
+        {% endif %} -->
+        <!-- <h2>Please enter summoner name:</h2>
         <form type="GET" action="/sideapp/login/" method="get">
           <input id="textbox" type="text" name="summonerName"></input>
           <input type="submit" value="Submit"></input>
-        </form>
-        <!-- <input id="textbox" type="text" name="summonerName"></input>
-        <a href="/sideapp/authenticate/summonerName">
-            <button class="btn btn-default" type="button">Submit</button>
-        </a> -->
+        </form> -->
+
+        <!-- jumbotron -->
+        <div class="jumbotron">
+            <div class="container text-center">
+                <h1>Welcome Back</h1>
+                <p style='font-size:25px'>Log in to be a step closer to play like a PRO</p>
+                <p style='font-size:18px'>(and help others to play like a PRO. Apply for Coach!)</p>
+            </div>
+        </div>
+
+        <div class="panel panel-default" style="margin-right:15%; margin-left:15%;" align="center">
+            <div class="row promo-top" style="margin-right:5%; margin:3% 5% 3% 5%;">
+        {% for field in form %}
+            {{ field }}<br><br>
+        {% endfor %}
+            </div>
+        </div>
 
         <!-- jQuery -->
         <script src="{% static 'js/jquery.js' %}" type="text/javascript"></script>

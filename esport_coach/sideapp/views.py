@@ -1,8 +1,8 @@
 """
 this file calls all page functions and renders the pages with given context.
 """
-from .forms import SignupForm, ContactForm, SalePaymentForm, errorForm
-from .models import Signup, Reviews, Coach, User, Reviewing
+from .forms import *
+from .models import *
 from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import render_to_response, redirect, render
@@ -17,17 +17,19 @@ import requests
 from pprint import pprint
 
 def home(request):
-    title = 'Welcome'
-    form = SignupForm(request.POST or None)
-    context = {"title": title, "form": form}
-
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.save()
-        context = {"title": "Signup Succesful"}
-    return render(request, "home.html", context)
+    return render(request, "home.html")
 
 def login(request):
+    form = AuthenticateForm(request.POST)
+    if form.is_valid():
+        userid = form.cleaned_data.get('userid')
+        password = form.cleaned_data.get('password')
+        # password = request.POST.get('password', '')
+    context = {"form" : form}
+    return render(request, "test.html", context)
+
+
+def register(request):
     context = {"value":"must provide a Summoner name"}
     if request.method == 'GET':
         summonerName = str(request.GET.get('summonerName'))
@@ -91,15 +93,15 @@ def contact(request):
     return render(request, "contact.html", context)
 
 
-def signup(request):
-    title = 'Welcome'
-    form = SignupForm(request.POST or None)
-    context = {"title": title, "form": form}
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.save()
-        context = {"title": "Signup Succesful"}
-    return render(request, "forms.html", context)
+# def signup(request):
+#     title = 'Welcome'
+#     form = SignupForm(request.POST or None)
+#     context = {"title": title, "form": form}
+#     if form.is_valid():
+#         instance = form.save(commit=False)
+#         instance.save()
+#         context = {"title": "Signup Succesful"}
+#     return render(request, "forms.html", context)
 
 
 def list_of_coaches(request):

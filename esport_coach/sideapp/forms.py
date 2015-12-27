@@ -1,5 +1,5 @@
 from django import forms
-from .models import Signup, transaction, Coach, User
+from .models import *
 from datetime import date, datetime
 from calendar import monthrange
 
@@ -12,20 +12,36 @@ class SignupForm(forms.ModelForm):
         email = self.validated_data.get('email')
         return email
 
+class AuthenticateForm(forms.Form):
+    userid = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'class': "input-lg"}))
+    password = forms.CharField(widget=forms.PasswordInput())
+
+
+class RegistrationForm(forms.Form):
+    class Meta:
+        model = User
+        fields = ['userid', 'password']
+
+    def __init__(self, *args, **kwargs):
+        super(FoodForm, self).__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({'class': 'form-control'})
+
 class CoachForm(forms.ModelForm):
     class Meta:
         model = Coach
         fields = ['server', 'champion', 'rating', 'pricerate', 'role', 'avatar', 'overview']
 
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ['userid', 'email', 'pname', 'MMR', 'skypeid', 'twitchid']
+# class UserForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ['userid', 'email', 'pname', 'MMR', 'skypeid', 'twitchid']
 
 class ContactForm(forms.Form):
     full_name = forms.CharField()
     email = forms.EmailField()
     message = forms.CharField()
+
 
 class errorForm(forms.Form):
     email = forms.EmailField()

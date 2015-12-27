@@ -38,6 +38,7 @@ class Reviews(models.Model):
 """
 class User(models.Model):
 		userid = models.CharField(primary_key=True, max_length=100, blank=False, null=False)
+		password = models.CharField(default='123A', max_length=18, blank=False, null=False)
 		email = models.EmailField(blank=False, null=False)
 		pname = models.CharField(max_length=100, blank=False, null=False)
 		MMR = models.IntegerField(default=0,  blank=False, null=False)
