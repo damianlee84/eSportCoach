@@ -86,29 +86,18 @@
                     <div class="tab-pane active" id="overview">
                         <br>
                         <h4>Who Am I?</h4>
-                        <p>My name is John and I am 22 years old coming from Russia. So student with a lot of free time for League and huge passion for the game.I mean I've been playing it back then in 2005 up until now ( with some minor breaks coz of school) so, 10 years, huh? Gotta mean smth.</p><br>
-                        <h4>Why Me?</h4>
-                        <p>Like I said, 10 years so far. Oh man, long time ago, some of the leagues/communities I was a member of, to name a few, most important ones - LofL, eld, league.pride, etc. To the most of u guys this doesnt mean anything but to explain, at these places u were playing on a regular basis with professional players (Dota1 versions of NEL but so much better), which is like 70 % ( rough estimation ) of Europe professional scene nowadays. Was top100 europe mmr leaderboards, right now around 6.3k ~ , adding to that, experience from various online amateur/semi professional tournaments (latest, worth mentioning is a quaterfinal of Gigabyte Challenge 12), constantly playing in 2nd divison of JoinedLegend League last couple of seasons with team ChL and also back then in League of Legends it was called pick-league, finishing top3 at majority of LANs I participated with my team in my country, countless hours of scrimming with my team with some of the best teams in Europe, its safe to say I have decent, to say the least, amount of skill and have gathered more than enough of game understanding and experience to be able to teach a few tricks some of you guys :)
-                        http://www.leaguebuff.com/players/40518174 (league profile )</p><br>
-                        <h4>Objective</h4>
-                        <p>My goal as a coach is to make sure that you are able to become the best possible player you can be and this means teaching you how league is supposed to be played in theory and how to actually go out onto the rift.
-                        Most players come here because they have hit a rough patch, but it does not mean they do not already know how to play the game. We will work primarily on eliminating factors in your gameplay that cause you to lose as well as expanding upon your overall game knowledge so that you can recognize these mistakes before they even happen.
-                        Note: Remember that 90% of games are won by proper decision making as opposed to having insane mechanics.</p>
+                        {{ coach.overview }}
                     </div>
                     <div class="tab-pane" id="cost">
                         <br>
                         <p>Pricing is as follows:<br><br>
-                           1-2hrs $25 per hour<br>
-                           3hrs $65<br>
-                           4hrs $90<br>
-                           6hrs $125<br>
-                           If you purchase 5 hours, I will add 1 FREE hour of coaching. 6hrs for the price of 5!<br><br>
-                           If you wish to talk to me privately, are interested, or have any questions contact me! Message me using this website. Adding me in game is not the best way to contact me as I get flooded with friend requests but feel free to after we have spoken.</p>
+                           The current price rate for Coach {{ coach.pname }} is: <em>{{ coach.pricerate }} $/hr</em><br>
+                           To find out if there's a discount on deals (e.g. >20hrs), please contact the coach directly using the email provided in the coach profile (click on the 'Email Coach' icon)
                     </div>
                     <div class="tab-pane" id="reviews">
                             <!-- Coach rating form -->
                             <h4>Rate Coach {{ coach.pname }}</h4>
-                            <form id="form_review" method="get" action="/sideapp/reviewcoach/{{coach.username}}">
+                            <form id="form_review" method="get" action="/sideapp/reviewcoach/{{coach.userid}}">
                                 <div class="form-inline">
                                     <div class="form-group">
                                         <span style="font-size:20px;"><input type="number" name="ratingSkill" id="ratingSkill" class="rating"/></span>

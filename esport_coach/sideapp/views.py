@@ -2,7 +2,7 @@
 this file calls all page functions and renders the pages with given context.
 """
 from .forms import SignupForm, ContactForm, SalePaymentForm, errorForm
-from .models import Signup, Reviews, Coach, User
+from .models import Signup, Reviews, Coach, User, Reviewing
 from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import render_to_response, redirect, render
@@ -183,7 +183,7 @@ def tutorselected(request, tutor_username):
         reviews = coach.reviewing_set.all()
         for review in reviews:
             avg_review = int((review.skill_stars+review.communication_stars+review.helpfulness_stars)/3)
-        coach_info = {"pname":user.pname, "mmr":user.MMR, "server":coach.server, "champion":coach.champion, "avg_review":avg_review, "pricerate":coach.pricerate, "skypeid":user.skypeid, "twitchid":user.twitchid, "userid":user.userid}
+        coach_info = {"pname":user.pname, "mmr":user.MMR, "server":coach.server, "champion":coach.champion, "avg_review":avg_review, "pricerate":coach.pricerate, "overview":coach.overview, "skypeid":user.skypeid, "twitchid":user.twitchid, "userid":user.userid}
 
     context = {
         'coach': coach_info,
@@ -196,40 +196,39 @@ def reviewcoach(request, tutor_username):
         # Response messages:
         response_sucess = "Thanks for your honest review!"
         response_error1 = "Error: Must input a comment."
-        response_error2 = "Error: Error when sending your review."
+        response_error2 = "Error: You have rated this coach already! If you need to modify/remove your previous rating for this coach, please contact us."
 
         try:
-            # For now the reviewer is manually inputed below until we have that global username passed around correctly.
-            # reviewer = Signup.objects.get(username=tutor_username)
-            user_reviewer = "SomeTutee"
+            user_reviewer = Reviewing.objects.get(coach__userid=tutor_username, student__userid='kelly')
             skill = request.GET.get('ratingSkill')
             communication = request.GET.get('ratingCommunication')
             helpfulness = request.GET.get('ratingHelpfulness')
             review_comment = request.GET.get('textarea_review')
 
-            if skill == "":
-                skill == 0
-            else:
-                skill = int(skill)
-            if communication == "":
-                communication == 0
-            else:
-                communication = int(communication)
-            if helpfulness == "":
-                helpfulness == 0
-            else:
-                helpfulness = int(helpfulness)
-            if review_comment == "":
-                return HttpResponse(response_error1)
+            # if skill == "":
+            #     skill == 0
+            # else:
+            #     skill = int(skill)
+            # if communication == "":
+            #     communication == 0
+            # else:
+            #     communication = int(communication)
+            # if helpfulness == "":
+            #     helpfulness == 0
+            # else:
+            #     helpfulness = int(helpfulness)
+            # if review_comment == "":
+            #     return HttpResponse(response_error1)
 
-        except KeyError:
-            return HttpResponse(response_error2)
+            # coach_selected = Signup.objects.get(username=tutor_username)
+            # all_users_reviews = coach_selected.reviews_set.all()
+            # rating = Reviews(id=None, coach=coach_selected, reviewer=user_reviewer, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=review_comment)
+            # rating.save()
 
-        coach_selected = Signup.objects.get(username=tutor_username)
-        all_users_reviews = coach_selected.reviews_set.all()
-        rating = Reviews(id=None, coach=coach_selected, reviewer=user_reviewer, skill_stars=skill, communication_stars=communication, helpfulness_stars=helpfulness, comment=review_comment)
-        rating.save()
-        return HttpResponse(response_sucess)
+            return HttpResponse(response_sucess)
+
+        except:
+            return HttpResponse(response_error2)     
     else:
         raise Http404
 
