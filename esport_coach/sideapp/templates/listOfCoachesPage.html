@@ -159,24 +159,22 @@
                         dataType:'json',
                     })
                     .done(function(response) {
-                        console.log(response)
-                        var s = "";
+                        var context = "";
 
-                        // for (var i=0; i < response.length; i++)
-                        // {
-                        //   field = response[i]["fields"]
-                        //   s += "<tr onclick=\"window.location.href='/sideapp/tutorselected/"+field["userid"]+"'\" style=\"cursor: pointer;\">";
-                        //   s += "<td>" + field["pname"] + "</td>" +
-                        //     "<td>" + field["MMR"] + "</td>" +
-                        //     "<td>" + field["server"] + "</td>" +
-                        //     "<td>" + field["champion"] + "</td>" +
-                        //     "<td>" + field["role"] + "</td>" +
-                        //     "<td>" + field["rating"] + "</td>" +
-                        //     "<td>" + field["pricerate"] + "</td>";
-                        //   s += "</tr>";
-                        // }
-                        // // console.log(list);
-                        // $('#test').html(s);
+                        for (var i=0; i<response['coaches'].length; i++)
+                        {                            
+                          coach = response["coaches"][i]
+                          context += "<tr onclick=\"window.location.href='/sideapp/tutorselected/"+coach["userid"]+"'\" style=\"cursor: pointer;\">";
+                          context += "<td>" + coach["pname"] + "</td>" +
+                                     "<td>" + coach["mmr"] + "</td>" +
+                                     "<td>" + coach["server"] + "</td>" +
+                                     "<td>" + coach["champion"] + "</td>" +
+                                     "<td>" + coach["role"] + "</td>" +
+                                     "<td>" + coach["rating"] + "</td>" +
+                                     "<td>" + coach["pricerate"] + "</td>";
+                          context += "</tr>";
+                        }
+                        $('#test').html(context);
                     })
                     .fail(function(response) {
                         alert("Oops! An error occured sending your review.");
