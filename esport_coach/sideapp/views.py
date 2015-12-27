@@ -104,29 +104,56 @@ def searchCoach(request):
             role = request.GET.get('Role')
             hero = request.GET.get('Hero')
             mmrRange = request.GET.get('MMR')
+            priceRange = request.GET.get('price')
 
             if (mmrRange == "100-300"):
-                minRange = 100
-                maxRange = 300
+                mmr_minRange = 100
+                mmr_maxRange = 300
             elif mmrRange == "300-500":
-                minRange = 300
-                maxRange = 500
+                mmr_minRange = 300
+                mmr_maxRange = 500
             elif mmrRange == "500-700":
-                minRange = 500
-                maxRange = 700
+                mmr_minRange = 500
+                mmr_maxRange = 700
             elif mmrRange == "700-900":
-                minRange = 700
-                maxRange = 900
+                mmr_minRange = 700
+                mmr_maxRange = 900
             elif mmrRange == "900-1100":
-                minRange = 900
-                maxRange = 1100
+                mmr_minRange = 900
+                mmr_maxRange = 1100
             elif mmrRange == "1100-1300":
-                minRange = 1100
-                maxRange = 1300
+                mmr_minRange = 1100
+                mmr_maxRange = 1300
 
-            users = User.objects.all()
+            if (priceRange == "$1-$10"):
+                price_minRange = 1
+                price_maxRange = 10
+            elif priceRange == "$10-$20":
+                price_minRange = 10
+                price_maxRange = 20
+            elif priceRange == "$20-$30":
+                price_minRange = 20
+                price_maxRange = 30
+            elif priceRange == "$30-$40":
+                price_minRange = 30
+                price_maxRange = 40
+            elif priceRange == "$40-$50":
+                price_minRange = 40
+                price_maxRange = 50
 
-            # users = User.objects.filter(MMR__range=(minRange,maxRange)).filter(coach__server=server, coach__champion=hero)
+            spec_filter = {}
+            if server != 'Region Server' and server != "------":
+                spec_filter['coach__server'] = server
+            if role != 'Role' and role != "------":
+                spec_filter['coach__role'] = role
+            if hero != 'Hero' and hero != "------":
+                spec_filter['coach__champion'] = hero
+            if mmrRange != 'MMR' and mmrRange != "------":
+                spec_filter['MMR__range'] = (mmr_minRange,mmr_maxRange)
+            if priceRange != 'Price Rate' and priceRange != "------":
+                spec_filter['coach__pricerate__range'] = (price_minRange,price_maxRange)
+
+            users = User.objects.filter(**spec_filter)
             coaches_list = []
             for user in users:
                 query_coach_att = user.coach_set.filter(userid=user.userid)
@@ -134,7 +161,7 @@ def searchCoach(request):
                     coaches_list.append({'pname': user.pname,
                                          'mmr': user.MMR,
                                          'server': att_as_coach.server,
-                                         'heroes': att_as_coach.champion,
+                                         'champion': att_as_coach.champion,
                                          'role': att_as_coach.role,
                                          'rating': att_as_coach.rating,
                                          'pricerate': att_as_coach.pricerate})
