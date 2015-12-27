@@ -159,26 +159,24 @@
                         dataType:'json',
                     })
                     .done(function(response) {
-                        list = response //list of objects
-                        var listLength = list.length;
+                        console.log(response)
                         var s = "";
-                        var field;
 
-                        for (var i=0; i < list.length; i++)
-                        {
-                          field = list[i]["fields"]
-                          s += "<tr onclick=\"window.location.href='/sideapp/tutorselected/"+field["userid"]+"'\" style=\"cursor: pointer;\">";
-                          s += "<td>" + field["pname"] + "</td>" +
-                            "<td>" + field["MMR"] + "</td>" +
-                            "<td>" + field["server"] + "</td>" +
-                            "<td>" + field["champion"] + "</td>" +
-                            "<td>" + field["role"] + "</td>" +
-                            "<td>" + field["rating"] + "</td>" +
-                            "<td>" + field["pricerate"] + "</td>";
-                          s += "</tr>";
-                        }
-                        // console.log(list);
-                        $('#test').html(s);
+                        // for (var i=0; i < response.length; i++)
+                        // {
+                        //   field = response[i]["fields"]
+                        //   s += "<tr onclick=\"window.location.href='/sideapp/tutorselected/"+field["userid"]+"'\" style=\"cursor: pointer;\">";
+                        //   s += "<td>" + field["pname"] + "</td>" +
+                        //     "<td>" + field["MMR"] + "</td>" +
+                        //     "<td>" + field["server"] + "</td>" +
+                        //     "<td>" + field["champion"] + "</td>" +
+                        //     "<td>" + field["role"] + "</td>" +
+                        //     "<td>" + field["rating"] + "</td>" +
+                        //     "<td>" + field["pricerate"] + "</td>";
+                        //   s += "</tr>";
+                        // }
+                        // // console.log(list);
+                        // $('#test').html(s);
                     })
                     .fail(function(response) {
                         alert("Oops! An error occured sending your review.");

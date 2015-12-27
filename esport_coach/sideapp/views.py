@@ -12,7 +12,9 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.core import serializers
 from django.db.models import Count
+import json
 import requests
+from pprint import pprint
 
 def home(request):
     title = 'Welcome'
@@ -102,6 +104,7 @@ def searchCoach(request):
             role = request.GET.get('Role')
             hero = request.GET.get('Hero')
             mmrRange = request.GET.get('MMR')
+
             if (mmrRange == "100-300"):
                 minRange = 100
                 maxRange = 300
@@ -121,13 +124,25 @@ def searchCoach(request):
                 minRange = 1100
                 maxRange = 1300
 
-            coaches = User.objects.filter(MMR__range=(minRange,maxRange)).filter(coach__server=server, coach__champion=hero)
+            users = User.objects.all()
 
-            formData = serializers.serialize('json',coaches)
+            # users = User.objects.filter(MMR__range=(minRange,maxRange)).filter(coach__server=server, coach__champion=hero)
+            coaches_list = []
+            for user in users:
+                query_coach_att = user.coach_set.filter(userid=user.userid)
+                for att_as_coach in query_coach_att:
+                    coaches_list.append({'pname': user.pname,
+                                         'mmr': user.MMR,
+                                         'server': att_as_coach.server,
+                                         'heroes': att_as_coach.champion,
+                                         'role': att_as_coach.role,
+                                         'rating': att_as_coach.rating,
+                                         'pricerate': att_as_coach.pricerate})
+            formData = json.dumps({'coaches':coaches_list})
+            return HttpResponse(formData)
 
         except KeyError:
             return HttpResponse('Error')
-        return HttpResponse(formData)
     else:
         raise Http404
 
