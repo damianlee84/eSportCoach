@@ -45,7 +45,7 @@ git push heroku master
 
 ```
 * **Sphinx Documentation**
-      - run the following command in the /sideapp/docs directory
+      - run the following command in the /esport_coach/docs directory
       - run the html file in the _build folder
 
 ```
