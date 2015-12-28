@@ -29,51 +29,46 @@
                         <option>Africa</option>
                         <option>Asia</option>
                         <option>Australia</option>
-                        <option>CA</option>
                         <option>Europe</option>
                         <option>NA</option>
+                        <option>LA</option>
                         <option>Russia</option>
-                        <option>SA</option>
                     </select>
                 </li>
                 <li class="dropdown">
                     <select name="Role" style="background-color:#222; color:White; border:none">
                         <option>Role</option>
                         <option>------</option>
-                        <option>Carry</option>
-                        <option>Disabler</option>
-                        <option>Lane Support</option>
-                        <option>Initiator</option>
-                        <option>Jungler</option>
+                        <option>Top</option>
+                        <option>Mid</option>
                         <option>Support</option>
-                        <option>Durable</option>
-                        <option>Nuker</option>
-                        <option>Pusher</option>
-                        <option>Escape</option>
+                        <option>ADC</option>
+                        <option>Jungle</option>
                     </select>
                 </li>
                 <li class="dropdown">
-                    <select name="Hero" style="background-color:#222; color:White; border:none">
-                        <option>Hero</option>
+                    <select name="Champion" style="background-color:#222; color:White; border:none">
+                        <option>Champion</option>
                         <option>------</option>
-                        <option>Earthshaker</option>
-                        <option>Axe</option>
-                        <option>Pudge</option>
-                        <option>Sven</option>
-                        <option>Sand King</option>
-                        <option>Jungler</option>
+                        <option>Ahri</option>
+                        <option>Darius</option>
+                        <option>Fiora</option>
+                        <option>Leona</option>
+                        <option>Lee Sin</option>
+                        <option>Lucian</option>
+                        <option>Zed</option>
                     </select>
                 </li>
                 <li class="dropdown">
                     <select name="Rank" style="background-color:#222; color:White; border:none">
                         <option>Rank</option>
                         <option>------</option>
-                        <option>100-300</option>
-                        <option>300-500</option>
-                        <option>500-700</option>
-                        <option>700-900</option>
-                        <option>900-1100</option>
-                        <option>1100-1300</option>
+                        <option>Bronze</option>
+                        <option>Silver</option>
+                        <option>Gold</option>
+                        <option>Platinum</option>
+                        <option>Diamond</option>
+                        <option>Challenger</option>
                     </select>
                 </li>
                 <li class="dropdown">
@@ -179,7 +174,6 @@
                     })
                     .done(function(response) {
                         var context = "";
-
                         for (var i=0; i<response['coaches'].length; i++)
                         {                            
                           coach = response["coaches"][i]
@@ -196,7 +190,13 @@
                         $('#test').html(context);
                     })
                     .fail(function(response) {
-                        alert("Oops! An error occured sending your review.");
+                        if (response.responseText == 'not found'){
+                            var context = "<tr><td>No coaches available.</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
+                            $('#test').html(context);
+                        }
+                        else{
+                            alert("Oops! An error occured searching coaches.");
+                        }
                     });
                 });
             });

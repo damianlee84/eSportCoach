@@ -17,11 +17,11 @@ class RegistrationForm(forms.Form):
     skypeid = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'id':'input_skypeid', 'name':'input_skypeid', 'class': "form-control", 'style':'border:1px solid #D3D3D3'}))
     twitchid = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'id':'input_twitchid', 'name':'input_twitchid', 'class': "form-control", 'style':'border:1px solid #D3D3D3'}))
 
-    def clean(self):
-        if self.clean_data.has_key('password1') and self.clean_data.has_key('password2'):
-            if self.clean_data['password1'] != self.clean_data['password2']:
-                raise ValidationError("The passwords you have entered do not match.")
-        return self.clean_data
+    # def clean(self):
+    #     if self.clean_data.has_key('password1') and self.clean_data.has_key('password2'):
+    #         if self.clean_data['password1'] != self.clean_data['password2']:
+    #             raise ValidationError("The passwords you have entered do not match.")
+    #     return self.clean_data
 
 
 class CoachForm(forms.ModelForm):

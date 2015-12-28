@@ -20,7 +20,6 @@ def home(request):
     return render(request, "home.html")
 
 def login(request):
-    
     form = AuthenticateForm(request.POST)
     if form.is_valid():
         userid = form.cleaned_data.get('userid')
@@ -54,7 +53,6 @@ def authenticateLogin(request):
             return HttpResponse(response_error2)
     else:
         raise Http404
-    pass
 
 
 def register(request):
@@ -142,7 +140,7 @@ def searchCoach(request):
         try:
             server = request.GET.get('Server')
             role = request.GET.get('Role')
-            hero = request.GET.get('Hero')
+            hero = request.GET.get('Champion')
             rank = request.GET.get('Rank')
             priceRange = request.GET.get('price')
 
@@ -167,10 +165,10 @@ def searchCoach(request):
                 spec_filter['coach__server'] = server
             if role != 'Role' and role != "------":
                 spec_filter['coach__role'] = role
-            if hero != 'Hero' and hero != "------":
+            if hero != 'Champion' and hero != "------":
                 spec_filter['coach__champion'] = hero
             if rank != 'Rank' and rank != "------":
-                spec_filter['rank'] = rank
+                spec_filter['rank__contains'] = rank
             if priceRange != 'Price Rate' and priceRange != "------":
                 spec_filter['coach__pricerate__range'] = (price_minRange,price_maxRange)
 
@@ -187,6 +185,8 @@ def searchCoach(request):
                                          'rating': att_as_coach.rating,
                                          'pricerate': att_as_coach.pricerate})
             formData = json.dumps({'coaches':coaches_list})
+            if coaches_list == []:
+                return HttpResponse('not found')
             return HttpResponse(formData)
 
         except KeyError:
@@ -204,7 +204,7 @@ def tutorselected(request, tutor_username):
         reviews = coach.reviewing_set.all()
         for review in reviews:
             avg_review = int((review.skill_stars+review.communication_stars+review.helpfulness_stars)/3)
-        coach_info = {"pname":user.pname, "rank":user.rank, "server":coach.server, "champion":coach.champion, "avg_review":avg_review, "pricerate":coach.pricerate, "overview":coach.overview, "skypeid":user.skypeid, "twitchid":user.twitchid, "userid":user.userid}
+        coach_info = {"pname":user.pname, "rank":user.rank, "server":coach.server, "champion":coach.champion, 'avatar':coach.avatar, "avg_review":avg_review, "pricerate":coach.pricerate, "overview":coach.overview, "skypeid":user.skypeid, "twitchid":user.twitchid, "userid":user.userid}
 
     context = {
         'coach': coach_info,
