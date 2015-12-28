@@ -109,10 +109,26 @@
                 dataType:'text',
             })
             .done(function(response){
-                if (response == 'User already exists'){
+                if (response == 'input_error1'){
                     var message = "User already exists! Try again.";
                     $(formMessages).html("<br><div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+message+"</div>");
                  }
+                 else if (response == "input_error2") {
+                  var message = "Email already exists! Try again.";
+                  $(formMessages).html("<br><div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+message+"</div>");
+                }
+                else if (response == "input_error3") {
+                  var message = "Summoner Name already exists! Try again.";
+                  $(formMessages).html("<br><div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+message+"</div>");
+                }
+                else if (response == "input_error4") {
+                  var message = "Skypeid already exists! Try again.";
+                  $(formMessages).html("<br><div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+message+"</div>");
+                }
+                else if (response == "input_error5") {
+                  var message = "Twitchid already exists! Try again.";
+                  $(formMessages).html("<br><div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+message+"</div>");
+                }
                 else if (response == "404") {
                   var message = "Invalid Summoner name";
                   $(formMessages).html("<br><div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+message+"</div>");

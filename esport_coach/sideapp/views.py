@@ -71,10 +71,7 @@ def register(request):
 def authenticateRegister(request):
 
     if request.is_ajax:
-        response_error1 = 'User already exists'
-        response_error2 = 'Email already exists'
-        response_error3 = 'Summoner Name already exists'
-        response_error4 = "Error getting your info from the form."
+        response_error = "Error getting your info from the form."
 
         try:
             userid = request.GET.get('userid')
@@ -84,21 +81,31 @@ def authenticateRegister(request):
             skypeid = request.GET.get('skypeid')
             twitchid = request.GET.get('twitchid')
         except:
-            return HttpResponse(response_error4)
+            return HttpResponse(response_error)
 
         try:
             login_userid = User.objects.get(userid=userid)
-            return HttpResponse(response_error1)
+            return HttpResponse('input_error1')
         except:
             pass
         try:
             login_userid = User.objects.get(email=email)
-            return HttpResponse(response_error2)
+            return HttpResponse('input_error2')
         except:
             pass
         try:
             login_userid = User.objects.get(pname=pname)
-            return HttpResponse(response_error3)
+            return HttpResponse('input_error3')
+        except:
+            pass
+        try:
+            login_userid = User.objects.get(skypeid=skypeid)
+            return HttpResponse('input_error4')
+        except:
+            pass
+        try:
+            login_userid = User.objects.get(twitchid=twitchid)
+            return HttpResponse('input_error5')
         except:
             pass
 
@@ -122,9 +129,18 @@ def authenticateRegister(request):
             summonerId = str(key[summonerName]["id"])
             r = requests.get('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/'+summonerId+'/entry?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
             summonerInfo = r.json()
-            summonerRank = summonerInfo[summonerId][0]["tier"]
+            summonerRank = (summonerInfo[summonerId][0]["tier"]).lower()
             summonerDivision = summonerInfo[summonerId][0]['entries'][0]['division']
-            user = User(userid=userid, password=password, email=email, pname=pname, rank=summonerRank, skypeid=skypeid, twitchid=twitchid)
+
+            rank = ""
+            for i in range(len(summonerRank)):
+                if i==0:
+                    rank+=(summonerRank[0]).upper()
+                else:
+                    rank+=summonerRank[i]
+
+            rank += " " + summonerDivision
+            user = User(userid=userid, password=password, email=email, pname=pname, rank=rank, skypeid=skypeid, twitchid=twitchid)
             user.save()
             # context = {"value":summonerRank,
             #            "division":summonerDivision,
