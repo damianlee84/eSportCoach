@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^contact/', views.contact, name='contact'),
     url(r'^login/', views.login, name='login'),
     url(r'^authenticateLogin/', views.authenticateLogin, name='authenticateLogin'),
+    url(r'^authenticateRegister/', views.authenticateRegister, name='authenticateRegister'),
     url(r'^authenticated/(?P<userid>[-\w]+)', views.authenticated, name='authenticated'),
     url(r'^register/', views.register, name='register'),
     url(r'^list_of_coaches/', views.list_of_coaches, name='list_of_coaches'),

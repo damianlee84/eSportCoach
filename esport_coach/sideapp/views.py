@@ -72,7 +72,9 @@ def authenticateRegister(request):
 
     if request.is_ajax:
         response_error1 = 'User already exists'
-        response_error2 = "Error getting your info from the form."
+        response_error2 = 'Email already exists'
+        response_error3 = 'Summoner Name already exists'
+        response_error4 = "Error getting your info from the form."
 
         try:
             userid = request.GET.get('userid')
@@ -81,41 +83,54 @@ def authenticateRegister(request):
             pname = request.GET.get('pname')
             skypeid = request.GET.get('skypeid')
             twitchid = request.GET.get('twitchid')
-            try:
-                login_userid = User.objects.get(userid=userid, password=password, email=email, pname=pname)
-                return HttpResponse(response_error1)
-            except:
-                summonerName = str(pname)
-                r = requests.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+summonerName+'?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
-                if r.status_code == 404:
-                    return HttpResponse("404")
-                elif r.status_code == 400:
-                    return HttpResponse("400")
-                elif r.status_code == 401:
-                    return HttpResponse("401")
-                elif r.status_code == 429:
-                    return HttpResponse("429")
-                elif r.status_code == 500:
-                    return HttpResponse("500")
-                elif r.status_code == 503:
-                    return HttpResponse("503")
-                else:
-                    key = r.json()
-                    summonerNameValue = key[summonerName]["name"]
-                    summonerId = str(key[summonerName]["id"])
-                    r = requests.get('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/'+summonerId+'/entry?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
-                    summonerInfo = r.json()
-                    summonerRank = summonerInfo[summonerId][0]["tier"]
-                    summonerDivision = summonerInfo[summonerId][0]['entries'][0]['division']
-                    user = User(userid=userid, password=password, email=email, pname=pname, rank=summonerRank, skypeid=skypeid, twitchid=twitchid)
-                    user.save()
-                    # context = {"value":summonerRank,
-                    #            "division":summonerDivision,
-                    #            "name":summonerNameValue}
-                    # return render(request, "authenticated.html", context)
-                return HttpResponse(userid)
         except:
+            return HttpResponse(response_error4)
+
+        try:
+            login_userid = User.objects.get(userid=userid)
+            return HttpResponse(response_error1)
+        except:
+            pass
+        try:
+            login_userid = User.objects.get(email=email)
             return HttpResponse(response_error2)
+        except:
+            pass
+        try:
+            login_userid = User.objects.get(pname=pname)
+            return HttpResponse(response_error3)
+        except:
+            pass    
+        
+        summonerName = str(pname)
+        r = requests.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+summonerName+'?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
+        if r.status_code == 404:
+            return HttpResponse("404")
+        elif r.status_code == 400:
+            return HttpResponse("400")
+        elif r.status_code == 401:
+            return HttpResponse("401")
+        elif r.status_code == 429:
+            return HttpResponse("429")
+        elif r.status_code == 500:
+            return HttpResponse("500")
+        elif r.status_code == 503:
+            return HttpResponse("503")
+        else:
+            key = r.json()
+            summonerNameValue = key[summonerName]["name"]
+            summonerId = str(key[summonerName]["id"])
+            r = requests.get('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/'+summonerId+'/entry?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
+            summonerInfo = r.json()
+            summonerRank = summonerInfo[summonerId][0]["tier"]
+            summonerDivision = summonerInfo[summonerId][0]['entries'][0]['division']
+            user = User(userid=userid, password=password, email=email, pname=pname, rank=summonerRank, skypeid=skypeid, twitchid=twitchid)
+            user.save()
+            # context = {"value":summonerRank,
+            #            "division":summonerDivision,
+            #            "name":summonerNameValue}
+            # return render(request, "authenticated.html", context)
+        return HttpResponse(userid)
     else:
         raise Http404
     pass
