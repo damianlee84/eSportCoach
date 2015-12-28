@@ -100,8 +100,8 @@ def authenticateRegister(request):
             login_userid = User.objects.get(pname=pname)
             return HttpResponse(response_error3)
         except:
-            pass    
-        
+            pass
+
         summonerName = str(pname)
         r = requests.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+summonerName+'?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
         if r.status_code == 404:
@@ -171,7 +171,7 @@ def contact(request):
     return render(request, "contact.html", context)
 
 
-def list_of_coaches(request):
+def listOfCoaches(request):
     coaches_list = []
 
     all_users = User.objects.all()
@@ -246,8 +246,21 @@ def searchCoach(request):
     else:
         raise Http404
 
+def applyForCoach(request):
+    form = CoachForm(request.POST)
+    if form.is_valid():
+        server = form.cleaned_data.get('server')
+        champion = form.cleaned_data.get('champion')
+        rating = form.cleaned_data.get('rating')
+        pricerate = form.cleaned_data.get('pricerate')
+        role = form.cleaned_data.get('role')
+        avatar = form.cleaned_data.get('avatar')
+        overview = form.cleaned_data.get('overview')
+    context = {"form" : form}
+    return render(request, "applyForCoach.html", context)
 
-def tutorselected(request, tutor_username):
+
+def tutorSelected(request, tutor_username):
     coach_info = []
     avg_review = 0;
     user = User.objects.get(userid=tutor_username)
@@ -264,7 +277,7 @@ def tutorselected(request, tutor_username):
     return render(request, "tutorSelectedPage.html", context)
 
 
-def reviewcoach(request, tutor_username):
+def reviewCoach(request, tutor_username):
     if request.is_ajax:
         # Response messages:
         response_sucess = "Thanks for your honest review!"
@@ -325,7 +338,7 @@ def renderReviews(request,tutor_username):
     else:
         raise Http404
 
-def paymentpage(request, tutor_username):
+def paymentPage(request, tutor_username):
     user = User.objects.get(userid=tutor_username)
     coaches = user.coach_set.all()
 
@@ -349,7 +362,7 @@ def paymentpage(request, tutor_username):
 
     return render(request, "summaryReceiptPage.html", context)
 
-def streampage(request, tutor_username):
+def streamPage(request, tutor_username):
     user = User.objects.get(userid=tutor_username)
     coaches = user.coach_set.all()
 

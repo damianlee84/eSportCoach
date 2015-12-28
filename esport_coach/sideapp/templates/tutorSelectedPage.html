@@ -19,7 +19,7 @@
     <body>
         <!--NavBar-->
         {% include "nav_bar.html" %}
-        
+
         <!-- jumbotron -->
         <div class="jumbotron">
             <div class="container text-center">
@@ -141,11 +141,11 @@
 
         <!-- Lesson Schedule Info -->
         <div class="panel panel-default" style="padding-top:1%; margin-right:15%; margin-left:15%;" align="center">
-            <div class="panel-body">                            
+            <div class="panel-body">
                 <form id="form_payment" method="GET" action="/sideapp/paymentpage/{{coach.userid}}">
-                    
+
                     <div class="col-xs-0 col-sm-4 text-left" style="width:25%; padding:0;">
-                        <a href="/sideapp/paymentpage/{{coach.username}}" ><img src="{% static 'pictures/stripe-logo.png' %}" style="width: 350px; height: 150px;" alt="Pay now with Stipe" /></a>
+                        <a href="/sideapp/paymentPage/{{coach.username}}" ><img src="{% static 'pictures/stripe-logo.png' %}" style="width: 350px; height: 150px;" alt="Pay now with Stipe" /></a>
                     </div>
 
                     <div class="col-xs-0 col-sm-3 text-left" style="width:75%;">
@@ -176,13 +176,13 @@
                         </div>
                     </div>
                     <div style="width:88%;" align="right">
-                        <a href="/sideapp/paymentpage/{{coach.userid}}" class="btn btn-info navbar-btn navbar-right">Submit</a>
+                        <a href="/sideapp/paymentPage/{{coach.userid}}" class="btn btn-info navbar-btn navbar-right">Submit</a>
                     </div>
                 </form>
             </div>
         </div>
 
-        
+
 
 
         <!-- BELOW ARE ALL THE SCRIPTS -->
@@ -225,14 +225,14 @@
                         data: formData,
                         dataType:'text',
                     })
-                    .done(function(response){             
+                    .done(function(response){
                             if (response.includes("Error")){
                                 $("#form_review_messages").html("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+response+"</div>");
                             }
                             else {
                                 $("#form_review_messages").html("<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+response+"</div>");
-                                $('#textarea_review').val('');        // Clear the textarea.  
-                            }     
+                                $('#textarea_review').val('');        // Clear the textarea.
+                            }
                     })
                     .fail(function(response){
                         alert("Oops! An error occured sending your review.");
@@ -244,21 +244,21 @@
         <!-- Script to render the reviews in the page when loaded.  -->
         <script>
             $(window).load(function() {
-                $.ajax({                                    
+                $.ajax({
                         type: 'GET',
                         url: "/sideapp/renderReviews/{{coach.userid}}/",
                         dataType: "json",
                     })
-                    .done(function(response){       
+                    .done(function(response){
                         var overall = 0;
                         var context = ""
 
-                        for (var review in response){       
+                        for (var review in response){
                             context += "<div class='panel panel-default' style='border:NONE;'><div class='panel-body' style='padding-left:0; padding-right:0; padding-bottom:5;'><div class='col-xs-0 col-sm-3 text-left' style='width:220px;'>";
 
                             // For the overall stars
                             context += "<div class='form-inline' style='width:215px;'><div class='form-group'>";
-                            overall = parseInt((response[review]["fields"]["skill_stars"] + response[review]["fields"]["communication_stars"] + response[review]["fields"]["helpfulness_stars"])/3);   
+                            overall = parseInt((response[review]["fields"]["skill_stars"] + response[review]["fields"]["communication_stars"] + response[review]["fields"]["helpfulness_stars"])/3);
                             for (i=0; i<overall; i++){
                                 context += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
                             }
@@ -309,9 +309,9 @@
                     });
                 });
         </script>
-        
+
         <!-- Script for the lesson schedule and payment information  -->
-        
+
 
         <!-- Script for script pagination -->
         <!---
@@ -337,9 +337,9 @@
                 firstClass: 'first'
             }).on("page", function(event, num){
                 $(".content4").html("Page " + num); // or some ajax content loading...
-            }); 
+            });
         </script> -->
-        
+
         <!-- Script for the tutor description tabs -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
