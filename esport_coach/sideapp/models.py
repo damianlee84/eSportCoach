@@ -4,29 +4,6 @@ from datetime import date, datetime
 from calendar import monthrange
 from django.db.models import Count
 
-class Signup(models.Model):
-		username = models.CharField(max_length=50, blank=False, null=False)
-		name = models.CharField(max_length=50, blank=False, null=False)
-		email = models.EmailField(max_length=50, blank=False, null=False)
-		skype = models.CharField(max_length=50, blank=False, null=False)
-		mmr = models.PositiveIntegerField(default=0,  blank=False, null=False)
-		server = models.CharField(max_length=50, blank = False, null=False)
-		hero = models.CharField(max_length=50, blank = False, null=False)
-		rating = models.PositiveIntegerField(default=0, blank=False, null=False)
-		reputation = models.PositiveIntegerField(default=0, blank=False, null=False)
-		students = models.PositiveIntegerField(default=0, blank=False, null=False)
-		pricerate = models.FloatField(default=0.00, blank=False, null=False)
-		def __unicode__(self):
-				return self.username + " " + self.email + " " + self.name
-
-class Reviews(models.Model):
-		coach = models.ForeignKey(Signup, on_delete=models.CASCADE)
-		reviewer = models.CharField(max_length=100, blank=False, null=True)
-		skill_stars = models.PositiveIntegerField(blank=False, null=True)
-		communication_stars = models.PositiveIntegerField(blank=False, null=True)
-		helpfulness_stars = models.PositiveIntegerField(blank=False, null=True)
-		comment = models.CharField(max_length=300, blank=False, null=True)
-
 """
 *User Table:	A database table is stores all user information for either a student or a coach. It contains all basic info of what a user should have.
 *Fields: 		userid: character field used to grab the ID from steam
@@ -63,11 +40,10 @@ class Coach(models.Model):
 	 server = models.CharField(max_length = 50, blank = False, null = False)
 	 champion = models.CharField(max_length = 500, blank = False, null = False)
 	 role = models.CharField(max_length = 500, blank = False, null = False)
-	 pricerate = models.FloatField(default = 0.00)
+	 pricerate = models.PositiveIntegerField(default = 0)
 	 avatar = models.URLField(blank=False, null=False)
 	 rating = models.IntegerField(default = 0,  blank = False, null = False)
 	 overview = models.TextField(blank=True)
-	 # user = User
 	 def __str__(self):
 				return  self.userid.userid + " " + self.champion + " " + str(self.rating) + " " + self.server + " " + str(self.pricerate) + " " + self.overview 
 
@@ -155,9 +131,6 @@ class Champions(models.Model):
    champion = models.CharField(primary_key=True, max_length=100, blank=False, null=False)
    def __str__(self):
         return self.champion
-
-
-
 
 
 class transaction(models.Model):

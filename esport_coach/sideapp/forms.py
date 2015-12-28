@@ -3,15 +3,6 @@ from .models import *
 from datetime import date, datetime
 from calendar import monthrange
 
-class SignupForm(forms.ModelForm):
-    class Meta:
-        model = Signup
-        fields = ['username', 'name', 'email', 'skype', 'mmr', 'server', 'hero', 'rating', 'reputation', 'students', 'pricerate']
-
-    def valid_email(self):
-        email = self.validated_data.get('email')
-        return email
-
 class AuthenticateForm(forms.Form):
     userid = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'id':'input_userid', 'name':'input_userid', 'class': "form-control", 'style':'border:1px solid #D3D3D3'}))
     password = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={'id':'input_password', 'name':'input_password','class': "form-control"}))
@@ -31,6 +22,7 @@ class RegistrationForm(forms.Form):
             if self.clean_data['password1'] != self.clean_data['password2']:
                 raise ValidationError("The passwords you have entered do not match.")
         return self.clean_data
+
 
 class CoachForm(forms.ModelForm):
     class Meta:
