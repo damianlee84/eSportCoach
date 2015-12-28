@@ -63,7 +63,7 @@ class Coach(models.Model):
 	 server = models.CharField(max_length = 50, blank = False, null = False)
 	 champion = models.CharField(max_length = 500, blank = False, null = False)
 	 role = models.CharField(max_length = 500, blank = False, null = False)
-	 pricerate = models.FloatField(default = 0.00)
+	 pricerate = models.PositiveIntegerField(default = 0)
 	 avatar = models.URLField(blank=False, null=False)
 	 rating = models.IntegerField(default = 0,  blank = False, null = False)
 	 overview = models.TextField(blank=True)

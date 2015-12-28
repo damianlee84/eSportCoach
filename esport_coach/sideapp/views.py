@@ -20,6 +20,7 @@ def home(request):
     return render(request, "home.html")
 
 def login(request):
+    
     form = AuthenticateForm(request.POST)
     if form.is_valid():
         userid = form.cleaned_data.get('userid')
