@@ -65,8 +65,8 @@
                     </select>
                 </li>
                 <li class="dropdown">
-                    <select name="MMR" style="background-color:#222; color:White; border:none">
-                        <option>MMR</option>
+                    <select name="rank" style="background-color:#222; color:White; border:none">
+                        <option>Rank</option>
                         <option>------</option>
                         <option>100-300</option>
                         <option>300-500</option>
@@ -108,7 +108,7 @@
                                     <tr class ="stuff">
                                         <!--  <th class ="leader-name">Rank</th> -->
                                         <th class ="leader-name">Coach</th>
-                                            <th>MMR</th>
+                                            <th>Rank</th>
                                             <th>Server</th>
                                             <th>Hero</th>
                                             <th>Role</th>
@@ -177,7 +177,7 @@
                           coach = response["coaches"][i]
                           context += "<tr onclick=\"window.location.href='/sideapp/tutorselected/"+coach["userid"]+"'\" style=\"cursor: pointer;\">";
                           context += "<td>" + coach["pname"] + "</td>" +
-                                     "<td>" + coach["mmr"] + "</td>" +
+                                     "<td>" + coach["rank"] + "</td>" +
                                      "<td>" + coach["server"] + "</td>" +
                                      "<td>" + coach["champion"] + "</td>" +
                                      "<td>" + coach["role"] + "</td>" +

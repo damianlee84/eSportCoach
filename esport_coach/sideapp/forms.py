@@ -18,24 +18,25 @@ class AuthenticateForm(forms.Form):
 
 
 class RegistrationForm(forms.Form):
-    class Meta:
-        model = User
-        fields = ['userid', 'password']
+    userid = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'id':'input_userid', 'name':'input_userid', 'class': "form-control", 'style':'border:1px solid #D3D3D3'}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={'id':'input_email', 'name':'input_email', 'class': "form-control", 'style':'border:1px solid #D3D3D3'}))
+    password1 = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={'id':'input_password1', 'name':'input_password1','class': "form-control"}))
+    password2 = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={'id':'input_password2', 'name':'input_password2','class': "form-control"}))
+    rank = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'id':'input_rank', 'name':'input_rank', 'class': "form-control", 'style':'border:1px solid #D3D3D3'}))
+    skypeid = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'id':'input_skypeid', 'name':'input_skypeid', 'class': "form-control", 'style':'border:1px solid #D3D3D3'}))
+    twitchid = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'id':'input_twitchid', 'name':'input_twitchid', 'class': "form-control", 'style':'border:1px solid #D3D3D3'}))
 
-    def __init__(self, *args, **kwargs):
-        super(FoodForm, self).__init__(*args, **kwargs)
-        for field in iter(self.fields):
-            self.fields[field].widget.attrs.update({'class': 'form-control'})
+    def clean(self):
+        if self.clean_data.has_key('password1') and self.clean_data.has_key('password2'):
+            if self.clean_data['password1'] != self.clean_data['password2']:
+                raise ValidationError("The passwords you have entered do not match.")
+        return self.clean_data
 
 class CoachForm(forms.ModelForm):
     class Meta:
         model = Coach
         fields = ['server', 'champion', 'rating', 'pricerate', 'role', 'avatar', 'overview']
 
-# class UserForm(forms.ModelForm):
-#     class Meta:
-#         model = User
-#         fields = ['userid', 'email', 'pname', 'MMR', 'skypeid', 'twitchid']
 
 class ContactForm(forms.Form):
     full_name = forms.CharField()

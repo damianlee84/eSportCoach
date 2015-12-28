@@ -10,7 +10,7 @@ class adminCoach(admin.ModelAdmin):
     list_display = ('server', 'champion', 'rating', 'pricerate', 'role', 'avatar', 'overview')
 
 class adminUser(admin.ModelAdmin):
-    list_display = ('userid', 'password', 'pname', 'email', 'MMR', 'skypeid', 'twitchid')
+    list_display = ('userid', 'password', 'pname', 'email', 'rank', 'skypeid', 'twitchid')
 
 
 admin.site.register(Signup, adminSignup)

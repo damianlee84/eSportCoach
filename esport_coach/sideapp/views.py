@@ -24,9 +24,8 @@ def login(request):
     if form.is_valid():
         userid = form.cleaned_data.get('userid')
         password = form.cleaned_data.get('password')
-        # password = request.POST.get('password', '')
     context = {"form" : form}
-    return render(request, "test.html", context)
+    return render(request, "loginAuthentication.html", context)
 
 
 def authenticated(request, userid):
@@ -38,57 +37,57 @@ def authenticated(request, userid):
 
 
 def authenticateLogin(request):
-    if request.is_ajax:
-        # Response messages:
-        response_error1 = 'not found'
-        response_error2 = "Error getting your info from the form."
+    # if request.is_ajax:
+    #     response_error1 = 'not found'
+    #     response_error2 = "Error getting your info from the form."
 
-        try:
-            userid = request.GET.get('userid')
-            password = request.GET.get('password')
-            try:
-                login_userid = User.objects.get(userid=userid, password=password)
-                return HttpResponse(userid)
-            except:
-                return HttpResponse(response_error1)
-        except:
-            return HttpResponse(response_error2)
-    else:
-        raise Http404
+    #     try:
+    #         userid = request.GET.get('userid')
+    #         password = request.GET.get('password')
+    #         try:
+    #             login_userid = User.objects.get(userid=userid, password=password)
+    #             return HttpResponse(userid)
+    #         except:
+    #             return HttpResponse(response_error1)
+    #     except:
+    #         return HttpResponse(response_error2)
+    # else:
+    #     raise Http404
+    pass
 
 
 def register(request):
-    context = {"value":"must provide a Summoner name"}
-    if request.method == 'GET':
-        summonerName = str(request.GET.get('summonerName'))
-        if summonerName == "None":
-            return render(request, "test.html")
-        r = requests.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+summonerName+'?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
-        if r.status_code == 404:
-            context = {"value":"Invalid Summoner name"}
-        elif r.status_code == 400:
-            context = {"value":"Bad request"}
-        elif r.status_code == 401:
-            context = {"value":"Unauthorized"}
-        elif r.status_code == 429:
-            context = {"value":"Rate Limit exceeded"}
-        elif r.status_code == 500:
-            context = {"value":"Internal server error"}
-        elif r.status_code == 503:
-            context = {"value":"Service unavailable"}
-        else:
-            key = r.json()
-            summonerNameValue = key[summonerName]["name"]
-            summonerId = str(key[summonerName]["id"])
-            r = requests.get('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/'+summonerId+'/entry?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
-            summonerInfo = r.json()
-            summonerRank = summonerInfo[summonerId][0]["tier"]
-            summonerDivision = summonerInfo[summonerId][0]['entries'][0]['division']
-            context = {"value":summonerRank,
-                       "division":summonerDivision,
-                       "name":summonerNameValue}
-            return render(request, "authenticated.html", context)
-    return render(request, "test.html", context)
+    # context = {"value":"must provide a Summoner name"}
+    # if request.method == 'GET':
+    #     summonerName = str(request.GET.get('summonerName'))
+    #     if summonerName == "None":
+    #         return render(request, "test.html")
+    #     r = requests.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+summonerName+'?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
+    #     if r.status_code == 404:
+    #         context = {"value":"Invalid Summoner name"}
+    #     elif r.status_code == 400:
+    #         context = {"value":"Bad request"}
+    #     elif r.status_code == 401:
+    #         context = {"value":"Unauthorized"}
+    #     elif r.status_code == 429:
+    #         context = {"value":"Rate Limit exceeded"}
+    #     elif r.status_code == 500:
+    #         context = {"value":"Internal server error"}
+    #     elif r.status_code == 503:
+    #         context = {"value":"Service unavailable"}
+    #     else:
+    #         key = r.json()
+    #         summonerNameValue = key[summonerName]["name"]
+    #         summonerId = str(key[summonerName]["id"])
+    #         r = requests.get('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/'+summonerId+'/entry?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
+    #         summonerInfo = r.json()
+    #         summonerRank = summonerInfo[summonerId][0]["tier"]
+    #         summonerDivision = summonerInfo[summonerId][0]['entries'][0]['division']
+    #         context = {"value":summonerRank,
+    #                    "division":summonerDivision,
+    #                    "name":summonerNameValue}
+    #         return render(request, "authenticated.html", context)
+    return render(request, "register.html")
 
 
 
@@ -143,7 +142,7 @@ def list_of_coaches(request):
             avg_review = 0;
             for review in reviews:
                 avg_review = int((review.skill_stars+review.communication_stars+review.helpfulness_stars)/3)
-            coaches_list.append([user.pname, user.MMR, coach.server, coach.champion, coach.role, avg_review, coach.pricerate, user.userid])
+            coaches_list.append([user.pname, user.rank, coach.server, coach.champion, coach.role, avg_review, coach.pricerate, user.userid])
 
     context = {'coaches': coaches_list}
     return render(request, "listOfCoachesPage.html", context)
@@ -154,27 +153,27 @@ def searchCoach(request):
             server = request.GET.get('Server')
             role = request.GET.get('Role')
             hero = request.GET.get('Hero')
-            mmrRange = request.GET.get('MMR')
+            rankRange = request.GET.get('rank')
             priceRange = request.GET.get('price')
 
-            if (mmrRange == "100-300"):
-                mmr_minRange = 100
-                mmr_maxRange = 300
-            elif mmrRange == "300-500":
-                mmr_minRange = 300
-                mmr_maxRange = 500
-            elif mmrRange == "500-700":
-                mmr_minRange = 500
-                mmr_maxRange = 700
-            elif mmrRange == "700-900":
-                mmr_minRange = 700
-                mmr_maxRange = 900
-            elif mmrRange == "900-1100":
-                mmr_minRange = 900
-                mmr_maxRange = 1100
-            elif mmrRange == "1100-1300":
-                mmr_minRange = 1100
-                mmr_maxRange = 1300
+            if (rankRange == "100-300"):
+                rank_minRange = 100
+                rank_maxRange = 300
+            elif rankRange == "300-500":
+                rank_minRange = 300
+                rank_maxRange = 500
+            elif rankRange == "500-700":
+                rank_minRange = 500
+                rank_maxRange = 700
+            elif rankRange == "700-900":
+                rank_minRange = 700
+                rank_maxRange = 900
+            elif rankRange == "900-1100":
+                rank_minRange = 900
+                rank_maxRange = 1100
+            elif rankRange == "1100-1300":
+                rank_minRange = 1100
+                rank_maxRange = 1300
 
             if (priceRange == "$1-$10"):
                 price_minRange = 1
@@ -199,8 +198,8 @@ def searchCoach(request):
                 spec_filter['coach__role'] = role
             if hero != 'Hero' and hero != "------":
                 spec_filter['coach__champion'] = hero
-            if mmrRange != 'MMR' and mmrRange != "------":
-                spec_filter['MMR__range'] = (mmr_minRange,mmr_maxRange)
+            if rankRange != 'rank' and rankRange != "------":
+                spec_filter['rank__range'] = (rank_minRange,rank_maxRange)
             if priceRange != 'Price Rate' and priceRange != "------":
                 spec_filter['coach__pricerate__range'] = (price_minRange,price_maxRange)
 
@@ -210,7 +209,7 @@ def searchCoach(request):
                 query_coach_att = user.coach_set.filter(userid=user.userid)
                 for att_as_coach in query_coach_att:
                     coaches_list.append({'pname': user.pname,
-                                         'mmr': user.MMR,
+                                         'rank': user.rank,
                                          'server': att_as_coach.server,
                                          'champion': att_as_coach.champion,
                                          'role': att_as_coach.role,
@@ -234,7 +233,7 @@ def tutorselected(request, tutor_username):
         reviews = coach.reviewing_set.all()
         for review in reviews:
             avg_review = int((review.skill_stars+review.communication_stars+review.helpfulness_stars)/3)
-        coach_info = {"pname":user.pname, "mmr":user.MMR, "server":coach.server, "champion":coach.champion, "avg_review":avg_review, "pricerate":coach.pricerate, "overview":coach.overview, "skypeid":user.skypeid, "twitchid":user.twitchid, "userid":user.userid}
+        coach_info = {"pname":user.pname, "rank":user.rank, "server":coach.server, "champion":coach.champion, "avg_review":avg_review, "pricerate":coach.pricerate, "overview":coach.overview, "skypeid":user.skypeid, "twitchid":user.twitchid, "userid":user.userid}
 
     context = {
         'coach': coach_info,
@@ -311,7 +310,7 @@ def paymentpage(request, tutor_username):
         reviews = coach.reviewing_set.all()
         for review in reviews:
             avg_review = int((review.skill_stars+review.communication_stars+review.helpfulness_stars)/3)
-        coach_info = {"pname":user.pname, "mmr":user.MMR, "server":coach.server, "champion":coach.champion, "avg_review":avg_review, "pricerate":coach.pricerate, "skypeid":user.skypeid, "twitchid":user.twitchid, "userid":user.userid}
+        coach_info = {"pname":user.pname, "rank":user.rank, "server":coach.server, "champion":coach.champion, "avg_review":avg_review, "pricerate":coach.pricerate, "skypeid":user.skypeid, "twitchid":user.twitchid, "userid":user.userid}
 
     # if request.is_ajax:
     #     lesson_duration = request.POST['lesson_duration']
@@ -335,7 +334,7 @@ def streampage(request, tutor_username):
         reviews = coach.reviewing_set.all()
         for review in reviews:
             avg_review = int((review.skill_stars+review.communication_stars+review.helpfulness_stars)/3)
-        coach_info = {"pname":user.pname, "mmr":user.MMR, "server":coach.server, "champion":coach.champion, "avg_review":avg_review, "pricerate":coach.pricerate, "skypeid":user.skypeid, "twitchid":user.twitchid, "userid":user.userid}
+        coach_info = {"pname":user.pname, "rank":user.rank, "server":coach.server, "champion":coach.champion, "avg_review":avg_review, "pricerate":coach.pricerate, "skypeid":user.skypeid, "twitchid":user.twitchid, "userid":user.userid}
 
     context = {'coach': coach_info}
     return render(request, "streamPage.html", context)

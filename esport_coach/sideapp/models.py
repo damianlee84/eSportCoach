@@ -32,16 +32,16 @@ class Reviews(models.Model):
 *Fields: 		userid: character field used to grab the ID from steam
 				email: email of the user
 				pname: steam persona
-				MMR: Containing the Rank or how experience a user is
+				rank: Containing the Rank or how experience a user is
 				skypeid: Skeype ID that need to do audio chat 
 				twitchid: twitchid ID that is used for video streaming
 """
 class User(models.Model):
 		userid = models.CharField(primary_key=True, max_length=100, blank=False, null=False)
-		password = models.CharField(default='123A', max_length=18, blank=False, null=False)
+		password = models.CharField(max_length=18, blank=False, null=False)
 		email = models.EmailField(blank=False, null=False)
 		pname = models.CharField(max_length=100, blank=False, null=False)
-		MMR = models.IntegerField(default=0,  blank=False, null=False)
+		rank = models.CharField(max_length=100, blank=False, null=False)
 		skypeid = models.CharField(max_length=100, blank=False, null=False)
 		twitchid = models.CharField(max_length=100, blank=False, null=False)
 		def __str__(self):
@@ -83,13 +83,13 @@ class Coach(models.Model):
 	 		students = Coaching.objects.filter(coach=self)
 	 		num_stu = students.aggregate(Count('student',distinct=True))
 	 		return num_stu['student__count']
-	 # The function below allows you to get MMR of Coach
+	 # The function below allows you to get Rank of Coach
 	 # How to use this function
 	 #	selected_coach = Coach.objects.get(userid= 'name')   input Coach object, and userid name. and get a specific coach object
 	 # 	Then just 
-	 #			selected_coach.getMMR()    This will return you the MMR of the selected coach.
-	 def getMMR(self):
-	 		return self.userid.MMR
+	 #			selected_coach.getRank()    This will return you the Rank of the selected coach.
+	 def getRank(self):
+	 		return self.userid.rank
 
 
 """
