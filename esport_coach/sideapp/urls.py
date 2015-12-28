@@ -10,8 +10,6 @@ urlpatterns = [
     url(r'^authenticateLogin/', views.authenticateLogin, name='authenticateLogin'),
     url(r'^authenticated/(?P<userid>[-\w]+)', views.authenticated, name='authenticated'),
     url(r'^register/', views.register, name='register'),
-    # url(r'^signup/', views.signup, name='signup'),
-    # url(r'^findcoach/$', views.findcoach, name='findcoach'),
     url(r'^list_of_coaches/', views.list_of_coaches, name='list_of_coaches'),
     url(r'^tutorselected/(?P<tutor_username>[-\w]+)', views.tutorselected, name='tutorselected'),
     url(r'^renderReviews/(?P<tutor_username>[-\w]+)', views.renderReviews, name='renderReviews'),
@@ -20,9 +18,6 @@ urlpatterns = [
     url(r'^streampage/(?P<tutor_username>[-\w]+)', views.streampage, name='streampage'),
     url(r'^streampage/(?P<tutor_username>[-\w]+)', views.streampage, name='streampage'),
     url(r'^searchCoach/', views.searchCoach, name='searchCoach'),
-    #url(r'^stream/', views.url, name='stream'),
-    # url(r'^coachApp/', views.coachApp, name='coachApp'),
-    #url(r'^signupCoach/', views.signupCoach, name='signupCoach'),
     url(r'^player_rank/', views.fourOfour, name='player_rank'),
 
 ]

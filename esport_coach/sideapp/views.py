@@ -38,22 +38,22 @@ def authenticated(request, userid):
 
 
 def authenticateLogin(request):
-    # if request.is_ajax:
-    #     response_error1 = 'not found'
-    #     response_error2 = "Error getting your info from the form."
+    if request.is_ajax:
+        response_error1 = 'not found'
+        response_error2 = "Error getting your info from the form."
 
-    #     try:
-    #         userid = request.GET.get('userid')
-    #         password = request.GET.get('password')
-    #         try:
-    #             login_userid = User.objects.get(userid=userid, password=password)
-    #             return HttpResponse(userid)
-    #         except:
-    #             return HttpResponse(response_error1)
-    #     except:
-    #         return HttpResponse(response_error2)
-    # else:
-    #     raise Http404
+        try:
+            userid = request.GET.get('userid')
+            password = request.GET.get('password')
+            try:
+                login_userid = User.objects.get(userid=userid, password=password)
+                return HttpResponse(userid)
+            except:
+                return HttpResponse(response_error1)
+        except:
+            return HttpResponse(response_error2)
+    else:
+        raise Http404
     pass
 
 
@@ -119,17 +119,6 @@ def contact(request):
 
     context = {"form" : form}
     return render(request, "contact.html", context)
-
-
-# def signup(request):
-#     title = 'Welcome'
-#     form = SignupForm(request.POST or None)
-#     context = {"title": title, "form": form}
-#     if form.is_valid():
-#         instance = form.save(commit=False)
-#         instance.save()
-#         context = {"title": "Signup Succesful"}
-#     return render(request, "forms.html", context)
 
 
 def list_of_coaches(request):
@@ -346,11 +335,3 @@ def fourOfour(request):
     context = {"form" : form}
     return render(request, "404.html", context)
 
-
-
-
-# def coachApp(request):
-#     """
-#     coach application
-#     """
-#     return render(request, "coachApp.html")
