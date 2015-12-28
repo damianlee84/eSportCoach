@@ -153,27 +153,8 @@ def searchCoach(request):
             server = request.GET.get('Server')
             role = request.GET.get('Role')
             hero = request.GET.get('Hero')
-            rankRange = request.GET.get('rank')
+            rank = request.GET.get('Rank')
             priceRange = request.GET.get('price')
-
-            if (rankRange == "100-300"):
-                rank_minRange = 100
-                rank_maxRange = 300
-            elif rankRange == "300-500":
-                rank_minRange = 300
-                rank_maxRange = 500
-            elif rankRange == "500-700":
-                rank_minRange = 500
-                rank_maxRange = 700
-            elif rankRange == "700-900":
-                rank_minRange = 700
-                rank_maxRange = 900
-            elif rankRange == "900-1100":
-                rank_minRange = 900
-                rank_maxRange = 1100
-            elif rankRange == "1100-1300":
-                rank_minRange = 1100
-                rank_maxRange = 1300
 
             if (priceRange == "$1-$10"):
                 price_minRange = 1
@@ -198,8 +179,8 @@ def searchCoach(request):
                 spec_filter['coach__role'] = role
             if hero != 'Hero' and hero != "------":
                 spec_filter['coach__champion'] = hero
-            if rankRange != 'rank' and rankRange != "------":
-                spec_filter['rank__range'] = (rank_minRange,rank_maxRange)
+            if rank != 'Rank' and rank != "------":
+                spec_filter['rank'] = rank
             if priceRange != 'Price Rate' and priceRange != "------":
                 spec_filter['coach__pricerate__range'] = (price_minRange,price_maxRange)
 
