@@ -81,6 +81,7 @@ class Coaching(models.Model):
 	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
 	 student = models.ForeignKey('User', on_delete=models.CASCADE)
 	 date = models.DateTimeField(auto_now_add = False, auto_now = "True")
+	 pricerate = models.FloatField(default = 0, blank = False, null = False)
 	 quantity = models.IntegerField(default = 0,  blank = False, null = False)
 	 request = models.TextField(blank=True)
 	 def __str__(self):
