@@ -44,6 +44,17 @@ heroku login
 git push heroku master
 
 ```
+* **Sphinx Documentation**
+      - run the following command in the /sideapp/docs directory
+      - run the html file in the _build folder
+
+```
+#!python
+
+make html
+
+```
+
 ## Development ##
 This website is still under development, more game will be support in the future.
 Questions or problems? Please post them on the [issue tracker](https://bitbucket.org/pablop1505/webdesignproject/issues).
