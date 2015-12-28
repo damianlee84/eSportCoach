@@ -31,7 +31,7 @@ pip install -r requirements.txt
     - PostgreSQL
 
 * **API**
-    - steamOpenID ![https://bitbucket.org/repo/jj5ap8/images/2824774629-sits_small.png](https://bitbucket.org/repo/jj5ap8/images/2824774629-sits_small.png)    
+    - Riot game API
     - Stripe ![blue-on-light.png](https://bitbucket.org/repo/jj5ap8/images/237123654-blue-on-light.png)
  
 * **Deployment instructions**
