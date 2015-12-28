@@ -40,7 +40,7 @@ class Coach(models.Model):
 	 server = models.CharField(max_length = 50, blank = False, null = False)
 	 champion = models.CharField(max_length = 500, blank = False, null = False)
 	 role = models.CharField(max_length = 500, blank = False, null = False)
-	 pricerate = models.PositiveIntegerField(default = 0)
+	 pricerate = models.PositiveIntegerField(default = 0,  blank = False, null = False)
 	 avatar = models.URLField(blank=False, null=False)
 	 rating = models.IntegerField(default = 0,  blank = False, null = False)
 	 overview = models.TextField(blank=True)
@@ -81,7 +81,7 @@ class Coaching(models.Model):
 	 coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
 	 student = models.ForeignKey('User', on_delete=models.CASCADE)
 	 date = models.DateTimeField(auto_now_add = False, auto_now = "True")
-	 pricerate = models.FloatField(default = 0, blank = False, null = False)
+	 pricerate = models.PositiveIntegerField(default = 0,  blank = False, null = False)
 	 quantity = models.IntegerField(default = 0,  blank = False, null = False)
 	 request = models.TextField(blank=True)
 	 def __str__(self):
