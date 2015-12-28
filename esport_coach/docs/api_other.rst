@@ -5,19 +5,10 @@ API & Other Configuration
 API
 ###
 
-**steamOpenID** <https://steamcommunity.com/dev>
-  - Valve provides these APIs so website developers can use data from Steam
-    in new and interesting ways. They allow developers to query Steam for
-    information that they can present on their own sites. At the moment the
-    only APIs we offer provide item data for Team Fortress 2, but this list
-    will grow over time.
-
-  - Bad thing about this API is Valve don't allow developer to grab match-making
-    ranking(MMR) because of privacy term. And there is no other API out there at the
-    moment to get the ranking information.
-
-  - There one other API that allow developer to grab information from steam, but
-    due to high volume of usage and the owner of the API stop distributing the API.
+**Riot Game API** <https://steamcommunity.com/dev>
+  - With this API, the League of Legends developer community can access to game data in a secure and reliable way. 
+    This is just part of our ongoing effort to respond to players' and developers' requests for data and to arm the community with more ways to contribute 
+    to the player experience.
 
 **Stripe** <https://stripe.com/docs/api>
   - Stripe API provide developer to integrate stripe payment method into their application.
