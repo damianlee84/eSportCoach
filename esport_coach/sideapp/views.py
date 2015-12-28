@@ -20,7 +20,7 @@ def home(request):
     return render(request, "home.html")
 
 def login(request):
-    
+
     form = AuthenticateForm(request.POST)
     if form.is_valid():
         userid = form.cleaned_data.get('userid')
@@ -58,37 +58,74 @@ def authenticateLogin(request):
 
 
 def register(request):
+
+    form = RegistrationForm(request.POST)
+    if form.is_valid():
+        userid = form.cleaned_data.get('userid')
+        password = form.cleaned_data.get('password')
+        email = form.cleaned_data.get('email')
+        pname = form.cleaned_data.get('pname')
+        skypeid = form.cleaned_data.get('skypeid')
+        twitchid = form.cleaned_data.get('twitchid')
+    context = {"form" : form}
+    return render(request, "register.html", context)
+
+def authenticateRegister(request):
+
+    if request.is_ajax:
+        response_error1 = 'User already exists'
+        response_error2 = "Error getting your info from the form."
+
+        try:
+            userid = request.GET.get('userid')
+            password = request.GET.get('password')
+            email = request.GET.get('email')
+            pname = request.GET.get('pname')
+            skypeid = request.GET.get('skypeid')
+            twitchid = request.GET.get('twitchid')
+            try:
+                login_userid = User.objects.get(userid=userid, password=password, email=email, pname=pname)
+                return HttpResponse(response_error1)
+            except:
+                summonerName = str(pname)
+                r = requests.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+summonerName+'?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
+                if r.status_code == 404:
+                    return HttpResponse("404")
+                elif r.status_code == 400:
+                    return HttpResponse("400")
+                elif r.status_code == 401:
+                    return HttpResponse("401")
+                elif r.status_code == 429:
+                    return HttpResponse("429")
+                elif r.status_code == 500:
+                    return HttpResponse("500")
+                elif r.status_code == 503:
+                    return HttpResponse("503")
+                else:
+                    key = r.json()
+                    summonerNameValue = key[summonerName]["name"]
+                    summonerId = str(key[summonerName]["id"])
+                    r = requests.get('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/'+summonerId+'/entry?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
+                    summonerInfo = r.json()
+                    summonerRank = summonerInfo[summonerId][0]["tier"]
+                    summonerDivision = summonerInfo[summonerId][0]['entries'][0]['division']
+                    user = User(userid=userid, password=password, email=email, pname=pname, rank=summonerRank, skypeid=skypeid, twitchid=twitchid)
+                    user.save()
+                    # context = {"value":summonerRank,
+                    #            "division":summonerDivision,
+                    #            "name":summonerNameValue}
+                    # return render(request, "authenticated.html", context)
+                return HttpResponse(userid)
+        except:
+            return HttpResponse(response_error2)
+    else:
+        raise Http404
+    pass
+
     # context = {"value":"must provide a Summoner name"}
     # if request.method == 'GET':
-    #     summonerName = str(request.GET.get('summonerName'))
-    #     if summonerName == "None":
-    #         return render(request, "test.html")
-    #     r = requests.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+summonerName+'?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
-    #     if r.status_code == 404:
-    #         context = {"value":"Invalid Summoner name"}
-    #     elif r.status_code == 400:
-    #         context = {"value":"Bad request"}
-    #     elif r.status_code == 401:
-    #         context = {"value":"Unauthorized"}
-    #     elif r.status_code == 429:
-    #         context = {"value":"Rate Limit exceeded"}
-    #     elif r.status_code == 500:
-    #         context = {"value":"Internal server error"}
-    #     elif r.status_code == 503:
-    #         context = {"value":"Service unavailable"}
-    #     else:
-    #         key = r.json()
-    #         summonerNameValue = key[summonerName]["name"]
-    #         summonerId = str(key[summonerName]["id"])
-    #         r = requests.get('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/'+summonerId+'/entry?api_key=8340953c-a577-4057-bcfb-962e98780cb1')
-    #         summonerInfo = r.json()
-    #         summonerRank = summonerInfo[summonerId][0]["tier"]
-    #         summonerDivision = summonerInfo[summonerId][0]['entries'][0]['division']
-    #         context = {"value":summonerRank,
-    #                    "division":summonerDivision,
-    #                    "name":summonerNameValue}
-    #         return render(request, "authenticated.html", context)
-    return render(request, "register.html")
+
+    # return render(request, "register.html")
 
 
 
@@ -334,4 +371,3 @@ def fourOfour(request):
         return render(request, "base.html")
     context = {"form" : form}
     return render(request, "404.html", context)
-
